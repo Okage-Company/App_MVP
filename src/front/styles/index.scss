@@ -1,11 +1,45 @@
 /* 
     General Styles
 */
+a{
+    color: white;
+}
+hr{
+    color: white;
+}
 .footer{
     background-color: black;
     color: white;
 }
-.right{
+.direcciones{
     float: right;
     color: white;
 }
+.linea{
+    border-bottom-style: solid;
+}
+.column {
+    float: left;
+    padding: 10px;
+    height: 80px; /* Should be removed. Only for demonstration */
+  }
+  
+  .left, .iconos, .about {
+    width: 8%;
+  }
+  .left{
+      font-weight: bold;
+  }
+  .about{
+      float: left;
+      text-align: left;
+  }
+  .middle {
+    width: 74%;
+  }
+  .iconos{
+      text-align: right;
+  }
+  .right{
+      float: right;
+  }
