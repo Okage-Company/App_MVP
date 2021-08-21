@@ -16,7 +16,7 @@ export const Footer = () => (
 				<div className="column middle" />
 				<div className="column iconos">
 					<i className="fa fa-facebook-official" aria-hidden="true" />
-					Facebook
+					Facebookgit
 				</div>
 			</div>
 		</div>
