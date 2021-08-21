@@ -1,0 +1,61 @@
+$blue-color: #5C74FF;
+$black-color: #0A0A0A;
+$grey-color: #969696;
+
+.card_container {
+    background-color: #fff;
+    width: 285px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card_image {
+    background-image:url(https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80);
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 10rem;
+}
+
+.card_container_text {
+    color: $black-color;
+    font-family: 'Roboto', sans-serif;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.card_category {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+}
+
+.card_title {
+    color: $blue-color;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.card_profile {
+    color: $blue-color;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+.card_container_footer {
+    display: flex;
+    align-items: center;
+}
+
+.card_address {
+    color: $grey-color;
+    font-size: 0.875rem;
+}
+
+.card_icon {
+    color: $grey-color;
+    font-size: 0.875rem;
+    margin-left: auto;
+}
