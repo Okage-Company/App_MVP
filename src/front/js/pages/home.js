@@ -9,7 +9,11 @@ export const Home = () => {
 
 	return (
 		<div>
-			<Review />
+			<Review
+				name="Taloolah Winters"
+				date="24 Jun 2021"
+				text="WONDERFUL service in an AMAZING setting! A totally recommendable experience if you want to disconnect from your bratty kids, they will take care of them and you can like go catch a movie or something."
+			/>
 		</div>
 	);
 };

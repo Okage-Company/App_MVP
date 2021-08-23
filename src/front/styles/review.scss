@@ -14,7 +14,6 @@ $medium-weight: 500;
 $bold: 700;
 
 // font-size
-// $xlarge: ;
 $large: 1.25rem;
 $medium-size: 0.875rem;
 $small: 0.775rem;
@@ -69,21 +68,6 @@ header {
     font-family: $roboto-mono;
 }
 
-.review_title {
-    display: flex;
-    align-items: center;
-}
-
-.review_star_icons {
-    color: $blue;
-    font-size: $small;
-}
-
-.review_title_text {
-    margin-left: $margin-between-elements;
-    font-weight: $bold;
-}
-
 .review_date {
     color: $grey;
     font-size: $small;
@@ -95,18 +79,8 @@ header {
     margin-bottom: $margin-between-elements;
 }
 
-.review_keep_reading {
-    text-decoration: underline;
-    font-weight: $medium-weight;
-    margin-bottom: $margin-between-elements;
-}
-
-footer {
+.review_report {
     color: $blue;
     font-size: $small;
     font-family: $roboto-mono;
-}
-
-.report_icon {
-    color: $blue;
 }
