@@ -1,0 +1,112 @@
+// color
+$blue: #5C74FF;
+$yellow: #FFDB7D;
+$black: #0A0A0A;
+$grey: #969696;
+
+// font-family
+$roboto: 'Roboto', sans-serif;
+$roboto-mono: 'Roboto Mono', monospace;
+
+// font-weight
+$regular: 400;
+$medium-weight: 500;
+$bold: 700;
+
+// font-size
+// $xlarge: ;
+$large: 1.25rem;
+$medium-size: 0.875rem;
+$small: 0.775rem;
+
+// margin & padding
+$padding-container: 1rem;
+$margin-between-elements: 0.75rem;
+
+//////////////////////////////////
+
+.review_container {
+    font-size: $medium-size;
+    font-family: $roboto;
+    color: $black;
+    background-color: #fff;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: $padding-container;
+    font-weight: $regular;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    margin-bottom: $margin-between-elements;
+}
+
+.review_profile_image {
+    background-image:url('https://images.unsplash.com/photo-1563306406-e66174fa3787?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2734&q=80');
+    background-position: center;
+    background-size: cover;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+}
+
+.review_profile_text {
+    display: flex;
+    flex-direction: column;
+    margin-left: $margin-between-elements;
+}
+
+.review_name {
+    color: $blue;
+    font-weight: $bold;
+}
+
+.review_chat {
+    color: $blue;
+    font-size: $small;
+    font-family: $roboto-mono;
+}
+
+.review_title {
+    display: flex;
+    align-items: center;
+}
+
+.review_star_icons {
+    color: $blue;
+    font-size: $small;
+}
+
+.review_title_text {
+    margin-left: $margin-between-elements;
+    font-weight: $bold;
+}
+
+.review_date {
+    color: $grey;
+    font-size: $small;
+    font-family: $roboto-mono;
+    margin-bottom: $margin-between-elements;
+}
+
+.review_text {
+    margin-bottom: $margin-between-elements;
+}
+
+.review_keep_reading {
+    text-decoration: underline;
+    font-weight: $medium-weight;
+    margin-bottom: $margin-between-elements;
+}
+
+footer {
+    color: $blue;
+    font-size: $small;
+    font-family: $roboto-mono;
+}
+
+.report_icon {
+    color: $blue;
+}
