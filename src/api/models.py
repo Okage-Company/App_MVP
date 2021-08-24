@@ -1,9 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
+import os
+import sys
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.dialects.postgresql import VARCHAR
 from sqlalchemy import Column, ForeignKey, Integer, String, Enum, Boolean, Table
 
 db = SQLAlchemy()
-
 
 business_services = Table('business_services', db.Model.metadata,
     Column("business_id", Integer, ForeignKey("business.id"), primary_key=True),
@@ -15,20 +17,20 @@ class Account(db.Model):
     #1.2-Declaro el título de cada columna
     id = db.Column(db.Integer, primary_key=True)
     account_type = db.Column(db.Boolean(True), unique=False, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(80), unique=False, nullable=False)
-    phone = db.Column(db.String(20), unique=False, nullable=True)
-    name = db.Column(db.String(20), unique=False, nullable=False)
-    last_name = db.Column(db.String(30), unique=False, nullable = True)
-    province = db.Column(db.String, unique=False, nullable=False)
-    post_code = db.Column(db.String, unique=False, nullable=False)
-    adress = db.Column(db.String, unique=False, nullable=True)
-    profile_foto = db.Column(db.String, unique=False, nullable=True)
-    _is_active = db.Column(db.Boolean(True), nullable=False)
+    email = db.Column(db.VARCHAR, unique=True, nullable=False)
+    _password = db.Column(db.VARCHAR, unique=False, nullable=False)
+    phone = db.Column(db.VARCHAR, unique=False, nullable=True)
+    name = db.Column(db.VARCHAR, unique=False, nullable=False)
+    last_name = db.Column(db.VARCHAR, unique=False, nullable = True)
+    province = db.Column(db.VARCHAR, unique=False, nullable=False)
+    post_code = db.Column(db.VARCHAR, unique=False, nullable=False)
+    adress = db.Column(db.VARCHAR, unique=False, nullable=True)
+    profile_foto = db.Column(db.VARCHAR, unique=False, nullable=True)
+    _is_active = db.Column(db.Boolean, default=True, unique=False, nullable=False)
 
     #2(__repr__)Esto sirve para que python pueda print por e-mail+id sin bugs ni problemas,
     def __repr__(self):
-        return f'Account {self.email}, {self.id}'
+        return f'Account {self.email}, {self.id}, {self.account_type}'
     #3(Serialize)-Transforma en formato json la base de datos, 
     # como si fuera un diccionario, para que podamos coger la información en el Front. 
     # { "id": 1,
@@ -50,6 +52,15 @@ class Account(db.Model):
             "adress": self.adress,
             "profile_photo": self.profile_foto
         }
+    
+    def create(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_all(cls):
+        users_list = cls.query.all()
+        return [user.to_dict() for user in users_list]
 
 class Client(db.Model):
     __tablename__ = 'client'
@@ -66,7 +77,8 @@ class Client(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "account_id": self.account_id
+            "account_id": self.account_id,
+            "comments": self.comments
         }
 
 class Favourites(db.Model):
@@ -78,15 +90,20 @@ class Favourites(db.Model):
     #2
     def __repr__(self):
         return '<Favourites %r>' % self.id
+    def serialize(self):
+        return {
+            "id": self.id,
+            "client_id": self.account_id,
+        }
 
 class Business(db.Model):
     __tablename__ = 'business'
     #1.2
     id = db.Column(db.Integer, primary_key=True)
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'))
-    centre_name = db.Column(db.String, unique=False, nullable=False)
-    cif = db.Column(db.String, unique=False, nullable=False)
-    schedule = db.Column(db.String, unique=False, nullable=False)
+    centre_name = db.Column(db.VARCHAR, unique=False, nullable=False)
+    cif = db.Column(db.VARCHAR, unique=False, nullable=False)
+    schedule = db.Column(db.VARCHAR, unique=False, nullable=False)
     business = db.relationship("Services",
                             secondary=business_services,
                             back_populates="business")
@@ -97,7 +114,10 @@ class Business(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "account_id": self.account_id
+            "account_id": self.account_id,
+            "centre_name": self.centre_name,
+            "cif" : self.cif,
+            "schedule": self.schedule
             #aquí no ponemos la password porque no queremos que se vea en el front
         }
 
@@ -105,14 +125,14 @@ class Services(db.Model):
     __tablename__ = 'services'
     #1.2
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String, nullable=False, unique=False)
+    title = db.Column(db.VARCHAR, nullable=False, unique=False)
     offer = db.Column(db.Boolean(True), nullable=False)
-    adress = db.Column(db.String, nullable=False)
-    specialty = db.Column(db.String, nullable=False)
-    numero_colegiado = db.Column(db.String, nullable=False, unique=False)
-    description = db.Column(db.String, nullable=False, unique=False)
-    tecniques = db.Column(db.String, nullable=True, unique=False)
-    photos = db.Column(db.String, nullable=True, unique=False)
+    adress = db.Column(db.VARCHAR, nullable=False)
+    specialty = db.Column(db.VARCHAR, nullable=False)
+    numero_colegiado = db.Column(db.VARCHAR, nullable=False, unique=False)
+    description = db.Column(db.VARCHAR, nullable=False, unique=False)
+    tecniques = db.Column(db.VARCHAR, nullable=True, unique=False)
+    photos = db.Column(db.VARCHAR, nullable=True, unique=False)
     reviews = db.relationship('Reviews')
     services = db.relationship("Business",
                             secondary=business_services,
@@ -120,18 +140,40 @@ class Services(db.Model):
 
     def __repr__(self):
         return '<Services %r>' % self.title
+        
+    def serialize(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "offer": self.offer,
+            "adress" : self.adress,
+            "specialty": self.specialty,
+            "numero_colegiado": self.numero_colegiado,
+            "description": self.description,
+            "tecniques": self.tecniques,
+            "photos": self.photos,
+            #aquí no ponemos la password porque no queremos que se vea en el front
+        }
 
 class Reviews(db.Model):
     __tablename__ = 'reviews'
     #1.2
     id = db.Column(db.Integer, primary_key=True)
-    services_id = db.Column(db.Integer, db.ForeignKey('services_id'))
+    services_id = db.Column(db.Integer, db.ForeignKey('services.id'))
     #comment_id = db.Column(db.Integer, db.ForeignKey('comments.id'))
-    review = db.Column(db.String, nullable=False, unique=False)
+    review = db.Column(db.VARCHAR, nullable=False, unique=False)
     comments = db.relationship('Comments')
     #2
     def __repr__(self):
         return '<Reviews %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "services_id": self.services_id,
+            "review": self.review,
+            #aquí no ponemos la password porque no queremos que se vea en el front
+        }
 
 class Comments(db.Model):
     __tablename__ = 'comments'
@@ -139,7 +181,16 @@ class Comments(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     client_id = db.Column(db.Integer, db.ForeignKey('client.id'))
     reviews_id = db.Column(db.Integer, db.ForeignKey('reviews.id'))
-    comment = db.Column(db.String, nullable=False, unique=False)
+    comment = db.Column(db.VARCHAR, nullable=False, unique=False)
     #2
     def __repr__(self):
         return '<Comments %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "client_id": self.client_id,
+            "reviews_id": self.reviews_id,
+            "comment": self.comment
+            #aquí no ponemos la password porque no queremos que se vea en el front
+        }
