@@ -24,16 +24,17 @@ $margin-between-elements: 0.75rem;
 
 //////////////////////////////////
 
-.card_container {
+.staff_card_container {
     background-color: #fff;
     width: 285px;
     display: flex;
     flex-direction: column;
-    font-size: $medium-size;
     color: $black;
+    font-family: $roboto;
+    font-size: $medium-size;
 }
 
-.card_image {
+.staff_card_image {
     background-image:url(https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80);
     background-position: center;
     background-size: cover;
@@ -41,41 +42,26 @@ $margin-between-elements: 0.75rem;
     height: 10rem;
 }
 
-.card_container_text {
-    font-family: $roboto;
+.staff_card_container_text {
     padding: $padding-container;
     display: flex;
     flex-direction: column;
 }
 
-.card_category {
-    font-family: $roboto-mono;
-    margin-bottom: $margin-between-elements;
-    font-size: $small;
-}
-
-.card_title {
-    color: $blue;
+.staff_card_name {
     font-size: $large;
+    color: $grey;
     font-weight: $bold;
-}
-
-.card_profile {
-    color: $blue;
-    font-weight: $medium-weight;
     margin-bottom: $margin-between-elements;
 }
 
-.card_container_footer {
-    display: flex;
-    align-items: center;
+.staff_card_specialty, .staff_card_collegiate_number {
+    font-family: $roboto-mono;
+    font-size: $small;
+    margin-bottom: $margin-between-elements;
 }
 
-.card_address {
+.staff_card_studies {
     color: $grey;
-}
-
-.card_icon {
-    color: $grey;
-    margin-left: auto;
+    margin-bottom: $margin-between-elements;
 }
