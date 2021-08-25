@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import "/workspace/react-flask-hello/src/front/styles/review.scss";
+import "../../styles/review.scss";
 
 const Review = props => {
 	return (
@@ -25,9 +25,9 @@ const Review = props => {
 };
 
 Review.propTypes = {
-	name: PropTypes.string,
-	date: PropTypes.string,
-	text: PropTypes.string
+	name: PropTypes.string.isRequired,
+	date: PropTypes.string.isRequired,
+	text: PropTypes.string.isRequired
 };
 
 export default Review;

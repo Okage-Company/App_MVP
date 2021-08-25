@@ -1,45 +1,20 @@
-// color
-$blue: #5C74FF;
-$yellow: #FFDB7D;
-$black: #0A0A0A;
-$grey: #969696;
-
-// font-family
-$roboto: 'Roboto', sans-serif;
-$roboto-mono: 'Roboto Mono', monospace;
-
-// font-weight
-$regular: 400;
-$medium-weight: 500;
-$bold: 700;
-
-// font-size
-$large: 1.25rem;
-$medium-size: 0.875rem;
-$small: 0.775rem;
-
-// margin & padding
-$padding-container: 1rem;
-$margin-between-elements: 0.75rem;
-
-//////////////////////////////////
+@import '../styles/index.scss';
 
 .review_container {
     font-size: $medium-size;
-    font-family: $roboto;
-    color: $black;
+    font-family: $primary-font;
+    color: $body-color;
     background-color: #fff;
     width: 400px;
     display: flex;
     flex-direction: column;
-    padding: $padding-container;
-    font-weight: $regular;
+    padding: $container-padding;
 }
 
 header {
     display: flex;
     align-items: center;
-    margin-bottom: $margin-between-elements;
+    margin-bottom: $container-elements-margin;
 }
 
 .review_profile_image {
@@ -54,33 +29,33 @@ header {
 .review_profile_text {
     display: flex;
     flex-direction: column;
-    margin-left: $margin-between-elements;
+    margin-left: $container-elements-margin;
 }
 
 .review_name {
-    color: $blue;
-    font-weight: $bold;
+    color: $primary-color;
+    font-weight: $bold-weight;
 }
 
 .review_chat {
-    color: $blue;
-    font-size: $small;
-    font-family: $roboto-mono;
+    color: $primary-color;
+    font-size: $small-size;
+    font-family: $secondary-font;
 }
 
 .review_date {
-    color: $grey;
-    font-size: $small;
-    font-family: $roboto-mono;
-    margin-bottom: $margin-between-elements;
+    color: $dark-grey-color;
+    font-size: $small-size;
+    font-family: $secondary-font;
+    margin-bottom: $container-elements-margin;
 }
 
 .review_text {
-    margin-bottom: $margin-between-elements;
+    margin-bottom: $container-elements-margin;
 }
 
 .review_report {
-    color: $blue;
-    font-size: $small;
-    font-family: $roboto-mono;
+    color: $primary-color;
+    font-size: $small-size;
+    font-family: $secondary-font;
 }
