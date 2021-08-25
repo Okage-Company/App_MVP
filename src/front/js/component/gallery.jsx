@@ -3,8 +3,8 @@ import React from react;
 const Gallery = () => {
 
 
-    return(
-
+    return(        
+        <div>Gallery</div>
     );
 };
 
