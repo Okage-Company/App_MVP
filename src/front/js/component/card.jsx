@@ -21,13 +21,12 @@ const Card = props => {
 };
 
 Card.propTypes = {
-	size: PropTypes.string,
-	image: PropTypes.string,
-	category: PropTypes.string,
-	title: PropTypes.string,
-	profile: PropTypes.string,
-	address: PropTypes.string,
-	icon: PropTypes.string
+	image: PropTypes.string.isRequired,
+	category: PropTypes.string.isRequired,
+	title: PropTypes.string.isRequired,
+	profile: PropTypes.string.isRequired,
+	address: PropTypes.string.isRequired,
+	icon: PropTypes.string.isRequired
 };
 
 export default Card;

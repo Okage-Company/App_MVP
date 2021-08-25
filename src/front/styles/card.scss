@@ -1,28 +1,4 @@
-// color
-$blue: #5C74FF;
-$yellow: #FFDB7D;
-$black: #0A0A0A;
-$grey: #969696;
-
-// font-family
-$roboto: 'Roboto', sans-serif;
-$roboto-mono: 'Roboto Mono', monospace;
-
-// font-weight
-$regular: 400;
-$medium-weight: 500;
-$bold: 700;
-
-// font-size
-$large: 1.25rem;
-$medium-size: 0.875rem;
-$small: 0.775rem;
-
-// margin & padding
-$padding-container: 1rem;
-$margin-between-elements: 0.75rem;
-
-//////////////////////////////////
+@import '/workspace/react-flask-hello/src/front/styles/index.scss';
 
 .card_container {
     background-color: #fff;
@@ -30,7 +6,7 @@ $margin-between-elements: 0.75rem;
     display: flex;
     flex-direction: column;
     font-size: $medium-size;
-    color: $black;
+    color: $body-color;
 }
 
 .card_image {
@@ -42,28 +18,28 @@ $margin-between-elements: 0.75rem;
 }
 
 .card_container_text {
-    font-family: $roboto;
-    padding: $padding-container;
+    font-family: $primary-font;
+    padding: $container-padding;
     display: flex;
     flex-direction: column;
 }
 
 .card_category {
-    font-family: $roboto-mono;
-    margin-bottom: $margin-between-elements;
-    font-size: $small;
+    font-family: $secondary-font;
+    margin-bottom: $container-elements-margin;
+    font-size: $small-size;
 }
 
 .card_title {
-    color: $blue;
-    font-size: $large;
-    font-weight: $bold;
+    color: $primary-color;
+    font-size: $large-size;
+    font-weight: $bold-weight;
 }
 
 .card_profile {
-    color: $blue;
+    color: $primary-color;
     font-weight: $medium-weight;
-    margin-bottom: $margin-between-elements;
+    margin-bottom: $container-elements-margin;
 }
 
 .card_container_footer {
@@ -72,10 +48,10 @@ $margin-between-elements: 0.75rem;
 }
 
 .card_address {
-    color: $grey;
+    color: $dark-grey-color;
 }
 
 .card_icon {
-    color: $grey;
+    color: $dark-grey-color;
     margin-left: auto;
 }

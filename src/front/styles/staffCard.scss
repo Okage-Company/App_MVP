@@ -1,36 +1,12 @@
-// color
-$blue: #5C74FF;
-$yellow: #FFDB7D;
-$black: #0A0A0A;
-$grey: #969696;
-
-// font-family
-$roboto: 'Roboto', sans-serif;
-$roboto-mono: 'Roboto Mono', monospace;
-
-// font-weight
-$regular: 400;
-$medium-weight: 500;
-$bold: 700;
-
-// font-size
-$large: 1.25rem;
-$medium-size: 0.875rem;
-$small: 0.775rem;
-
-// margin & padding
-$padding-container: 1rem;
-$margin-between-elements: 0.75rem;
-
-//////////////////////////////////
+@import '/workspace/react-flask-hello/src/front/styles/index.scss';
 
 .staff_card_container {
     background-color: #fff;
     width: 285px;
     display: flex;
     flex-direction: column;
-    color: $black;
-    font-family: $roboto;
+    color: $body-color;
+    font-family: $primary-font;
     font-size: $medium-size;
 }
 
@@ -43,25 +19,25 @@ $margin-between-elements: 0.75rem;
 }
 
 .staff_card_container_text {
-    padding: $padding-container;
+    padding: $container-padding;
     display: flex;
     flex-direction: column;
 }
 
 .staff_card_name {
-    font-size: $large;
-    color: $grey;
-    font-weight: $bold;
-    margin-bottom: $margin-between-elements;
+    font-size: $large-size;
+    color: $dark-grey-color;
+    font-weight: $bold-weight;
+    margin-bottom: $container-elements-margin;
 }
 
 .staff_card_specialty, .staff_card_collegiate_number {
-    font-family: $roboto-mono;
-    font-size: $small;
-    margin-bottom: $margin-between-elements;
+    font-family: $secondary-font;
+    font-size: $small-size;
+    margin-bottom: $container-elements-margin;
 }
 
 .staff_card_studies {
-    color: $grey;
-    margin-bottom: $margin-between-elements;
+    color: $dark-grey-color;
+    margin-bottom: $container-elements-margin;
 }

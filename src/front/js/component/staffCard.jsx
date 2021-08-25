@@ -18,11 +18,10 @@ const StaffCard = props => {
 };
 
 StaffCard.propTypes = {
-	name: PropTypes.string,
-	specialty: PropTypes.string,
-	category: PropTypes.string,
-	studies: PropTypes.string,
-	collegiateNumber: PropTypes.string
+	name: PropTypes.string.isRequired,
+	specialty: PropTypes.string.isRequired,
+	studies: PropTypes.string.isRequired,
+	collegiateNumber: PropTypes.string.isRequired
 };
 
 export default StaffCard;
