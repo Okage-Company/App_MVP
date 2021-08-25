@@ -1,0 +1,35 @@
+body{
+  background-color: #F9F6F2;
+}
+
+.container {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 3fr;
+  grid-gap: 2vw;
+}
+
+.myForm {
+  display: grid;
+  grid-template-columns: [labels] auto [controls] 1fr;
+  grid-auto-flow: row;
+  grid-gap: .8em;
+  background: #F9F6F2;
+  padding: 1.2em;
+}
+.myForm > label  {
+  grid-column: labels;
+  grid-row: auto;
+}
+.myForm > input,
+.myForm > textarea,
+.myForm > button {
+  grid-column: controls;
+  grid-row: auto;
+  border: none;
+  padding: 1em;
+  
+}
+.myForm > button{
+    background-color: #5C74FF;
+}
