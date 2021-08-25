@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export const Footer = () => (
+const Footer = () => (
 	<footer className="footer mt-auto py-3 text-center">
 		<div className="big">
 			<div>
@@ -28,3 +28,4 @@ export const Footer = () => (
 		</div>
 	</footer>
 );
+export default Footer;
