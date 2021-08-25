@@ -2,13 +2,15 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.scss";
+import Button from "../component/button.jsx";
+import Gallery from "../component/gallery.jsx";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
 		<div className="text-center mt-5">
-			<h1>Hello Rigo!</h1>
+			<Button />
 			<p>
 				<img src={rigoImageUrl} />
 			</p>
@@ -19,6 +21,7 @@ export const Home = () => {
 					Read documentation
 				</a>
 			</p>
+			<Gallery />
 		</div>
 	);
 };
