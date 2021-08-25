@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import "/workspace/react-flask-hello/src/front/styles/staffCard.scss";
+import "../../styles/staffCard.scss";
 
 const StaffCard = props => {
 	return (
