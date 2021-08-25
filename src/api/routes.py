@@ -8,9 +8,9 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from flask_cors import CORS
 from sqlalchemy import exc
 from werkzeug.security import check_password_hash
-from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 
-from api.models import db, Account, Client, Business, Favourites, Services, Reviews
+from api.models import db, Account, Client, Business, Services, Reviews
 from api.utils import generate_sitemap, APIException
 
 #Poner API delante
@@ -21,7 +21,7 @@ api = Blueprint('api', __name__)
 def get_user():
     all_user = Account.get_all()
     if all_user:
-        return jsonify(all_user), 200
+        return jsonify([user.serialize() for user in all_user]), 200
     
     return jsonify({'message': 'No account created'}), 500
 
