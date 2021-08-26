@@ -1,15 +1,19 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
+import Button from "../component/button.jsx";
+import Gallery from "../component/gallery.jsx";
 
-import Card from "/workspace/react-flask-hello/src/front/js/component/card.jsx";
-import StaffCard from "/workspace/react-flask-hello/src/front/js/component/staffCard.jsx";
+import Card from "../component/card.jsx";
+import StaffCard from "../component/staffCard.jsx";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
 		<div>
+			<Button />
+			<Gallery />
 			{/* card_search_view */}
 			<Card
 				category="Healthcare, Psychology"
