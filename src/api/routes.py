@@ -19,10 +19,13 @@ api = Blueprint('api', __name__)
 #1-Recibir toda la lista de usuarios
 @api.route('/account', methods=['GET'])
 def get_user():
-    all_user = Account.get_all()
-    if all_user:
+    all_user = Account.get_all() 
+    #Asignamos a all_user todos los usuarios que hemos conseguido llamando
+                                #a la clase account con el class method get_all
+    if all_user: 
+        #Si all_user tiene algo devuelve un json con cada usuario en forma de diccionario
         return jsonify([user.serialize() for user in all_user]), 200
-    
+    #Si all_user esta vacio devuelve un error
     return jsonify({'message': 'No account created'}), 500
 
 #2-Crear un usuario

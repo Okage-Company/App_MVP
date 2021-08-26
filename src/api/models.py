@@ -107,7 +107,9 @@ class Account(db.Model):
 
     @classmethod
     def get_all(cls):
-        users_list = cls.query.all()
+        #Pasamos la clase por parametro en este caso Account
+        users_list = cls.query.all() 
+        #Asignamos a user_list todos los usuarios de Account
         return users_list
         #[user.serialize() for user in users_list]
 

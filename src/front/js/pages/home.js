@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 
-import Card from "/workspace/react-flask-hello/src/front/js/component/card.jsx";
-import StaffCard from "/workspace/react-flask-hello/src/front/js/component/staffCard.jsx";
+import Card from "/workspace/App_MVP/src/front/js/component/card.jsx";
+import StaffCard from "/workspace/App_MVP/src/front/js/component/staffCard.jsx";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
