@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 
 import Card from "/workspace/react-flask-hello/src/front/js/component/card.jsx";
+import CardHome from "/workspace/react-flask-hello/src/front/js/component/cardHome.jsx";
 import StaffCard from "/workspace/react-flask-hello/src/front/js/component/staffCard.jsx";
 
 export const Home = () => {
@@ -10,6 +11,9 @@ export const Home = () => {
 
 	return (
 		<div>
+			{/* card_home */}
+			<CardHome category="Healthcare" />
+
 			{/* card_search_view */}
 			<Card
 				category="Healthcare, Psychology"
