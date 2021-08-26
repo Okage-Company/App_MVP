@@ -7,7 +7,7 @@ import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
-import { Navbar } from "./component/navbar";
+import Navbar from "./component/navbar.jsx";
 import { Footer } from "./component/footer";
 
 //create your first component
@@ -31,6 +31,7 @@ const Layout = () => {
 						<Route exact path="/single/:theid">
 							<Single />
 						</Route>
+						----{" "}
 						<Route>
 							<h1>Not found!</h1>
 						</Route>

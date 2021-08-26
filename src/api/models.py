@@ -8,19 +8,31 @@ from sqlalchemy import Column, ForeignKey, Integer, String, Enum, Boolean, Table
 
 db = SQLAlchemy()
 
-comments = Table("comments", db.Model.metadata,
-    Column("reviews_id", ForeignKey("reviews.id"), primary_key=True),
-    Column("client_id", ForeignKey("client.id"), primary_key=True)
+
+#Tabla intermedia entre cliente y buservices
+favourites = Table("favourites", db.Model.metadata,
+    Column("client_id", ForeignKey("client.id"), primary_key=True),
+    Column("buservices_id", ForeignKey("buservices.id"), primary_key=True)
 )
 
+class Comments(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.VARCHAR, nullable=False)
+    client_id = db.Column(ForeignKey('client.id'))
+    reviews_id = db.Column(ForeignKey('reviews.id'))
+    #Relationship
+    client = db.relationship("Client")
+    reviews = db.relationship("Reviews")
+
+#Tabla intermedia entre Business y Services
 class Buservices(db.Model):
     __tablename__ = 'buservices'
-    business_id = db.Column(ForeignKey('business.id'), primary_key=True)
-    services_id = db.Column(ForeignKey('services.id'), primary_key=True)
-    extra_data = Column(String(50))
+    id = db.Column(db.Integer, primary_key=True)
+    business_id = db.Column(ForeignKey('business.id'), nullable=False)
+    services_id = db.Column(ForeignKey('services.id'), nullable=False)
     #data
-    title = db.Column(db.VARCHAR, nullable=False, unique=False)
-    offer = db.Column(db.Boolean(True), nullable=False)
+    offer = db.Column(db.Boolean, default=True, nullable=False)
     adress = db.Column(db.VARCHAR, nullable=False)
     specialty = db.Column(db.VARCHAR, nullable=False)
     numero_colegiado = db.Column(db.VARCHAR, nullable=False, unique=False)
@@ -28,8 +40,12 @@ class Buservices(db.Model):
     tecniques = db.Column(db.VARCHAR, nullable=True, unique=False)
     photos = db.Column(db.VARCHAR, nullable=True, unique=False)
     #Relationship
-    services = db.relationship("Services", back_populates="business_")
-    business = db.relationship("Business", back_populates="services_")
+    services = db.relationship("Services")
+    business = db.relationship("Business")
+    client_ = db.relationship("Client",
+                    secondary=favourites,
+                    backref="buservices")
+
 
     def __repr__(self):
         return f'Buservices {self.title}, {self.specialty}, {self.numero_colegiado}'
@@ -55,7 +71,7 @@ class Account(db.Model):
     clients = db.relationship('Client', uselist=False, backref="account")
     businesses = db.relationship('Business', uselist=False, backref="account")
     #datos
-    is_client = db.Column(db.Boolean(True), unique=False, nullable=False)
+    is_client = db.Column(db.Boolean, default=True, unique=False, nullable=False)
     email = db.Column(db.VARCHAR, unique=True, nullable=False)
     _password = db.Column(db.VARCHAR, unique=False, nullable=False)
     phone = db.Column(db.VARCHAR, unique=False, nullable=True)
@@ -92,7 +108,8 @@ class Account(db.Model):
     @classmethod
     def get_all(cls):
         users_list = cls.query.all()
-        return [user.serialize() for user in users_list]
+        return users_list
+        #[user.serialize() for user in users_list]
 
 class Client(db.Model):
     __tablename__ = 'client'
@@ -101,8 +118,10 @@ class Client(db.Model):
     #FK
     account_id = db.Column(Integer, ForeignKey('account.id'))
     #Relationships
-    favourites = db.relationship("Favourites", uselist=False, backref="client")
-    reviews = db.relationship("Reviews", secondary=comments, back_populates="client")
+    reviews_ = db.relationship("Comments", back_populates="client")
+    buservices_ = db.relationship("Buservices",
+                    secondary=favourites,
+                    backref="client")
     #2
     def __repr__(self):
         return f'Client {self.id}'
@@ -112,20 +131,6 @@ class Client(db.Model):
             "id": self.id,
         }
         
-class Favourites(db.Model):
-    __tablename__ = 'favourites'
-    #1.2
-    id = db.Column(db.Integer, primary_key=True)
-    #FK
-    client_id = db.Column(db.Integer, db.ForeignKey('client.id'))
-    #2
-    def __repr__(self):
-        return f'Favourites {self.id}'
-        
-    def serialize(self):
-        return {
-            "id": self.id,
-        }
 
 class Business(db.Model):
     __tablename__ = 'business'
@@ -139,7 +144,7 @@ class Business(db.Model):
     #Poner la jornada partida
     schedule = db.Column(db.VARCHAR, unique=False, nullable=False)
     #Relationships
-    services_ = relationship("Buservices", back_populates="business")
+    services_ = db.relationship("Buservices", back_populates="business")
     #2
     def __repr__(self):
         return f'Business {self.id}'
@@ -159,8 +164,10 @@ class Services(db.Model):
     __tablename__ = 'services'
     #1.2
     id = db.Column(db.Integer, primary_key=True)
+    #Data
+    title = db.Column(db.VARCHAR, nullable=False, unique=False)
     #relation
-    business_ = relationship("Buservices", back_populates="services")
+    business_ = db.relationship("Buservices", back_populates="services")
 
     def __repr__(self):
         return f'Services {self.title}'
@@ -176,10 +183,10 @@ class Reviews(db.Model):
     __tablename__ = 'reviews'
     #1.2
     id = db.Column(db.Integer, primary_key=True)
+    #Data
     review = db.Column(db.VARCHAR, nullable=False, unique=False)
-    comment = db.Column(db.VARCHAR, nullable=False, unique=False)
     #Relationships
-    client = db.relationship("Client", secondary=comments, back_populates="reviews")
+    client_ = db.relationship("Comments", back_populates="reviews")
 
     #FK
     #2

@@ -1,0 +1,45 @@
+@import '../styles/index.scss';
+
+
+.MuiToolbar-root{
+    background-color: $background-body-color;
+    color: $primary-color;
+}
+.searchIcon {
+    color: white
+}
+
+.MuiSvgIcon-root{
+    color: $primary-color;
+
+}
+.MuiInputBase-root{
+    position: absolute;
+    background-color: white;
+    border-radius: 0.3rem;
+    
+}
+.makeStyles-searchIcon-3 {
+    color: #5C74FF;
+    height: 100%;
+    display: flex;
+    padding: 0px 16px;
+    z-index: 200;
+    align-items: center;
+    pointer-events: none;
+    justify-content: center;
+}
+.makeStyles-searchIcon-4 {
+    color: #5C74FF;
+    height: 100%;
+    display: flex;
+    padding: 0px 16px;
+    z-index: 200;
+    align-items: center;
+    pointer-events: none;
+    justify-content: center;
+}
+.makeStyles-inputInput-5{
+
+}
+

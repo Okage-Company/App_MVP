@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { alpha, makeStyles } from "@material-ui/core/styles";
+import { alpha, makeStyles, Grid } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -8,43 +8,41 @@ import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import MessageIcon from "@material-ui/icons/Message";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
 import LanguageIcon from "@material-ui/icons/Language";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import MoreIcon from "@material-ui/icons/MoreVert";
+import "../../styles/navbar.scss";
 
 const useStyles = makeStyles(theme => ({
 	grow: {
 		flexGrow: 1
 	},
-	menuButton: {
-		marginRight: theme.spacing(2)
-	},
-	title: {
-		display: "none",
-		[theme.breakpoints.up("sm")]: {
-			display: "block"
-		}
-	},
 	search: {
 		position: "relative",
 		borderRadius: theme.shape.borderRadius,
+		margin: "auto",
 		backgroundColor: alpha(theme.palette.common.white, 0.15),
 		"&:hover": {
 			backgroundColor: alpha(theme.palette.common.white, 0.25)
 		},
-		marginRight: theme.spacing(2),
-		marginLeft: 0,
-		width: "100%",
+
 		[theme.breakpoints.up("sm")]: {
-			marginLeft: theme.spacing(3),
-			width: "auto"
+			marginLeft: theme.spacing(2)
 		}
 	},
+	searchMobile: {
+		position: "relative",
+		borderRadius: theme.shape.borderRadius,
+		margin: "auto",
+		backgroundColor: alpha(theme.palette.common.white, 0.15),
+		"&:hover": {
+			backgroundColor: alpha(theme.palette.common.white, 0.25)
+		},
+
+		[theme.breakpoints.up("sm")]: {}
+	},
+
 	searchIcon: {
 		padding: theme.spacing(0, 2),
 		height: "100%",
@@ -52,8 +50,10 @@ const useStyles = makeStyles(theme => ({
 		pointerEvents: "none",
 		display: "flex",
 		alignItems: "center",
-		justifyContent: "center"
+		justifyContent: "center",
+		color: "#5C74FF"
 	},
+
 	inputRoot: {
 		color: "inherit"
 	},
@@ -68,14 +68,22 @@ const useStyles = makeStyles(theme => ({
 		}
 	},
 	sectionDesktop: {
-		display: "none",
 		[theme.breakpoints.up("md")]: {
 			display: "flex"
 		}
 	},
+
 	sectionMobile: {
 		display: "flex",
+		flex: "no-wrap",
 		[theme.breakpoints.up("md")]: {
+			display: "none"
+		}
+	},
+	searchBarMobileDiv: {
+		justifyContent: "center",
+
+		[theme.breakpoints.up("sm")]: {
 			display: "none"
 		}
 	}
@@ -88,9 +96,12 @@ const Navbar = () => {
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
 	const isMenuOpen = Boolean(anchorEl);
-	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
 	const handleProfileMenuOpen = event => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handleLanguagesMenuOpen = event => {
 		setAnchorEl(event.currentTarget);
 	};
 
@@ -103,11 +114,8 @@ const Navbar = () => {
 		handleMobileMenuClose();
 	};
 
-	const handleMobileMenuOpen = event => {
-		setMobileMoreAnchorEl(event.currentTarget);
-	};
-
 	const menuId = "primary-search-account-menu";
+	const menuId2 = "language-search-account-menu";
 	const renderMenu = (
 		<Menu
 			anchorEl={anchorEl}
@@ -123,58 +131,23 @@ const Navbar = () => {
 		</Menu>
 	);
 
-	const mobileMenuId = "primary-search-account-menu-mobile";
-	const renderMobileMenu = (
-		<Menu
-			anchorEl={mobileMoreAnchorEl}
-			anchorOrigin={{ vertical: "top", horizontal: "right" }}
-			id={mobileMenuId}
-			keepMounted
-			transformOrigin={{ vertical: "top", horizontal: "right" }}
-			open={isMobileMenuOpen}
-			onClose={handleMobileMenuClose}>
-			<MenuItem>
-				<IconButton aria-label="show 4 new mails" color="inherit">
-					<Badge badgeContent={4} color="secondary">
-						<LanguageIcon />
-					</Badge>
-				</IconButton>
-				<p>Messages</p>
-			</MenuItem>
-			<MenuItem>
-				<IconButton aria-label="show 11 new notifications" color="inherit">
-					<Badge badgeContent={11} color="secondary">
-						<MessageIcon />
-					</Badge>
-				</IconButton>
-				<p>Notifications</p>
-			</MenuItem>
-			<MenuItem onClick={handleProfileMenuOpen}>
-				<IconButton
-					aria-label="account of current user"
-					aria-controls="primary-search-account-menu"
-					aria-haspopup="true"
-					color="inherit">
-					<AccountCircle />
-				</IconButton>
-				<p>Profile</p>
-			</MenuItem>
-		</Menu>
-	);
 	//Los div que devuelvo
 	return (
 		<div className={classes.grow}>
-			<AppBar position="static" elevation={0}>
+			<AppBar className="navBar" position="static" elevation={0}>
 				<Toolbar>
+					{/*Logo*/}
 					<Typography className={classes.title} variant="h6" noWrap>
-						LOGO Okage
+						Okage
 					</Typography>
+					<div className={classes.grow} />
+					{/*Searchbar*/}
 					<div className={classes.search}>
 						<div className={classes.searchIcon}>
 							<SearchIcon />
 						</div>
 						<InputBase
-							placeholder="Search…"
+							placeholder="Where are you?"
 							classes={{
 								root: classes.inputRoot,
 								input: classes.inputInput
@@ -184,16 +157,19 @@ const Navbar = () => {
 					</div>
 					<div className={classes.grow} />
 					<div className={classes.sectionDesktop}>
-						<IconButton aria-label="show 4 new mails" color="inherit">
-							<Badge badgeContent={4} color="secondary">
+						{/*Language icon*/}
+						<IconButton aria-label="show 4 new mails" color="inherit" aria-controls={menuId}>
+							<Badge badgeContent={4} color="secondary" onClick={handleLanguagesMenuOpen}>
 								<LanguageIcon />
 							</Badge>
 						</IconButton>
-						<IconButton aria-label="show 17 new messages" color="inherit">
+						{/*DMs icon */}
+						<IconButton aria-label="show 19 new messages" color="inherit">
 							<Badge badgeContent={17} color="secondary">
 								<MessageIcon />
 							</Badge>
 						</IconButton>
+						{/*ProfileBubble */}
 						<IconButton
 							edge="end"
 							aria-label="account of current user"
@@ -204,19 +180,25 @@ const Navbar = () => {
 							<AccountCircle />
 						</IconButton>
 					</div>
-					<div className={classes.sectionMobile}>
-						<IconButton
-							aria-label="show more"
-							aria-controls={mobileMenuId}
-							aria-haspopup="true"
-							onClick={handleMobileMenuOpen}
-							color="inherit">
-							<MoreIcon />
-						</IconButton>
+				</Toolbar>
+				<Toolbar className={classes.searchBarMobileDiv}>
+					<div>
+						<div className={classes.searchMobile}>
+							<div className={classes.searchIcon}>
+								<SearchIcon />
+							</div>
+							<InputBase
+								placeholder="Where are you?"
+								classes={{
+									root: classes.inputRoot,
+									input: classes.inputInput
+								}}
+								inputProps={{ "aria-label": "search" }}
+							/>
+						</div>
 					</div>
 				</Toolbar>
 			</AppBar>
-			{renderMobileMenu}
 			{renderMenu}
 		</div>
 	);
