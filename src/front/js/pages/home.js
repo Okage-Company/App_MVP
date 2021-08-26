@@ -10,7 +10,17 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div>
+		<div className="grid-container">
+			<span>Here write something</span>
+			<div className="home_title">
+				<span className="home_title_text">A new</span>
+				<span className="home_title_text">pulse of</span>
+				<span className="home_title_text">dream</span>
+			</div>
+			<span>
+				Okage is dedicated to promoting services and solutions, across the spectrum and throughout the life
+				span, for the needs of people with autism and their families.
+			</span>
 			{/* card_home */}
 			<CardHome category="Healthcare" />
 
