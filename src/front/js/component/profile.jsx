@@ -39,8 +39,8 @@ export const Profile = () => {
 				<div className={classes.imag}>
 					<Avatar className={classes.purple}> V </Avatar>
 				</div>
-				<div></div>
-				<div></div>
+				<div>Button</div>
+				<div>Button</div>
 			</div>
 			<div>
 				<h3>Your profile</h3>
