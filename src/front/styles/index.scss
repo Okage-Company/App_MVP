@@ -1,3 +1,28 @@
-/* 
-    General Styles
-*/
+// color
+$primary-color: #5C74FF;
+$secondary-color: #FFDB7D;
+$body-color: #0A0A0A;
+$dark-grey-color: #969696;
+$light-grey-color: #F6F6F6;
+$background-body-color: #F9F6F2;
+
+// font-family
+$primary-font: 'Roboto', sans-serif;
+$secondary-font: 'Roboto Mono', monospace;
+
+// font-weight
+$regular-weight: 400;
+$medium-weight: 500;
+$bold-weight: 700;
+
+// font-size
+$large-size: 1.25rem;
+$medium-size: 0.875rem;
+$small-size: 0.775rem;
+
+// margin & padding
+$container-padding: 1rem;
+$container-grid-padding: 5.938rem;
+$container-elements-margin: 0.75rem;
+$grid-gap: 2rem;
+$border-radius: 0.3rem;

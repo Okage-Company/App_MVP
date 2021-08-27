@@ -1,42 +1,46 @@
-a{
-    color: white;
+@import '../styles/index.scss';
+
+.footer_container {
+    color: #fff;
+    font-size: $medium-size;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: $container-grid-padding;
+    padding-right: $container-grid-padding;
+    background-color: $body-color;
+    display: grid;
+    grid-gap: $grid-gap;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: "logo aboutContact socialMedia socialMedia socialMedia socialMedia socialMedia socialMedia"
+                        "terms terms terms terms terms terms terms terms"
 }
-hr{
-    color: white;
+
+.footer_logo {
+    grid-area: logo;
 }
-.footer{
-    background-color: black;
-    color: white;
+
+.footer_logo_img {
+    width: 5rem;
 }
-.direcciones{
-    float: right;
-    color: white;
+
+.footer_text {
+    grid-area: aboutContact;
 }
-.linea{
-    border-bottom-style: solid;
+
+.footer_social {
+    grid-area: socialMedia;
+    margin-left: auto;
+    font-size: $large-size;
 }
-.column {
-    float: left;
-    padding: 10px;
-    height: 80px; /* Should be removed. Only for demonstration */
-  }
-  
-  .left, .iconos, .about {
-    width: 8%;
-  }
-  .left{
-      font-weight: bold;
-  }
-  .about{
-      float: left;
-      text-align: left;
-  }
-  .middle {
-    width: 74%;
-  }
-  .iconos{
-      text-align: right;
-  }
-  .right{
-      float: right;
-  }
+
+.footer_terms {
+    grid-area: terms;
+    margin-left: auto;
+    font-size: $small-size;
+    border-top: 1px solid red;
+}
+
+.sm-icon {
+    margin-left: 1rem;
+}
