@@ -14,7 +14,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import LanguageIcon from "@material-ui/icons/Language";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import "../../styles/navbar.scss";
-import Image from "material-ui-image";
+import logosvg from "../../img/logo-navbar-01.png";
 
 const useStyles = makeStyles(theme => ({
 	grow: {
@@ -28,19 +28,20 @@ const useStyles = makeStyles(theme => ({
 			backgroundColor: alpha(theme.palette.common.white, 0.25)
 		},
 		display: "none",
+
 		[theme.breakpoints.up("sm")]: {
-			display: "block"
+			display: "block",
+			width: "350px",
+			marginLeft: "6px"
 		}
 	},
 	searchMobile: {
 		position: "relative",
 		borderRadius: theme.shape.borderRadius,
-		margin: "auto",
 		backgroundColor: alpha(theme.palette.common.white, 0.15),
 		"&:hover": {
 			backgroundColor: alpha(theme.palette.common.white, 0.25)
 		},
-		width: "100%",
 		[theme.breakpoints.up("sm")]: {}
 	},
 
@@ -63,10 +64,8 @@ const useStyles = makeStyles(theme => ({
 		// vertical padding + font size from searchIcon
 		paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
 		transition: theme.transitions.create("width"),
-		width: "100%",
-		[theme.breakpoints.up("md")]: {
-			width: "20ch"
-		}
+
+		[theme.breakpoints.up("md")]: {}
 	},
 	sectionDesktop: {
 		[theme.breakpoints.up("md")]: {
@@ -86,6 +85,17 @@ const useStyles = makeStyles(theme => ({
 		[theme.breakpoints.up("sm")]: {
 			display: "none"
 		}
+	},
+	title: {
+		[theme.breakpoints.up("sm")]: {
+			display: "block"
+		}
+	},
+	mobileIcons: {
+		padding: "5px",
+		[theme.breakpoints.up("sm")]: {
+			padding: "12px"
+		}
 	}
 }));
 
@@ -93,16 +103,18 @@ const Navbar = () => {
 	//Declaro todas las constantes
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
+	const [anchorEl2, setAnchorEl2] = React.useState(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
 	const isMenuOpen = Boolean(anchorEl);
+	const isMenuLanguagesOpen = Boolean(anchorEl2);
 
 	const handleProfileMenuOpen = event => {
 		setAnchorEl(event.currentTarget);
 	};
 
 	const handleLanguagesMenuOpen = event => {
-		setAnchorEl(event.currentTarget);
+		setAnchorEl2(event.currentTarget);
 	};
 
 	const handleMobileMenuClose = () => {
@@ -111,6 +123,10 @@ const Navbar = () => {
 
 	const handleMenuClose = () => {
 		setAnchorEl(null);
+		handleMobileMenuClose();
+	};
+	const handleMenuClose2 = () => {
+		setAnchorEl2(null);
 		handleMobileMenuClose();
 	};
 
@@ -130,18 +146,32 @@ const Navbar = () => {
 			<MenuItem onClick={handleMenuClose}>Log Out</MenuItem>
 		</Menu>
 	);
+	const renderMenu2 = (
+		<Menu
+			anchorEl={anchorEl2}
+			anchorOrigin={{ vertical: "top", horizontal: "right" }}
+			id={menuId2}
+			keepMounted
+			transformOrigin={{ vertical: "top", horizontal: "right" }}
+			open={isMenuLanguagesOpen}
+			onClose={handleMenuClose2}>
+			<MenuItem onClick={handleMenuClose2}>Español</MenuItem>
+			<MenuItem onClick={handleMenuClose2}>English</MenuItem>
+			<MenuItem onClick={handleMenuClose2}>Català</MenuItem>
+		</Menu>
+	);
 
 	//Los div que devuelvo
 	return (
 		<div className={classes.grow}>
-			<AppBar className="navBar" position="static" elevation={0}>
+			<AppBar className="navBar" position="fixed" elevation={0}>
 				<Toolbar>
 					{/*Logo*/}
-					<div className="">
+					<div className="d-flex flex-row">
+						<img src={logosvg} className="okageLogo" />
 						<Typography className={classes.title} variant="h6" noWrap>
 							Okage
 						</Typography>
-						<Image src="../../img/logo-navbar-1-01.svg" alt="Okage" />
 					</div>
 					<div className={classes.grow} />
 					{/*Searchbar*/}
@@ -161,15 +191,19 @@ const Navbar = () => {
 					<div className={classes.grow} />
 					<div className={classes.sectionDesktop}>
 						{/*Language icon*/}
-						<IconButton aria-label="show 4 new mails" color="inherit" aria-controls={menuId}>
+						<IconButton
+							className={classes.mobileIcons}
+							color="inherit"
+							onClick={handleLanguagesMenuOpen}
+							aria-controls={menuId2}>
 							<LanguageIcon />
 						</IconButton>
 						{/*DMs icon */}
-						<IconButton aria-label="show 19 new messages" color="inherit">
+						<IconButton className={classes.mobileIcons} aria-label="show 19 new messages" color="inherit">
 							<FavoriteIcon />
 						</IconButton>
 						{/*DMs icon */}
-						<IconButton aria-label="show 19 new messages" color="inherit">
+						<IconButton className={classes.mobileIcons} aria-label="show 19 new messages" color="inherit">
 							<Badge badgeContent={17} color="secondary">
 								<MessageIcon />
 							</Badge>
@@ -177,6 +211,7 @@ const Navbar = () => {
 						{/*ProfileBubble */}
 						<IconButton
 							edge="end"
+							className={classes.mobileIcons}
 							aria-label="account of current user"
 							aria-controls={menuId}
 							aria-haspopup="true"
@@ -187,7 +222,7 @@ const Navbar = () => {
 					</div>
 				</Toolbar>
 				<Toolbar className={classes.searchBarMobileDiv}>
-					<div>
+					<div className="w-100">
 						<div className={classes.searchMobile}>
 							<div className={classes.searchIcon}>
 								<SearchIcon />
@@ -205,6 +240,7 @@ const Navbar = () => {
 				</Toolbar>
 			</AppBar>
 			{renderMenu}
+			{renderMenu2}
 		</div>
 	);
 };
