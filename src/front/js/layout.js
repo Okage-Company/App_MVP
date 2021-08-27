@@ -8,7 +8,6 @@ import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
-import FooterRicardo from "/workspace/react-flask-hello/src/front/js/component/footerRicardo.jsx";
 import { Footer } from "./component/footer";
 
 //create your first component
@@ -36,7 +35,6 @@ const Layout = () => {
 							<h1>Not found!</h1>
 						</Route>
 					</Switch>
-					<FooterRicardo />
 					<Footer />
 				</ScrollToTop>
 			</BrowserRouter>
