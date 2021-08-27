@@ -3,8 +3,10 @@
 .grid_container {
     background-color: $background-body-color;
     display: grid;
-    padding-left: 5.938rem;
-    padding-right: 5.938rem;
+    padding-top: 2rem;
+    padding-left: $container-grid-padding;
+    padding-right: $container-grid-padding;
+    padding-bottom: $container-grid-padding;
     grid-gap: $grid-gap;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 40rem 1fr;
