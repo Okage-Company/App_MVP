@@ -8,4 +8,4 @@ const Home = () => {
 	return <Button />;
 };
 
-export default Button;
+export default Home;
