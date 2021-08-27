@@ -12,7 +12,9 @@ import SearchIcon from "@material-ui/icons/Search";
 import MessageIcon from "@material-ui/icons/Message";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import LanguageIcon from "@material-ui/icons/Language";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import "../../styles/navbar.scss";
+import Image from "material-ui-image";
 
 const useStyles = makeStyles(theme => ({
 	grow: {
@@ -21,14 +23,13 @@ const useStyles = makeStyles(theme => ({
 	search: {
 		position: "relative",
 		borderRadius: theme.shape.borderRadius,
-		margin: "auto",
 		backgroundColor: alpha(theme.palette.common.white, 0.15),
 		"&:hover": {
 			backgroundColor: alpha(theme.palette.common.white, 0.25)
 		},
-
+		display: "none",
 		[theme.breakpoints.up("sm")]: {
-			marginLeft: theme.spacing(2)
+			display: "block"
 		}
 	},
 	searchMobile: {
@@ -39,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 		"&:hover": {
 			backgroundColor: alpha(theme.palette.common.white, 0.25)
 		},
-
+		width: "100%",
 		[theme.breakpoints.up("sm")]: {}
 	},
 
@@ -82,7 +83,6 @@ const useStyles = makeStyles(theme => ({
 	},
 	searchBarMobileDiv: {
 		justifyContent: "center",
-
 		[theme.breakpoints.up("sm")]: {
 			display: "none"
 		}
@@ -137,9 +137,12 @@ const Navbar = () => {
 			<AppBar className="navBar" position="static" elevation={0}>
 				<Toolbar>
 					{/*Logo*/}
-					<Typography className={classes.title} variant="h6" noWrap>
-						Okage
-					</Typography>
+					<div className="">
+						<Typography className={classes.title} variant="h6" noWrap>
+							Okage
+						</Typography>
+						<Image src="../../img/logo-navbar-1-01.svg" alt="Okage" />
+					</div>
 					<div className={classes.grow} />
 					{/*Searchbar*/}
 					<div className={classes.search}>
@@ -159,9 +162,11 @@ const Navbar = () => {
 					<div className={classes.sectionDesktop}>
 						{/*Language icon*/}
 						<IconButton aria-label="show 4 new mails" color="inherit" aria-controls={menuId}>
-							<Badge badgeContent={4} color="secondary" onClick={handleLanguagesMenuOpen}>
-								<LanguageIcon />
-							</Badge>
+							<LanguageIcon />
+						</IconButton>
+						{/*DMs icon */}
+						<IconButton aria-label="show 19 new messages" color="inherit">
+							<FavoriteIcon />
 						</IconButton>
 						{/*DMs icon */}
 						<IconButton aria-label="show 19 new messages" color="inherit">
