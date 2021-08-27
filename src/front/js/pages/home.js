@@ -12,7 +12,7 @@ export const Home = () => {
 
 	return (
 		<div>
-			<Button action="Maps" />
+			<Button />
 			<Gallery />
 			{/* card_search_view */}
 			<Card
