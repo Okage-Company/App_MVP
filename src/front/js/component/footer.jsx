@@ -14,8 +14,10 @@ const Footer = () => (
 			<i className="fab sm-icon fa-facebook-square"></i>
 			<i className="fab sm-icon fa-twitter-square"></i>
 		</div>
-		<div className="footer_terms"></div>
-		<div className="footer_terms">2021© Terms & Conditions • Privacy Policy • Cookies</div>
+		<div className="footer_terms">
+			<div className="footer_terms_divider" />
+			<span className="footer_terms_text">2021© Terms & Conditions • Privacy Policy • Cookies</span>
+		</div>
 	</div>
 );
 export default Footer;
