@@ -2,13 +2,16 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 
+
 import CardHome from "/workspace/react-flask-hello/src/front/js/component/cardHome.jsx";
 import Button from "/workspace/react-flask-hello/src/front/js/component/button.jsx";
+
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
+
 		<div className="grid_container">
 			<div className="grid_container_title">
 				<div className="home_title">
@@ -70,6 +73,6 @@ export const Home = () => {
 					</div>
 				</div>
 			</div>
-		</div>
+======
 	);
 };
