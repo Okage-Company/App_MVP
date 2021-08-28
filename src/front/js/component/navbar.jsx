@@ -163,7 +163,7 @@ const Navbar = () => {
 
 	//Los div que devuelvo
 	return (
-		<div className={classes.grow}>
+		<div>
 			<AppBar className="navBar" position="fixed" elevation={0}>
 				<Toolbar>
 					{/*Logo*/}

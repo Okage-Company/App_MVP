@@ -1,0 +1,17 @@
+@import '../styles/index.scss';
+
+.modalService {
+    background-color: white;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    margin-right: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+h5 {
+    margin-top: 2rem;
+    color: $dark-grey-color;
+}
