@@ -2,7 +2,8 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import Button from "@material-ui/core/Button";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import "../../styles/modal_service.scss";
 
 const typeOfService = [
@@ -27,19 +28,20 @@ const typeOfService = [
 const useStylesMS = makeStyles(theme => ({
 	rootMS: {
 		"& .MuiTextField-root": {
-			width: "30rem",
+			width: "100%",
+			maxWidth: "31rem",
 			marginTop: "2rem",
 			display: "flex",
 			flex: "column",
 			color: "#F6F6F6"
 		},
-		"& .MuiTextareaAutosize-root": {
-			width: "30rem",
-			marginTop: "2rem",
-			display: "flex",
-			flex: "column",
-			color: "#F6F6F6"
+		"& .MuiInput-input": {
+			backgroundColor: "#F6F6F6",
+			background: "grey"
 		}
+	},
+	input: {
+		display: "none"
 	}
 }));
 
@@ -57,6 +59,7 @@ export default function ValidationTextFields() {
 				<div className="modalServiceDescription">
 					<h5>Description</h5>
 					<TextField
+						className="inputBGC"
 						id="outlined-error"
 						label="Service Title"
 						placeholder="Service Title"
@@ -112,15 +115,25 @@ export default function ValidationTextFields() {
 						variant="outlined"
 					/>
 				</div>
-				<div className="modalServiceStaff">
-					<h5>Gallery</h5>
-					<TextField
-						id="outlined-error-helper-text"
-						label="Full Name"
-						defaultValue=""
-						helperText="Choose the name of the main worker."
-						variant="outlined"
-					/>
+				<h5>Gallery</h5>
+				<div className="modalServiceGallery">
+					<div className="galleryBox"></div>
+					<div className="galleryBox"></div>
+					<div className="galleryBox"></div>
+				</div>
+				<div className="buttonUploadImage">
+					<input accept="image/*" className={classes.input} id="contained-button-file" multiple type="file" />
+					<label htmlFor="contained-button-file">
+						<Button variant="contained" color="primary" component="span" disableElevation>
+							Upload Images
+						</Button>
+					</label>
+				</div>
+				<div className="buttonCreateService">
+					<Button variant="contained" color="primary" disableElevation>
+						<ArrowForwardIcon />
+						Create a Service
+					</Button>
 				</div>
 			</form>
 		</div>
