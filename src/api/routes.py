@@ -56,7 +56,6 @@ def create_client():
     profile_foto = request.json.get('profile_photo', None)
     _is_active = request.json.get('_is_active', None)
 
-  
     user = Account(
         is_client=is_client,
         email=email,
@@ -70,29 +69,32 @@ def create_client():
         profile_foto=profile_foto,
         _is_active=True
     )
-    #La sintaxis sería:
-    #If user.is_client=True:
-    #   client=Client(account_id=user.id)
-    #   client.create()...
-    #else:
-    #   cif = request.json.get('cif', None)
-    #   if not cif:
-    #       error:something is wrong
-    #   else
-    #       business=Business(account_id=user.id)
-    #       business.create()
+  
     try:
         user.create()
         #return jsonify(user.serialize()), 201
     except exc.IntegrityError:
         return {'error': 'Something is wrong'}, 409
     
-    client=Client(account_id=user.id)
 
-    if user.is_client=True:
-        client.create()
-        return jsonify(client.serialize()), 201
-    else 
+    if user:
+        if (user.is_client==True):
+            client=Client(account_id=user.id)
+            client.create()
+            return jsonify(client.serialize()), 201
+        else:
+            centre_name = request.json.get('centre_name', None)
+            cif = request.json.get('cif', None)
+            schedule = request.json.get('schedule', None) 
+            business=Business(
+                account_id=user.id,
+                centre_name=centre_name,
+                cif=cif,
+                schedule=schedule
+            )
+            business.create()
+            return jsonify(business.serialize()), 201
+    else:
         return {'error': 'Something is wrong'}, 409
     
 
