@@ -22,12 +22,28 @@ def get_user():
     all_user = Account.get_all()
     if all_user:
         return jsonify([user.serialize() for user in all_user]), 200
+    return jsonify({'message': 'No account created'}), 500
+
+#2-Recibir toda la lista de clientes
+@api.route('/client', methods=['GET'])
+def get_client():
+    all_clients = Client.get_all()
+    if all_clients:
+        return jsonify([client.serialize() for client in all_clients]), 200
+    
+    return jsonify({'message': 'No account created'}), 500
+#3-Recibir toda la lista de business
+@api.route('/business', methods=['GET'])
+def get_business():
+    all_businesses = Business.get_all()
+    if all_businesses:
+        return jsonify([business.serialize() for business in all_businesses]), 200
     
     return jsonify({'message': 'No account created'}), 500
 
 #2-Crear un usuario
 @api.route('/account', methods=['POST'])
-def create_account():
+def create_client():
     is_client = request.json.get('is_client', None)
     email = request.json.get('email', None)
     _password = request.json.get('_password', None)
@@ -42,7 +58,7 @@ def create_account():
 
   
     user = Account(
-        is_client=True,
+        is_client=is_client,
         email=email,
         _password=_password,
         phone=phone,
@@ -54,12 +70,31 @@ def create_account():
         profile_foto=profile_foto,
         _is_active=True
     )
-
+    #La sintaxis sería:
+    #If user.is_client=True:
+    #   client=Client(account_id=user.id)
+    #   client.create()...
+    #else:
+    #   cif = request.json.get('cif', None)
+    #   if not cif:
+    #       error:something is wrong
+    #   else
+    #       business=Business(account_id=user.id)
+    #       business.create()
     try:
         user.create()
-        return jsonify(user.serialize()), 201
+        #return jsonify(user.serialize()), 201
     except exc.IntegrityError:
         return {'error': 'Something is wrong'}, 409
+    
+    client=Client(account_id=user.id)
+
+    if user.is_client=True:
+        client.create()
+        return jsonify(client.serialize()), 201
+    else 
+        return {'error': 'Something is wrong'}, 409
+    
 
 #LOGIN + JWT TOKEN
 @api.route('/login', methods=['POST'])
