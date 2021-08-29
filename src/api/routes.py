@@ -89,10 +89,10 @@ def create_client():
     
     client=Client(account_id=user.id)
 
-    if user.is_client=True:
+    if (user.is_client==True):
         client.create()
         return jsonify(client.serialize()), 201
-    else 
+    else:
         return {'error': 'Something is wrong'}, 409
     
 
