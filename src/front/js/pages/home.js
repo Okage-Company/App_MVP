@@ -20,7 +20,7 @@ export const Home = () => {
 				}}>
 				Eat my shorts
 			</button>
-			{openModal && <Modal />}
+			{openModal && <Modal closeModal={setOpenModal} />}
 		</div>
 	);
 };
