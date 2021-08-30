@@ -2,7 +2,7 @@ const BASE_URL = "https://3001-brown-chicken-oj9mv0gl.ws-eu16.gitpod.io/api/";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			business: {}
+			business: []
 		},
 		actions: {
 			getBusiness: async () => {
