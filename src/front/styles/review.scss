@@ -1,0 +1,61 @@
+@import '../styles/index.scss';
+
+.review_container {
+    font-size: $medium-size;
+    font-family: $primary-font;
+    color: $body-color;
+    background-color: #fff;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: $container-padding;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    margin-bottom: $container-elements-margin;
+}
+
+.review_profile_image {
+    background-image:url('https://images.unsplash.com/photo-1563306406-e66174fa3787?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2734&q=80');
+    background-position: center;
+    background-size: cover;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+}
+
+.review_profile_text {
+    display: flex;
+    flex-direction: column;
+    margin-left: $container-elements-margin;
+}
+
+.review_name {
+    color: $primary-color;
+    font-weight: $bold-weight;
+}
+
+.review_chat {
+    color: $primary-color;
+    font-size: $small-size;
+    font-family: $secondary-font;
+}
+
+.review_date {
+    color: $dark-grey-color;
+    font-size: $small-size;
+    font-family: $secondary-font;
+    margin-bottom: $container-elements-margin;
+}
+
+.review_text {
+    margin-bottom: $container-elements-margin;
+}
+
+.review_report {
+    color: $primary-color;
+    font-size: $small-size;
+    font-family: $secondary-font;
+}

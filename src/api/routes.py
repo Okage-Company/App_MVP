@@ -28,9 +28,26 @@ def get_user():
     #Si all_user esta vacio devuelve un error
     return jsonify({'message': 'No account created'}), 500
 
-#2-Crear un usuario
+#2-Recibir toda la lista de clientes
+@api.route('/client', methods=['GET'])
+def get_client():
+    all_clients = Client.get_all()
+    if all_clients:
+        return jsonify([client.serialize() for client in all_clients]), 200
+    return jsonify({'message': 'No account created'}), 500
+    
+    return jsonify({'message': 'No clients created'}), 500
+#3-Recibir toda la lista de business
+@api.route('/business', methods=['GET'])
+def get_business():
+    all_businesses = Business.get_all()
+    if all_businesses:
+        return jsonify([business.serialize() for business in all_businesses]), 200
+    return jsonify({'message': 'No business created'}), 500
+
+#2-Crear un usuario Business/Client según el booleano is_client:
 @api.route('/account', methods=['POST'])
-def create_account():
+def create_client():
     is_client = request.json.get('is_client', None)
     email = request.json.get('email', None)
     _password = request.json.get('_password', None)
@@ -43,9 +60,8 @@ def create_account():
     profile_foto = request.json.get('profile_photo', None)
     _is_active = request.json.get('_is_active', None)
 
-  
     user = Account(
-        is_client=True,
+        is_client=is_client,
         email=email,
         _password=_password,
         phone=phone,
@@ -57,12 +73,40 @@ def create_account():
         profile_foto=profile_foto,
         _is_active=True
     )
-
+  
     try:
         user.create()
-        return jsonify(user.serialize()), 201
+        #return jsonify(user.serialize()), 201
     except exc.IntegrityError:
         return {'error': 'Something is wrong'}, 409
+    
+
+    if user:
+        if (user.is_client==True):
+            client=Client(account_id=user.id)
+            try:
+                client.create()
+                return jsonify(client.serialize()), 201
+            except exc.IntegrityError:
+                return {'error': 'Something is wrong'}, 409
+        else:
+            centre_name = request.json.get('centre_name', None)
+            cif = request.json.get('cif', None)
+            schedule = request.json.get('schedule', None) 
+            business=Business(
+                account_id=user.id,
+                centre_name=centre_name,
+                cif=cif,
+                schedule=schedule
+            )
+            try:
+                business.create()
+                return jsonify(business.serialize()), 201
+            except exc.IntegrityError:
+                return {'error': 'Something is wrong'}, 409
+    else:
+        return {'error': 'Something is wrong'}, 409
+    
 
 #LOGIN + JWT TOKEN
 @api.route('/login', methods=['POST'])
