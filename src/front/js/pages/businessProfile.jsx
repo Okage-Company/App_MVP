@@ -6,21 +6,11 @@ const BusinessProfile = () => {
 	const { store } = useContext(Context);
 
 	return (
-		<div>
-			<h1>Businesses</h1>
-			<div>Title</div>
-			<div>
-				{store.business.map((business, index) => {
-					return (
-						<div key={index}>
-							<div>{business.id}</div>
-							<div>{business.account_id}</div>
-							<div>{business.cif}</div>
-							<div>{business.centre_name}</div>
-							<div>{business.schedule}</div>
-						</div>
-					);
-				})}
+		<div className="businessProfileContainer">
+			<div className="businessProfileSidebar">Hello</div>
+			<div className="businessProfileMain">
+				<h1>Businesses</h1>
+				<div>Title</div>
 			</div>
 		</div>
 	);
