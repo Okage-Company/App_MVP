@@ -21,7 +21,7 @@ api = Blueprint('api', __name__)
 def get_user():
     all_user = Account.get_all() 
     #Asignamos a all_user todos los usuarios que hemos conseguido llamando
-                                #a la clase account con el class method get_all
+    #a la clase account con el class method get_all
     if all_user: 
         #Si all_user tiene algo devuelve un json con cada usuario en forma de diccionario
         return jsonify([user.serialize() for user in all_user]), 200
@@ -63,6 +63,22 @@ def create_account():
         return jsonify(user.serialize()), 201
     except exc.IntegrityError:
         return {'error': 'Something is wrong'}, 409
+
+#Get user by ID
+@api.route('/account/<int:id>', methods=['GET'])
+def user_by_id(id):
+    user = Account.read_by_id(id)
+    if not (user):
+        return jsonify({'msg': 'Account not found'}),404
+    return jsonify(user.serialize()),200           
+
+#Get user by EMAIL
+@api.route('/account/<email>', methods=['GET'])
+def user_by_email(email):
+    user = Account.get_by_email(email)
+    if not (user):
+        return jsonify({'msg': 'Account not found, please check your email or Sign Up'}), 404
+    return jsonify(user.serialize()),200    
 
 #LOGIN + JWT TOKEN
 @api.route('/login', methods=['POST'])

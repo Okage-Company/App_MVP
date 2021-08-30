@@ -113,6 +113,16 @@ class Account(db.Model):
         return users_list
         #[user.serialize() for user in users_list]
 
+    @classmethod
+    def read_by_id(cls, id):    
+        user = cls.query.get(id)
+        return user
+        
+    @classmethod
+    def get_by_email(cls, email):
+        user = cls.query.filter_by(email=email).one_or_none()
+        return user
+
 class Client(db.Model):
     __tablename__ = 'client'
     #1.2

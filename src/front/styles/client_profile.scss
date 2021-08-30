@@ -1,0 +1,29 @@
+@import '../styles/index.scss';
+div {
+    border: grey solid 1px;
+   }
+   .clientProfileContainer {
+       padding-left: 5.938rem;
+       padding-right: 5.938rem;
+       display: grid;
+       grid-gap: 2rem;
+       grid-template-columns: repeat(12, minmax(0, 1fr));
+       grid-template-rows: repeat(1, minmax(0, 1fr));
+       grid-template-areas: "sidebar sidebar sidebar main main main main main main main main main";
+   }
+   .clientProfileSidebar {
+       grid-area: sidebar;
+   }
+   .clientProfileMain {
+       grid-area: main;
+   }
+   @media (max-width: 600px) {
+       .clientProfileContainer {
+           padding-left: 2rem;
+           padding-right: 2rem;
+           grid-template-columns: repeat(1, minmax(0, 1fr));
+           grid-template-rows: repeat(2, minmax(0, 1fr));
+           grid-template-areas: "sidebar"
+                                   "main";
+       }
+   }

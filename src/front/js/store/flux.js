@@ -1,49 +1,29 @@
+import { responsiveFontSizes } from "@material-ui/core";
+//Declaramos nuestrs
+const BASE_URL = "https://3001-brown-roundworm-pv0d4gpt.ws-eu16.gitpod.io/api/";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			account: []
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
+			getAccount: async () => {
+				try {
+					let response = await fetch(BASE_URL.concat("account/"));
 
-			getMessage: () => {
-				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/hello")
-					.then(resp => resp.json())
-					.then(data => setStore({ message: data.message }))
-					.catch(error => console.log("Error loading message from backend", error));
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
+					if (response.ok) {
+						let responseAsJson = await response.json();
+						setStore({ account: responseAsJson });
+						console.log(responseAsJson);
+					} else {
+						throw new Error(response.statusText, "code", response.status);
+					}
+				} catch (error) {
+					console.log(error);
+				}
 			}
 		}
 	};
 };
-
 export default getState;
