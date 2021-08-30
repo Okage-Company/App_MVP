@@ -7,6 +7,7 @@ import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
+import BusinessProfile from "./pages/businessProfile.jsx";
 import Navbar from "./component/navbar.jsx";
 import { Footer } from "./component/footer";
 
@@ -25,8 +26,8 @@ const Layout = () => {
 						<Route exact path="/">
 							<Home />
 						</Route>
-						<Route exact path="/demo">
-							<Demo />
+						<Route exact path="/business_profile">
+							<BusinessProfile />
 						</Route>
 						<Route exact path="/single/:theid">
 							<Single />
