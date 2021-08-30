@@ -30,18 +30,18 @@ def get_client():
     all_clients = Client.get_all()
     if all_clients:
         return jsonify([client.serialize() for client in all_clients]), 200
-    
     return jsonify({'message': 'No account created'}), 500
+    
+    return jsonify({'message': 'No clients created'}), 500
 #3-Recibir toda la lista de business
 @api.route('/business', methods=['GET'])
 def get_business():
     all_businesses = Business.get_all()
     if all_businesses:
         return jsonify([business.serialize() for business in all_businesses]), 200
-    
-    return jsonify({'message': 'No account created'}), 500
+    return jsonify({'message': 'No business created'}), 500
 
-#2-Crear un usuario
+#2-Crear un usuario Business/Client según el booleano is_client:
 @api.route('/account', methods=['POST'])
 def create_client():
     is_client = request.json.get('is_client', None)
@@ -80,8 +80,11 @@ def create_client():
     if user:
         if (user.is_client==True):
             client=Client(account_id=user.id)
-            client.create()
-            return jsonify(client.serialize()), 201
+            try:
+                client.create()
+                return jsonify(client.serialize()), 201
+            except exc.IntegrityError:
+                return {'error': 'Something is wrong'}, 409
         else:
             centre_name = request.json.get('centre_name', None)
             cif = request.json.get('cif', None)
@@ -92,8 +95,11 @@ def create_client():
                 cif=cif,
                 schedule=schedule
             )
-            business.create()
-            return jsonify(business.serialize()), 201
+            try:
+                business.create()
+                return jsonify(business.serialize()), 201
+            except exc.IntegrityError:
+                return {'error': 'Something is wrong'}, 409
     else:
         return {'error': 'Something is wrong'}, 409
     
