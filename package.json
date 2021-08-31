@@ -77,7 +77,10 @@
 	},
 	"dependencies": {
 		"@material-ui/core": "^4.12.3",
+		"@material-ui/icons": "^4.11.2",
 		"bootstrap": "^4.6.0",
+		"jsonwebtoken": "^8.5.1",
+		"material-ui-image": "^3.3.2",
 		"prop-types": "^15.7.2",
 		"react": "^16.14.0",
 		"react-dom": "^16.14.0",

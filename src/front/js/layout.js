@@ -7,9 +7,12 @@ import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
+
 import { Navbar } from "./component/navbar";
 import { Profile } from "./component/profile.jsx";
 import Footer from "./component/footer.jsx";
+import Navbar from "./component/navbar.jsx";
+
 
 //create your first component
 const Layout = () => {
@@ -23,6 +26,21 @@ const Layout = () => {
 				<ScrollToTop>
 					<Navbar />
 					<Profile />
+					<Switch>
+						<Route exact path="/">
+							<Home />
+						</Route>
+						<Route exact path="/demo">
+							<Demo />
+						</Route>
+						<Route exact path="/single/:theid">
+							<Single />
+						</Route>
+						----{" "}
+						<Route>
+							<h1>Not found!</h1>
+						</Route>
+					</Switch>
 					<Footer />
 				</ScrollToTop>
 			</BrowserRouter>
