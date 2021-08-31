@@ -5,6 +5,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.dialects.postgresql import VARCHAR
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, ForeignKey, Integer, String, Enum, Boolean, Table
+#Import del cifrado de la password
+from werkzeug.security import check_password_hash
 
 db = SQLAlchemy()
 
@@ -104,6 +106,10 @@ class Account(db.Model):
     def create(self):
         db.session.add(self)
         db.session.commit()
+
+    def validate_password(self, password):
+        is_valid = check_password_hash(self._password, password)
+        return is_valid
     
     @classmethod
     def get_by_id(cls, id):
