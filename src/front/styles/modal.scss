@@ -41,7 +41,7 @@
 
 .modal_form {
     grid-area: form;
-    padding: 5rem;
+    padding: 4rem;
 }
 
 .modal_image {
@@ -112,9 +112,26 @@
 
 .form_footer_text {
     margin-top: $container-elements-margin;
-    font-size: $small-size;
 }
 
 .form_link, .form_link:hover {
     color: $primary-color;
+}
+
+.form_sign_up_header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.form_sign_up_title {
+    font-size: $large-size;
+    font-weight: $medium-weight;
+    padding-left: $container-elements-margin;
+}
+
+.form_sign_up_arrow_button {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
 }
