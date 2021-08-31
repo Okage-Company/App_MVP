@@ -1,10 +1,9 @@
 @import '../styles/index.scss';
-div {
-    border: grey solid 1px;
-   }
+
    .clientProfileContainer {
        padding-left: 5.938rem;
        padding-right: 5.938rem;
+       padding-top: 6rem;
        display: grid;
        grid-gap: 2rem;
        grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -17,6 +16,13 @@ div {
    .clientProfileMain {
        grid-area: main;
    }
+   .clientProfileImage{
+    height: 10rem;
+    width: 10rem;
+    background: rgb(197, 197, 197);
+    border-radius: 10rem;
+    align-self: center;
+}
    @media (max-width: 600px) {
        .clientProfileContainer {
            padding-left: 2rem;
@@ -27,3 +33,24 @@ div {
                                    "main";
        }
    }
+   .dataContainer{
+    padding-bottom: 1rem;
+    border-bottom: rgb(224, 224, 224)  solid 1px;
+    display: flex;
+    justify-content: space-between;
+}
+.clientProfileTitle{
+    padding-bottom: 2rem;
+    font-weight: $bold-weight;
+}
+.dataContainerTitle{
+    font-weight: $medium-weight;
+    padding-bottom: 0.2rem;
+    padding-top: 0.2rem;
+}
+.dataContainerEdit{
+    padding-bottom: 0.2rem;
+    padding-top: 0.2rem;
+    color: $primary-color;
+    cursor: pointer;
+}
