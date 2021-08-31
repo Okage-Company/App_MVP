@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
+import "../../styles/profile.scss";
 
 import Card from "/workspace/react-flask-hello/src/front/js/component/card.jsx";
 import Modal from "/workspace/react-flask-hello/src/front/js/component/modal.jsx";
