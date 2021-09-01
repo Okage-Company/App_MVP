@@ -1,0 +1,55 @@
+@import '../styles/index.scss';
+
+.footer_container {
+    color: #fff;
+    font-size: $medium-size;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: $container-grid-padding;
+    padding-right: $container-grid-padding;
+    background-color: $body-color;
+    display: grid;
+    grid-gap: $grid-gap;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "logo aboutContact socialMedia socialMedia socialMedia socialMedia socialMedia socialMedia"
+                        "terms terms terms terms terms terms terms terms"
+}
+
+.footer_logo {
+    grid-area: logo;
+}
+
+.footer_logo_img {
+    width: 5rem;
+}
+
+.footer_text {
+    grid-area: aboutContact;
+}
+
+.footer_social {
+    grid-area: socialMedia;
+    margin-left: auto;
+    font-size: $large-size;
+}
+
+.footer_terms {
+    grid-area: terms;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer_terms_divider {
+    border-top: 1px solid #fff;
+}
+
+.footer_terms_text {
+    font-size: $small-size;
+    margin-left: auto;
+    margin-top: 2rem;
+}
+
+.sm-icon {
+    margin-left: 1rem;
+}

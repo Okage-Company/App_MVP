@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { alpha, makeStyles, Grid } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -15,6 +15,7 @@ import LanguageIcon from "@material-ui/icons/Language";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import "../../styles/navbar.scss";
 import logosvg from "../../img/logo-navbar-01.png";
+import Modal from "../component/modal.jsx";
 
 const useStyles = makeStyles(theme => ({
 	grow: {
@@ -104,6 +105,7 @@ const Navbar = () => {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [anchorEl2, setAnchorEl2] = React.useState(null);
+	const [openModal, setOpenModal] = useState(false);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
 	const isMenuOpen = Boolean(anchorEl);
@@ -163,7 +165,7 @@ const Navbar = () => {
 
 	//Los div que devuelvo
 	return (
-		<div className={classes.grow}>
+		<div>
 			<AppBar className="navBar" position="fixed" elevation={0}>
 				<Toolbar>
 					{/*Logo*/}
@@ -212,10 +214,7 @@ const Navbar = () => {
 						<IconButton
 							edge="end"
 							className={classes.mobileIcons}
-							aria-label="account of current user"
-							aria-controls={menuId}
-							aria-haspopup="true"
-							onClick={handleProfileMenuOpen}
+							onClick={() => setOpenModal(true)}
 							color="inherit">
 							<AccountCircle />
 						</IconButton>
@@ -239,6 +238,7 @@ const Navbar = () => {
 					</div>
 				</Toolbar>
 			</AppBar>
+			{openModal && <Modal closeModal={setOpenModal} />}
 			{renderMenu}
 			{renderMenu2}
 		</div>
