@@ -150,6 +150,11 @@ class Client(db.Model):
     def get_all(cls):
         client_list = cls.query.all()
         return client_list
+
+    @classmethod
+    def get_by_id(cls, id):
+        client = cls.query.get(id)
+        return client
         
 
 class Business(db.Model):
@@ -188,6 +193,11 @@ class Business(db.Model):
     def get_all(cls):
         business_list = cls.query.all()
         return business_list
+
+    @classmethod
+    def get_by_id(cls, id):
+        business = cls.query.get(id)
+        return business
 
 class Services(db.Model):
     __tablename__ = 'services'
