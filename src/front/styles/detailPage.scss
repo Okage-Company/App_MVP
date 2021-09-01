@@ -1,6 +1,6 @@
 @import '../styles/index.scss';
 
-.grid_container {
+.grid_container_detail_page {
     margin-top: $page-margin-top;
     background-color: $background-body-color;
     display: grid;
@@ -13,35 +13,6 @@
     grid-template-rows: 38rem 1fr;
     grid-template-areas: "title title banner banner"
                         "cardHome cardHome cardHome cardHome"
-}
-
-@media (max-width: 970px) {
-    .grid_container {
-        background-color: $background-body-color;
-        display: grid;
-        padding-left: 2rem;
-        padding-right: 2rem;
-        grid-gap: $grid-gap;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: 30rem 1fr;
-        grid-template-areas: "title banner"
-                            "cardHome cardHome";
-    }
-}
-
-@media (max-width: 600px) {
-    .grid_container {
-        background-color: $background-body-color;
-        display: grid;
-        padding-left: 2rem;
-        padding-right: 2rem;
-        grid-gap: $grid-gap;
-        grid-template-columns: repeat(1, 1fr);
-        grid-template-rows: 15rem auto 1fr;
-        grid-template-areas: "banner"
-                            "title"
-                            "cardHome";
-    }
 }
 
 .grid_container > * {
@@ -74,26 +45,6 @@
     padding: 0;
 }
 
-@media (max-width: 970px) {
-    .grid_container_card_home {
-        grid-area: cardHome;
-        display: grid;
-        grid-gap: $grid-gap;
-        grid-template-columns: repeat(2, 1fr);
-        padding: 0;
-    }
-}
-
-@media (max-width: 600px) {
-    .grid_container_card_home {
-        grid-area: cardHome;
-        display: grid;
-        grid-gap: $grid-gap;
-        grid-template-columns: repeat(1, 1fr);
-        padding: 0;
-    }
-}
-
 .home_title {
     display: flex;
     flex-direction: column;
@@ -101,37 +52,11 @@
     margin-bottom: 1rem;
 }
 
-@media (max-width: 600px) {
-    .home_title {
-        line-height: 4.5rem;
-        font-size: 3rem;
-    }
-}
-
-@media (max-width: 970px) {
-    .home_title {
-        line-height: 4.5rem;
-        font-size: 3rem;
-    }
-}
-
 .home_title_text {
     padding: 0;
     margin: 0;
     font-weight: $bold-weight;
     font-size: 5.709rem;
-}
-
-@media (max-width: 600px) {
-    .home_title_text {
-        font-size: 4rem;
-    }
-}
-
-@media (max-width: 970px) {
-    .home_title_text {
-        font-size: 4rem;
-    }
 }
 
 .home_title_text_background {
