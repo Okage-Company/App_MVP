@@ -10,3 +10,11 @@
     border: 0;
     border-radius: $border-radius;
 }
+
+.button:hover {
+    background-color: $primary-color-hover;
+}
+
+.button:active {
+    background-color: $primary-color-active;
+}

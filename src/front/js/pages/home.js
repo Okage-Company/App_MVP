@@ -9,46 +9,46 @@ import { array } from "prop-types";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
-	// Maleficent used her evil forces to make us make this map, probably the worst curse that's ever been cast...
+	// Maleficent used her evil forces to make us make this map, probably the worst curse that's ever been cast ! Our heroes were able to do it, but the pain it caused will forever last...
 	const cardHomeImages = [
 		{
-			service: "arts",
+			service: "Arts",
+			url:
+				"https://images.pexels.com/photos/8613071/pexels-photo-8613071.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+		},
+		{
+			service: "Healthcare",
 			url:
 				"https://images.unsplash.com/photo-1598207951491-255eaf139751?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2734&q=80"
 		},
 		{
-			service: "healthcare",
-			url:
-				"https://images.unsplash.com/photo-1598207951491-255eaf139751?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2734&q=80"
-		},
-		{
-			service: "languages",
+			service: "Languages",
 			url:
 				"https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80"
 		},
 		{
-			service: "meditation",
+			service: "Meditation",
 			url:
 				"https://images.unsplash.com/photo-1554244933-d876deb6b2ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2900&q=80"
 		},
 		{
-			service: "meetings",
+			service: "Meetings",
 			url:
 				"https://images.unsplash.com/photo-1461280360983-bd93eaa5051b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2850&q=80"
 		},
 		{
-			service: "psychology",
+			service: "Psychology",
 			url:
 				"https://images.pexels.com/photos/7176026/pexels-photo-7176026.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
 		},
 		{
-			service: "sports",
+			service: "Sports",
 			url:
 				"https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80"
 		}
 	];
 
-	cardHomeImages.map((parameter, index) => {
+	const cardHomeMap = cardHomeImages.map((parameter, index) => {
 		return <CardHome key={index} category={parameter.service} image={parameter.url} />;
 	});
 
@@ -79,35 +79,7 @@ export const Home = () => {
 			</div>
 			{/* card_home */}
 			<div className="grid_container_card_home">
-				{cardHomeImages}
-				<CardHome
-					category="Arts"
-					image="https://images.pexels.com/photos/8613071/pexels-photo-8613071.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-				/>
-				<CardHome
-					category="Healthcare"
-					image="https://images.unsplash.com/photo-1598207951491-255eaf139751?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2734&q=80"
-				/>
-				<CardHome
-					category="Languages"
-					image="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80"
-				/>
-				<CardHome
-					category="Meditation"
-					image="https://images.unsplash.com/photo-1554244933-d876deb6b2ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2900&q=80"
-				/>
-				<CardHome
-					category="Meetings"
-					image="https://images.unsplash.com/photo-1461280360983-bd93eaa5051b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2850&q=80"
-				/>
-				<CardHome
-					category="Psychology"
-					image="https://images.pexels.com/photos/7176026/pexels-photo-7176026.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-				/>
-				<CardHome
-					category="Sports"
-					image="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80"
-				/>
+				{cardHomeMap}
 				<div className="grid_container_card_home_button_container">
 					<Button text="See more" />
 					<div className="home_categories_text">
