@@ -9,7 +9,7 @@
     padding-right: $container-grid-padding;
     padding-bottom: $container-grid-padding;
     grid-gap: $grid-gap;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 38rem 1fr;
     grid-template-areas: "title title banner banner"
                         "cardHome cardHome cardHome cardHome"
