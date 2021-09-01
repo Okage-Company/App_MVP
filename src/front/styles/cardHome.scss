@@ -1,0 +1,31 @@
+@import '../styles/index.scss';
+
+.home_card_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color: $body-color;
+    font-family: $primary-font;
+    font-size: $medium-size;
+}
+
+.home_card_image {
+    width: 100%;
+}
+
+.home_card_image_img {
+    width:100%;
+    height: 18rem;
+    object-fit: cover;
+    border-radius: $border-radius;
+    pointer-events: none;
+}
+
+.home_card_category {
+    font-size: $large-size;
+    font-weight: $medium-weight;
+    color: $primary-color;
+    padding: $container-padding;
+    padding: 0;
+    margin-top: $container-elements-margin;
+}
