@@ -8,8 +8,6 @@ import { Single } from "./pages/single";
 import Client_Profile from "./pages/client_profile.jsx";
 import injectContext from "./store/appContext";
 
-//import { Navbar } from "./component/navbar";
-//import { Profile } from "./component/profile.jsx";
 import Footer from "./component/footer.jsx";
 import Navbar from "./component/navbar.jsx";
 
