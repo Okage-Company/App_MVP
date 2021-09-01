@@ -3,8 +3,8 @@ import React from "react";
 import "../../styles/home.scss";
 import "../../styles/profile.scss";
 
-import CardHome from "/workspace/react-flask-hello/src/front/js/component/cardHome.jsx";
-import Button from "/workspace/react-flask-hello/src/front/js/component/button.jsx";
+import CardHome from "../component/cardHome.jsx";
+import Button from "../component/button.jsx";
 
 export const Home = () => {
 	// Maleficent used her evil forces to make us make this map, probably the worst curse that's ever been cast ! Our heroes were able to do it, but the pain it caused will forever last...
