@@ -104,11 +104,15 @@ class Account(db.Model):
     def create(self):
         db.session.add(self)
         db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
     
     @classmethod
     def get_by_id(cls, id):
-        account = cls.query.get(id)
-        return account
+        user = cls.query.get(id)
+        return user
 
     @classmethod
     def get_by_email(cls, email):
@@ -119,6 +123,8 @@ class Account(db.Model):
     def get_all(cls):
         users_list = cls.query.all()
         return users_list
+
+    
 
 class Client(db.Model):
     __tablename__ = 'client'

@@ -118,3 +118,13 @@ def login():
         access_token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=120))
         return {'token': access_token}, 200
     return {'error': 'Some parameter is wrong'}, 400
+
+@api.route('/account/<int:id>', methods = ['DELETE'])
+def delete_users(id):
+    user = Account.get_by_id(id)
+
+    if user:
+        user.delete()
+        return jsonify(user.serialize(),{'msg':'Account deleted'}), 200
+
+    return jsonify({'msg' : 'Account not foud'}), 404
