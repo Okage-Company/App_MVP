@@ -44,7 +44,8 @@ class Buservices(db.Model):
     business = db.relationship("Business")
     client_ = db.relationship("Client",
                     secondary=favourites,
-                    backref="buservices")
+                    backref="buservices",
+                    overlaps="buservices,client_")
 
 
     def __repr__(self):
@@ -86,7 +87,7 @@ class Account(db.Model):
 
     #2(__repr__)Esto sirve para que python pueda print por e-mail+id sin bugs ni problemas,
     def __repr__(self):
-        return f'Account {self.email}, {self.id}, {self.account_type}'
+        return f'Account {self.email}, {self.id}'
     #3(Serialize)-Transforma en formato json la base de datos, 
     def serialize(self):
         return {

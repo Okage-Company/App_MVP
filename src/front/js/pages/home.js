@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
-import Client_Profile from "../component/client_profile.jsx";
+import Client_Profile from "./client_profile.jsx";
 
 export const Home = () => {
 	return (

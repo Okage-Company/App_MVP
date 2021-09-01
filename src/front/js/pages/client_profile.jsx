@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
+import PasswordUpdate from "../component/password.jsx";
 import { Context } from "../store/appContext";
 import "../../styles/client_profile.scss";
 
 const Client_Profile = () => {
 	const { store } = useContext(Context);
+
 	return (
 		<div>
 			{store.account.map((account, index) => {
@@ -75,23 +77,7 @@ const Client_Profile = () => {
 									</div>
 								</div>
 							</div>
-							<div>Password Update</div>
-							<div>
-								<div className="dataContainer">
-									<div>
-										<div className="dataContainerTitle">Current Password</div>
-										<div>{account._password}</div>
-									</div>
-									<div className="dataContainerEdit">Edit</div>
-								</div>
-							</div>
-							<div>
-								<p>New Password {account._new_password}</p>{" "}
-							</div>
-							<div>
-								<p>Confirm New Password: {account._new_password}</p>{" "}
-							</div>
-							<button>Update</button>
+							<PasswordUpdate />
 						</div>
 					</div>
 				);
