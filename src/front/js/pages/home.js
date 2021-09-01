@@ -1,7 +1,6 @@
 import React from "react";
 
 import "../../styles/home.scss";
-import "../../styles/profile.scss";
 
 import CardHome from "../component/cardHome.jsx";
 import Button from "../component/button.jsx";
