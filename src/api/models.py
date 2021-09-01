@@ -98,7 +98,8 @@ class Account(db.Model):
             "province": self.province,
             "post_code": self.post_code,
             "adress": self.adress,
-            "profile_photo": self.profile_foto
+            "profile_photo": self.profile_foto,
+            "_is_active": self._is_active
         }
     
     def create(self):
@@ -123,6 +124,13 @@ class Account(db.Model):
     def get_all(cls):
         users_list = cls.query.all()
         return users_list
+
+    @classmethod
+    def disable_user(cls, id):
+        user_disabled = cls.query.get(id)
+        user_disabled._is_active = False
+        db.session.commit()
+        return user_disabled
 
     
 

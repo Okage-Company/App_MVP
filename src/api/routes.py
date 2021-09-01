@@ -119,7 +119,7 @@ def login():
         return {'token': access_token}, 200
     return {'error': 'Some parameter is wrong'}, 400
 
-@api.route('/account/<int:id>', methods = ['DELETE'])
+'''@api.route('/account/<int:id>', methods = ['DELETE'])
 def delete_users(id):
     user = Account.get_by_id(id)
 
@@ -127,4 +127,17 @@ def delete_users(id):
         user.delete()
         return jsonify(user.serialize(),{'msg':'Account deleted'}), 200
 
+    return jsonify({'msg' : 'Account not foud'}), 404'''
+
+
+@api.route('/account/<int:id>', methods = ['DELETE'])
+def disable_user(id):
+    user = Account.get_by_id(id)
+    if user:
+        if (user._is_active==True):
+            user.disable_user(id)
+            return jsonify(user.serialize()), 200
+        return jsonify({'msg' : 'Account already disabled'}), 404
+
     return jsonify({'msg' : 'Account not foud'}), 404
+
