@@ -30,7 +30,7 @@ def get_user_by_id(id):
     user = Account.get_by_id(id)
     if user:
         return jsonify(user.serialize()), 200
-    return jsonify({'message':'Account not found'}), 500
+    return jsonify({'message':'Account not found'}), 404
 
 
 #2-Recibir toda la lista de clientes
@@ -49,7 +49,7 @@ def get_client_by_id(id):
     client = Client.get_by_id(id)
     if client:
         return jsonify(client.serialize()), 200
-    return jsonify({'message':'Client not found'}), 500
+    return jsonify({'message':'Client not found'}), 404
 
 
 #3-Recibir toda la lista de business
@@ -66,7 +66,7 @@ def get_business_by_id(id):
     business = Business.get_by_id(id)
     if business:
         return jsonify(business.serialize()), 200
-    return jsonify({'message':'Business not found'}), 500
+    return jsonify({'message':'Business not found'}), 404
 
 
 #2-Crear un usuario Business/Client según el booleano is_client:
