@@ -198,6 +198,11 @@ class Business(db.Model):
         business_list = cls.query.all()
         return business_list
 
+    @classmethod
+    def get_by_id_business(cls, id):
+        get_by_id_business_variable = cls.query.get(id)
+        return get_by_id_business_variable
+
 class Services(db.Model):
     __tablename__ = 'services'
     #1.2
@@ -213,6 +218,7 @@ class Services(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "title": self.title
             #aquí no ponemos la password porque no queremos que se vea en el front
         }
 
@@ -220,6 +226,11 @@ class Services(db.Model):
     def get_all(cls):
         service_list = cls.query.all()
         return service_list
+
+    @classmethod
+    def get_by_title(cls, title):
+        service_title = cls.query.filter_by(title=title).one_or_none()
+        return service_title
 
 class Reviews(db.Model):
     __tablename__ = 'reviews'
@@ -242,6 +253,10 @@ class Reviews(db.Model):
             #aquí no ponemos la password porque no queremos que se vea en el front
         }
     
+    def create(self):
+        db.session.add(self)
+        db.session.commit()
+
     @classmethod
     def get_all(cls):
         get_all_reviews = cls.query.all()
