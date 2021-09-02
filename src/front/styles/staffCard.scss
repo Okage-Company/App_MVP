@@ -2,12 +2,13 @@
 
 .staff_card_container {
     background-color: #fff;
-    width: 285px;
+    width: 17.5rem;
     display: flex;
     flex-direction: column;
     color: $body-color;
     font-family: $primary-font;
     font-size: $medium-size;
+    border-radius: $border-radius;
 }
 
 .staff_card_image {
@@ -16,6 +17,8 @@
     background-size: cover;
     width: 100%;
     height: 10rem;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
 }
 
 .staff_card_container_text {
@@ -25,7 +28,6 @@
 }
 
 .staff_card_name {
-    font-size: $large-size;
     color: $dark-grey-color;
     font-weight: $bold-weight;
     margin-bottom: $container-elements-margin;
@@ -40,4 +42,8 @@
 .staff_card_studies {
     color: $dark-grey-color;
     margin-bottom: $container-elements-margin;
+}
+
+.icon-right-margin {
+    margin-right: $container-elements-margin;
 }
