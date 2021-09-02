@@ -10,7 +10,7 @@ from sqlalchemy import exc
 from werkzeug.security import check_password_hash
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 
-from api.models import db, Account, Client, Business, Services, Reviews
+from api.models import db, Account, Client, Business, Services, Reviews, Buservices
 from api.utils import generate_sitemap, APIException
 
 #Poner API delante
@@ -102,7 +102,60 @@ def create_client():
                 return {'error': 'Something is wrong'}, 409
     else:
         return {'error': 'Something is wrong'}, 409
-    
+
+@api.route('/services', methods=['GET'])
+def get_service():
+    service_result = Services.get_all()
+    if service_result:
+        return jsonify([service.serialize() for service in service_result]), 200
+    return {'oh my god': 'Something is terribly wrong'}, 409    
+
+@api.route('/buservices', methods=['GET'])
+def get_buservice():
+    buservice_result = Buservices.get_all()
+    if buservice_result:
+        return jsonify([buservice.serialize() for buservice in buservice_result]), 200
+    return {'almitghty Thor!': 'Raise us from perdition'}, 409
+
+@api.route('/buservices', methods=['POST'])
+def post_buservice():
+    offer = request.json.get('offer', None)
+    adress = request.json.get('adress', None)
+    specialty = request.json.get('specialty', None)
+    numero_colegiado = request.json.get('numero_colegiado', None)
+    description = request.json.get('description', None)
+    tecniques = request.json.get('tecniques', None)
+    photos = request.json.get('photos', None)
+
+    buservice_variable = Buservices(
+        offer=offer,
+        adress=adress,
+        specialty=specialty,
+        numero_colegiado=numero_colegiado,
+        description=description,
+        tecniques=tecniques,
+        photos=photos
+    )
+
+    service_variable = Services()
+    business_variable = Business()
+
+    if buservice_variable:
+        relation_service = Buservices(services_id=business_variable.id)
+        relation_business = Buservices(business_id=service_variable.id)
+
+    try:
+        buservice_variable.create()
+        return jsonify(buservice_variable.serialize()), 201
+    except exc.IntegrityError:
+        return {'wake up': 'this is not a dream, this is a reality, there is no going back, there is no going home'}, 409
+
+@api.route('/reviews', methods=['GET'])
+def get_reviews():
+    reviews_result = Reviews.get_all()
+    if reviews_result:
+        return jsonify([baby_review.serialize() for baby_review in reviews_result]), 200
+    return {'dang it!': 'In the kingswood, there lived a mother and her cub, she loved him very much. But there were all sort of things living in the woods, evil things... like stags and wolves... you could hear them howling in the night, and the cub was frightened, but his mother said: God only knows what went wrong, but you must not lose faith little lion, for one day all the beast will bow to you, and rest a crown upon your head. You will be king. You will be strong and fierce, just like your father.'}, 409
 
 #LOGIN + JWT TOKEN
 @api.route('/login', methods=['POST'])

@@ -52,7 +52,7 @@ class Buservices(db.Model):
 
     def serialize(self):
         return {
-            "title": self.title,
+            # "title": self.title,
             "offer": self.offer,
             "adress" : self.adress,
             "specialty": self.specialty,
@@ -61,6 +61,15 @@ class Buservices(db.Model):
             "tecniques": self.tecniques,
             "photos": self.photos,
         }
+
+    def create(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_all(cls):
+        get_all_buservice = cls.query.all()
+        return get_all_buservice
 
 #1.1-Declaro el nombre de la primera tabla
 class Account(db.Model):
@@ -194,7 +203,7 @@ class Services(db.Model):
     #1.2
     id = db.Column(db.Integer, primary_key=True)
     #Data
-    title = db.Column(db.VARCHAR, nullable=False, unique=False)
+    title = db.Column(db.VARCHAR, nullable=True, unique=False)
     #relation
     business_ = db.relationship("Buservices", back_populates="services")
 
@@ -207,6 +216,10 @@ class Services(db.Model):
             #aquí no ponemos la password porque no queremos que se vea en el front
         }
 
+    @classmethod
+    def get_all(cls):
+        service_list = cls.query.all()
+        return service_list
 
 class Reviews(db.Model):
     __tablename__ = 'reviews'
@@ -228,3 +241,8 @@ class Reviews(db.Model):
             "review": self.review,
             #aquí no ponemos la password porque no queremos que se vea en el front
         }
+    
+    @classmethod
+    def get_all(cls):
+        get_all_reviews = cls.query.all()
+        return get_all_reviews
