@@ -127,7 +127,7 @@ class Account(db.Model):
 
     @classmethod
     def disable_user(cls, id):
-        user_disabled = cls.query.get(id)
+        user_disabled = get_by_id(account, id)
         user_disabled._is_active = False
         db.session.commit()
         return user_disabled
@@ -218,8 +218,20 @@ class Services(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "title": self.title,
             #aquí no ponemos la password porque no queremos que se vea en el front
         }
+
+    @classmethod
+    def get_all(cls):
+        services_list = cls.query.all()
+        return services_list
+
+
+    def create(self):
+        db.session.add(self)
+        db.session.commit()
+
 
 
 class Reviews(db.Model):
