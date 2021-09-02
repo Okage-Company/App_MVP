@@ -1,14 +1,20 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment, useContext } from "react";
+import { Context } from "../store/appContext";
 import { useForm } from "react-hook-form";
 import "../../styles/modal.scss";
 import PropTypes from "prop-types";
+import { CallToActionSharp } from "@material-ui/icons";
 
 const Modal = ({ closeModal }) => {
 	const [modalContent, setModalContent] = useState("");
 	const [modalView, setModalView] = useState(false);
-
+	const { store, actions } = useContext(Context);
 	const { register, handleSubmit } = useForm();
-	const submitAction = data => console.log(data);
+
+	const submitAction = credentials => {
+		console.log("Llega");
+		actions.getRegister(JSON.stringify(credentials));
+	};
 
 	useEffect(() => {
 		if (modalView == true) {
@@ -23,7 +29,7 @@ const Modal = ({ closeModal }) => {
 						</div>
 						<label className="form_label">Name</label>
 						<input
-							{...register("firstName")}
+							{...register("name")}
 							className="form_placeholder"
 							type="text"
 							id="email"
@@ -33,7 +39,7 @@ const Modal = ({ closeModal }) => {
 					<div className="form_imputs">
 						<label className="form_label">Last Name</label>
 						<input
-							{...register("lastName")}
+							{...register("last_name")}
 							className="form_placeholder"
 							type="text"
 							id="email"
@@ -61,19 +67,9 @@ const Modal = ({ closeModal }) => {
 						/>
 					</div>
 					<div className="form_imputs">
-						<label className="form_label">City</label>
-						<input
-							{...register("city")}
-							className="form_placeholder"
-							type="text"
-							id="email"
-							placeholder="e.g. Marbella"
-						/>
-					</div>
-					<div className="form_imputs">
 						<label className="form_label">Postal code</label>
 						<input
-							{...register("zip")}
+							{...register("post_code")}
 							className="form_placeholder"
 							type="text"
 							id="email"
@@ -83,7 +79,7 @@ const Modal = ({ closeModal }) => {
 					<div className="form_imputs">
 						<label className="form_label">Address</label>
 						<input
-							{...register("address")}
+							{...register("adress")}
 							className="form_placeholder"
 							type="text"
 							id="email"
@@ -91,7 +87,7 @@ const Modal = ({ closeModal }) => {
 						/>
 					</div>
 					<div className="form_footer">
-						<input {...register("getStarted")} type="submit" value="Get started"></input>
+						<input type="submit" value="Get started"></input>
 					</div>
 				</Fragment>
 			);
@@ -116,10 +112,10 @@ const Modal = ({ closeModal }) => {
 					<div className="form_imputs">
 						<label className="form_label">Password</label>
 						<input
-							{...register("password")}
+							{...register("_password")}
 							className="form_placeholder"
 							type="text"
-							id="email"
+							id="password"
 							placeholder="••••••••"
 						/>
 					</div>
@@ -127,24 +123,26 @@ const Modal = ({ closeModal }) => {
 						<label className="form_label">Who are you?</label>
 						<div className="form_check_container">
 							<div className="form_check_container_flex">
-								<input {...register("particular")} type="checkbox" id="particular" />
+								<input type="checkbox" id="particular" />
 								<span className="form_check">Particular</span>
 							</div>
 							<div className="form_check_container_flex">
-								<input {...register("business")} type="checkbox" id="business" />
+								<input type="checkbox" id="business" />
 								<span className="form_check">Business</span>
 							</div>
 						</div>
 					</div>
 					<div className="form_footer">
 						<input
-							{...register("continue")}
 							onClick={() => {
 								setModalView(true);
 							}}
-							type="submit"
 							value="Continue"></input>
-						<span className="form_footer_text">
+						<span
+							className="form_footer_text"
+							onClick={() => {
+								closeModal(false);
+							}}>
 							Already a member? <a className="form_link">Log in</a>
 						</span>
 					</div>

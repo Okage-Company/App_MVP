@@ -7,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			BASE_URL: "https://brown-chicken-oj9mv0gl.ws-eu16.gitpod.io/",
-			URL_API: "3001-https://brown-chicken-oj9mv0gl.ws-eu16.gitpod.io/api/",
+			URL_API: "https://3001-brown-chicken-oj9mv0gl.ws-eu16.gitpod.io/api/",
 			user: {},
 			currentUser: {}
 		},
@@ -25,18 +25,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//REGISTER FLUX
 			getRegister: credentials => {
 				//Decodificar el token
+				console.log("Llega");
 				const tokenDecode = access_token => {
 					let decoded = jwt_decode(access_token);
 					return decoded;
 				};
 				//
 				const setUserFromToken = access_token => {
-					localStorage.setItem("tokenID", token.sub.id);
+					localStorage.setItem("tokenID", access_token.sub.id);
 					localStorage.setItem("");
+					console.log(localStorage);
 				};
-				const redirectToProfile = () => {
+				const redirectToHome = () => {
 					if (localStorage.getItem("tokenID") != null) {
-						location.replace("./profile/".concat(localStorage.getItem("tokenID")));
+						location.replace("./home/".concat(localStorage.getItem("tokenID")));
 					}
 				};
 
@@ -49,6 +51,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: credentials
 				})
 					.then(function(response) {
+						console.log("Llega");
 						console.log(response);
 						if (!response.ok) {
 							throw Error("This account can't be registered");
@@ -56,10 +59,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response.json();
 					})
 					.then(function(responseAsJson) {
+						console.log("ya llegaaa");
 						localStorage.setItem("access_token", responseAsJson);
 						const tokenDecoded = tokenDecode(responseAsJson);
 						setUserFromToken(tokenDecoded);
-						redirectToProfile();
+						redirectToHome();
+					})
+					.catch(function(error) {
+						console.log("There's a problem", error);
 					});
 			},
 			//LOGGIN FLUX
@@ -77,6 +84,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						location.replace("./profile/".concat(localStorage.getItem("tokenID")));
 					}
 				};
+				const redirectToHome = () => {
+					if (localStorage.getItem("tokenID") != null) {
+						location.replace("./".concat(localStorage.getItem("tokenID")));
+					}
+				};
 				fetch(getStore().URL_API.concat("login"), {
 					method: "POST",
 					body: "credentials",
@@ -92,7 +104,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						localStorage.setItem("access_token", responseAsJson);
 						const tokenDecoded = tokenDecode(responseAsJson);
 						setUserFromToken(tokenDecoded);
-						redirectToProfile();
+						redirectToHome();
 					})
 					.catch(function(error) {
 						alert("User/password incorrects");

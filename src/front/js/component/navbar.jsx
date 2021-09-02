@@ -103,20 +103,20 @@ const useStyles = makeStyles(theme => ({
 const Navbar = () => {
 	//Declaro todas las constantes
 	const classes = useStyles();
-	const [anchorEl, setAnchorEl] = React.useState(null);
-	const [anchorEl2, setAnchorEl2] = React.useState(null);
+	const [profileMenu, setProfileMenu] = useState(null);
+	const [languagesMenu, setLanguagesMenu] = useState(null);
 	const [openModal, setOpenModal] = useState(false);
-	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
-	const isMenuOpen = Boolean(anchorEl);
-	const isMenuLanguagesOpen = Boolean(anchorEl2);
+	const isMenuOpen = Boolean(profileMenu);
+	const isMenuLanguagesOpen = Boolean(languagesMenu);
 
 	const handleProfileMenuOpen = event => {
-		setAnchorEl(event.currentTarget);
+		setProfileMenu(event.currentTarget);
 	};
 
 	const handleLanguagesMenuOpen = event => {
-		setAnchorEl2(event.currentTarget);
+		setLanguagesMenu(event.currentTarget);
 	};
 
 	const handleMobileMenuClose = () => {
@@ -124,11 +124,11 @@ const Navbar = () => {
 	};
 
 	const handleMenuClose = () => {
-		setAnchorEl(null);
+		setProfileMenu(null);
 		handleMobileMenuClose();
 	};
 	const handleMenuClose2 = () => {
-		setAnchorEl2(null);
+		setLanguagesMenu(null);
 		handleMobileMenuClose();
 	};
 
@@ -136,7 +136,7 @@ const Navbar = () => {
 	const menuId2 = "language-search-account-menu";
 	const renderMenu = (
 		<Menu
-			anchorEl={anchorEl}
+			profileMenu={profileMenu}
 			anchorOrigin={{ vertical: "top", horizontal: "right" }}
 			id={menuId}
 			keepMounted
@@ -150,7 +150,7 @@ const Navbar = () => {
 	);
 	const renderMenu2 = (
 		<Menu
-			anchorEl={anchorEl2}
+			profileMenu={languagesMenu}
 			anchorOrigin={{ vertical: "top", horizontal: "right" }}
 			id={menuId2}
 			keepMounted
@@ -244,5 +244,4 @@ const Navbar = () => {
 		</div>
 	);
 };
-
 export default Navbar;
