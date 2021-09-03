@@ -31,14 +31,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return decoded;
 				};
 				//
-				const setUserFromToken = access_token => {
-					localStorage.setItem("tokenID", access_token.sub.id);
-					localStorage.setItem("");
+				const setUserFromToken = token => {
+					localStorage.setItem("tokenID", token.sub.id);
 					console.log(localStorage);
 				};
 				const redirectToHome = () => {
 					if (localStorage.getItem("tokenID") != null) {
-						location.replace("./home/".concat(localStorage.getItem("tokenID")));
+						//location.replace("./");//
+						//.concat(localStorage.getItem("tokenID"))//
 					}
 				};
 
@@ -59,9 +59,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response.json();
 					})
 					.then(function(responseAsJson) {
-						console.log("ya llegaaa");
-						localStorage.setItem("access_token", responseAsJson);
-						const tokenDecoded = tokenDecode(responseAsJson);
+						console.log("ya llegaaa", responseAsJson);
+						localStorage.setItem("access_token", responseAsJson[1]);
+						const tokenDecoded = tokenDecode(responseAsJson[1]);
 						setUserFromToken(tokenDecoded);
 						redirectToHome();
 					})
@@ -77,16 +77,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				const setUserFromToken = access_token => {
 					localStorage.setItem("tokenID", token.sub.id);
-					localStorage.setItem("tokenName", token.sub.name);
-				};
-				const redirectToProfile = () => {
-					if (localStorage.getItem("tokenID") != null) {
-						location.replace("./profile/".concat(localStorage.getItem("tokenID")));
-					}
 				};
 				const redirectToHome = () => {
 					if (localStorage.getItem("tokenID") != null) {
-						location.replace("./".concat(localStorage.getItem("tokenID")));
+						location.replace("./");
 					}
 				};
 				fetch(getStore().URL_API.concat("login"), {
@@ -96,7 +90,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(function(response) {
 						if (!response.ok) {
-							throw Error("I can't get login!");
+							throw Error("Login failed");
 						}
 						return response.json();
 					})

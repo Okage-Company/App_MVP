@@ -127,13 +127,13 @@ const Navbar = () => {
 		setProfileMenu(null);
 		handleMobileMenuClose();
 	};
-	const handleMenuClose2 = () => {
+	const handleMenuLanguagesClose = () => {
 		setLanguagesMenu(null);
 		handleMobileMenuClose();
 	};
 
 	const menuId = "primary-search-account-menu";
-	const menuId2 = "language-search-account-menu";
+	const menuLanguagesId = "language-search-account-menu";
 	const renderMenu = (
 		<Menu
 			profileMenu={profileMenu}
@@ -143,23 +143,23 @@ const Navbar = () => {
 			transformOrigin={{ vertical: "top", horizontal: "right" }}
 			open={isMenuOpen}
 			onClose={handleMenuClose}>
-			<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-			<MenuItem onClick={handleMenuClose}>My account</MenuItem>
-			<MenuItem onClick={handleMenuClose}>Log Out</MenuItem>
+			<MenuItem onClick={handleMenuLanguagesClose}>Profile</MenuItem>
+			<MenuItem onClick={handleMenuLanguagesClose}>My account</MenuItem>
+			<MenuItem onClick={handleMenuLanguagesClose}>Log Out</MenuItem>
 		</Menu>
 	);
 	const renderMenu2 = (
 		<Menu
 			profileMenu={languagesMenu}
 			anchorOrigin={{ vertical: "top", horizontal: "right" }}
-			id={menuId2}
+			id={menuLanguagesId}
 			keepMounted
 			transformOrigin={{ vertical: "top", horizontal: "right" }}
 			open={isMenuLanguagesOpen}
-			onClose={handleMenuClose2}>
-			<MenuItem onClick={handleMenuClose2}>Español</MenuItem>
-			<MenuItem onClick={handleMenuClose2}>English</MenuItem>
-			<MenuItem onClick={handleMenuClose2}>Català</MenuItem>
+			onClose={handleMenuLanguagesClose}>
+			<MenuItem onClick={handleMenuLanguagesClose}>Español</MenuItem>
+			<MenuItem onClick={handleMenuLanguagesClose}>English</MenuItem>
+			<MenuItem onClick={handleMenuLanguagesClose}>Català</MenuItem>
 		</Menu>
 	);
 
@@ -197,7 +197,7 @@ const Navbar = () => {
 							className={classes.mobileIcons}
 							color="inherit"
 							onClick={handleLanguagesMenuOpen}
-							aria-controls={menuId2}>
+							aria-controls={menuLanguagesId}>
 							<LanguageIcon />
 						</IconButton>
 						{/*DMs icon */}

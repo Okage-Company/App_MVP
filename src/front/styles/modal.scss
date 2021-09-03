@@ -1,7 +1,7 @@
 @import '../styles/index.scss';
 
 .modal_container {
-    position:  absolute;
+    position: fixed;
     width: 70%;
     height: 90%;
     left: 50%;
@@ -114,8 +114,25 @@
     margin-top: $container-elements-margin;
 }
 
-.form_link, .form_link:hover {
+.form_footer_text_log {
+    margin-top: $container-elements-margin;
+    text-align: center;
+}
+
+.form_link {
     color: $primary-color;
+}
+
+.form_link:hover {
+    cursor: pointer;
+    color: $primary-color-hover;
+    text-decoration: none;
+}
+
+.form_link:active {
+    cursor: pointer;
+    color: $primary-color-active;
+    text-decoration: none;
 }
 
 .form_sign_up_header {
@@ -134,4 +151,23 @@
     background-color: transparent;
     border: 0;
     padding: 0;
+}
+
+.get-started-button {
+    font-family: $primary-font;
+    width: 100%;
+    background-color: $primary-color;
+    font-size: $medium-size;
+    padding: $container-padding;
+    color: #fff;
+    border: 0;
+    border-radius: $border-radius;
+}
+
+.get-started-button:hover {
+    background-color: $primary-color-hover;
+}
+
+.get-started-button:active {
+    background-color: $primary-color-active;
 }
