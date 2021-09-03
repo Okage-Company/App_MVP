@@ -1,18 +1,21 @@
 import { responsiveFontSizes } from "@material-ui/core";
 import { ControlCameraOutlined } from "@material-ui/icons";
-//Declaramos nuestrs
-const BASE_URL = "https://3001-brown-roundworm-pv0d4gpt.ws-eu15.gitpod.io/api/";
+
+//Declaramos nuestras constantes
+
+const BASE_URL = "https://3001-brown-roundworm-pv0d4gpt.ws-eu16.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			account: []
+			account: [],
+			clientId: []
 		},
 		actions: {
 			getAccount: async () => {
 				console.log("fetch");
 				try {
-					let response = await fetch(BASE_URL.concat("account/<int:id>"));
+					let response = await fetch(BASE_URL.concat("account/"));
 					console.log("response", response);
 
 					if (response.ok) {
@@ -25,6 +28,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log(error);
 				}
+			},
+			getClientId: id => {
+				console.log(id);
+				fetch(BASE_URL.concat("account/", id))
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						setStore({ clientId: new Array(responseAsJson) });
+						console.log(getStore().clientId);
+					});
 			}
 		}
 	};

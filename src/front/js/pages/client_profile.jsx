@@ -1,14 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import PasswordUpdate from "../component/password.jsx";
 import { Context } from "../store/appContext";
 import "../../styles/client_profile.scss";
+import { useParams } from "react-router-dom";
+import { CallToActionSharp } from "@material-ui/icons";
 
 const Client_Profile = () => {
-	const { store } = useContext(Context);
+	const { store, actions } = useContext(Context);
+	let params = useParams();
+	console.log(params);
 
+	useEffect(() => {
+		actions.getClientId(params.id);
+	}, []);
 	return (
 		<div>
-			{store.account.map((account, index) => {
+			{store.clientId.map((account, index) => {
 				return (
 					<div className="clientProfileContainer" key={index}>
 						<div className="clientProfileSidebar">

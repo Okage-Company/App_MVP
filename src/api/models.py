@@ -108,7 +108,7 @@ class Account(db.Model):
     
     @classmethod
     def get_by_id(cls, id):
-        account = cls.query.get(id)
+        account = cls.query.filter_by(id=id).one_or_none()
         return account
 
     @classmethod
@@ -148,12 +148,10 @@ class Client(db.Model):
     def __repr__(self):
         return f'Client {self.id} {self.account_id}'
    #3
-    def serialize(self):
+    def to_dict(self):
         client = Account.get_by_id(self.account_id)
-        return {
-            "id": self.id,
-            "account_id": self.account_id,
-        }
+        client = client.serialize().update({"client_id" : self.id})
+        return client
 
     def create(self):
         db.session.add(self)
@@ -163,7 +161,12 @@ class Client(db.Model):
     def get_all(cls):
         client_list = cls.query.all()
         return client_list
-        
+
+    @classmethod
+    def get_by_id(cls, id):
+        client = cls.query.filter_by(id=id).one_or_none()
+        print (client)
+        return client
 
 class Business(db.Model):
     __tablename__ = 'business'
@@ -201,6 +204,7 @@ class Business(db.Model):
     def get_all(cls):
         business_list = cls.query.all()
         return business_list
+
 
 class Services(db.Model):
     __tablename__ = 'services'
