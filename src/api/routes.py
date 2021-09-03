@@ -24,6 +24,28 @@ def get_user():
         return jsonify([user.serialize() for user in all_user]), 200
     return jsonify({'message': 'No account created'}), 500
 
+#1.1-Usuario por ID
+@api.route('/account/<int:id>', methods=['GET'])
+def get_user_by_id(id):
+    user = Account.get_by_id(id)
+    if user:
+        return jsonify(user.serialize()), 200
+    return jsonify({'message':'Account not found'}), 404
+
+#ELIMINAR CUENTA
+@api.route('/account/<int:id>', methods = ['DELETE'])
+
+def delete_account(id):
+    if not id == get_jwt_identity():
+        return jsonify({'message': 'not authorized'}), 301
+
+    user = Account.get_by_id(id)
+    if user:
+        user.disable_user()
+        return jsonify({'message': 'user deleted'}, user.serialize())
+    return jsonify({'message': 'user not found'}), 404
+
+
 #2-Recibir toda la lista de clientes
 @api.route('/client', methods=['GET'])
 def get_client():
@@ -33,6 +55,16 @@ def get_client():
     return jsonify({'message': 'No account created'}), 500
     
     return jsonify({'message': 'No clients created'}), 500
+
+#2.1-Cliente por ID
+@api.route('/client/<int:id>', methods =['GET'])
+def get_client_by_id(id):
+    client = Client.get_by_id(id)
+    if client:
+        return jsonify(client.serialize()), 200
+    return jsonify({'message':'Client not found'}), 404
+
+
 #3-Recibir toda la lista de business
 @api.route('/business', methods=['GET'])
 def get_business():
@@ -40,6 +72,14 @@ def get_business():
     if all_businesses:
         return jsonify([business.serialize() for business in all_businesses]), 200
     return jsonify({'message': 'No business created'}), 500
+
+#3.1-Business por ID
+@api.route('/business/<int:id>', methods =['GET'])
+def get_business_by_id(id):
+    business = Business.get_by_id(id)
+    if business:
+        return jsonify(business.serialize()), 200
+    return jsonify({'message':'Business not found'}), 404
 
 #2-Crear un usuario Business/Client según el booleano is_client:
 @api.route('/account', methods=['POST'])
@@ -128,18 +168,6 @@ def delete_users(id):
         return jsonify(user.serialize(),{'msg':'Account deleted'}), 200
 
     return jsonify({'msg' : 'Account not foud'}), 404'''
-
-
-@api.route('/account/<int:id>', methods = ['DELETE'])
-def disable_user(id):
-    user = Account.get_by_id(id)
-    if user:
-        if (user._is_active==True):
-            user.disable_user(id)
-            return jsonify(user.serialize()), 200
-        return jsonify({'msg' : 'Account already disabled'}), 404
-
-    return jsonify({'msg' : 'Account not found'}), 404
 
 
 #MOSTRAR TIPOS DE SERVICIOS
