@@ -9,7 +9,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			account: [],
-			clientId: []
+			clientId: [],
+			businessId: []
 		},
 		actions: {
 			getAccount: async () => {
@@ -45,7 +46,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getBusinessId: id => {
 				console.log(id);
-				fetch(BASE_URL.concat("account/", id))
+				fetch(BASE_URL.concat("business/", id))
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);

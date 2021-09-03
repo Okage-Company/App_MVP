@@ -43,7 +43,7 @@ def get_client():
 def get_business():
     all_businesses = Business.get_all()
     if all_businesses:
-        return jsonify([business.serialize() for business in all_businesses]), 200
+        return jsonify([business.to_dict() for business in all_businesses]), 200
     return jsonify({'message': 'No business created'}), 500
 
 #4-Crear un usuario Business/Client según el booleano is_client:
@@ -127,7 +127,6 @@ def get_by_email(email):
 @api.route('/client/<int:id>', methods =['GET'])
 def get_client_by_id(id):
     client = Client.get_by_id(id)
-    print (client, '@@@@@@@@@@@@@@@@@@')
     if not (client):
         return jsonify({'message':'Client not found'}), 404
     return jsonify(client.to_dict()), 200
@@ -136,9 +135,11 @@ def get_client_by_id(id):
 @api.route('/business/<int:id>', methods =['GET'])
 def get_business_by_id(id):
     business = Business.get_business_id(id)
-    if business:
-        return jsonify(business.serialize()), 200
-    return jsonify({'message':'Business not found'}), 404
+    if not business:
+        return jsonify({'message':'Business not found'}), 404
+    
+    return jsonify(business.to_dict()), 200
+    
 
 #LOGIN + JWT TOKEN
 @api.route('/login', methods=['POST'])
@@ -159,8 +160,6 @@ def login():
 #@jwt_required()
 def get_user_ID(id):
     client = Client.get_by_id(id)
-    
     if not client:
         return {'error': 'User doesnt exits'},400
-
     return jsonify(client.to_dict()), 200

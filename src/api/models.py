@@ -185,8 +185,7 @@ class Business(db.Model):
     def __repr__(self):
         return f'Business {self.id}'
         
-    #3
-    def serialize(self):
+    def to_dict(self):
         return {
             "id": self.id,
             "account_id": self.account_id,
@@ -208,8 +207,8 @@ class Business(db.Model):
     @classmethod
     def get_business_id(cls, id):
         business = cls.query.filter_by(id=id).one_or_none()
-        print (business)
         return business
+
 
 class Services(db.Model):
     __tablename__ = 'services'
