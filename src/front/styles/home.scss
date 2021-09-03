@@ -1,8 +1,179 @@
 @import '../styles/index.scss';
-body{
-    margin-top: 6rem;
+
+.grid_container {
+    margin-top: 3.5rem;
     background-color: $background-body-color;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  
+    display: grid;
+    padding-top: 2rem;
+    padding-left: $container-grid-padding;
+    padding-right: $container-grid-padding;
+    padding-bottom: $container-grid-padding;
+    grid-gap: $grid-gap;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 38rem 1fr;
+    grid-template-areas: "title title banner banner"
+                        "cardHome cardHome cardHome cardHome"
+}
+
+@media (max-width: 970px) {
+    .grid_container {
+        background-color: $background-body-color;
+        display: grid;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        grid-gap: $grid-gap;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 30rem 1fr;
+        grid-template-areas: "title banner"
+                            "cardHome cardHome";
+    }
+}
+
+@media (max-width: 600px) {
+    .grid_container {
+        background-color: $background-body-color;
+        display: grid;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        grid-gap: $grid-gap;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: 15rem auto 1fr;
+        grid-template-areas: "banner"
+                            "title"
+                            "cardHome";
+    }
+}
+
+.grid_container > * {
+    padding: 0;
+}
+
+.grid_container_title {
+    grid-area: title;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.grid_container_banner {
+    grid-area: banner;
+    background: url('https://i.ibb.co/5jH9LSh/Screenshot-2021-08-27-at-12-22-35.png') no-repeat center;
+    border-radius: $border-radius;
+    background-size: cover;
+    display: flex;
+    padding: $container-padding;
+    justify-content: center;
+}
+
+.grid_container_card_home {
+    grid-area: cardHome;
+    display: grid;
+    grid-gap: $grid-gap;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    padding: 0;
+}
+
+@media (max-width: 970px) {
+    .grid_container_card_home {
+        grid-area: cardHome;
+        display: grid;
+        grid-gap: $grid-gap;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .grid_container_card_home {
+        grid-area: cardHome;
+        display: grid;
+        grid-gap: $grid-gap;
+        grid-template-columns: repeat(1, 1fr);
+        padding: 0;
+    }
+}
+
+.home_title {
+    display: flex;
+    flex-direction: column;
+    line-height: 6em;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 600px) {
+    .home_title {
+        line-height: 4.5rem;
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 970px) {
+    .home_title {
+        line-height: 4.5rem;
+        font-size: 3rem;
+    }
+}
+
+.home_title_text {
+    padding: 0;
+    margin: 0;
+    font-weight: $bold-weight;
+    font-size: 5.709rem;
+}
+
+@media (max-width: 600px) {
+    .home_title_text {
+        font-size: 4rem;
+    }
+}
+
+@media (max-width: 970px) {
+    .home_title_text {
+        font-size: 4rem;
+    }
+}
+
+.home_title_text_background {
+    background-color: $secondary-color;
+}
+
+.home_categories_text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid $body-color;
+    padding: 1rem;
+    border-radius: $border-radius;
+    font-size: $small-size;
+    font-family: $secondary-font;
+    margin-top: 1rem;
+}
+
+.home_banner_text {
+    text-align: center;
+    border: 1px solid $body-color;
+    padding: 1rem;
+    border-radius: $border-radius;
+    font-size: $small-size;
+    font-family: $secondary-font;
+    background-color: $secondary-color;
+    margin-top: auto;
+}
+
+.home_description {
+    width: 80%;
+    margin-bottom: 1rem;
+}
+
+.button_size {
+    width: 7rem;
+}
+
+.grid_container_card_home_button_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

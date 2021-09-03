@@ -104,12 +104,21 @@ class Account(db.Model):
     def create(self):
         db.session.add(self)
         db.session.commit()
+    
+    @classmethod
+    def get_by_id(cls, id):
+        account = cls.query.get(id)
+        return account
+
+    @classmethod
+    def get_by_email(cls, email):
+        account = cls.query.filter_by(email=email).one_or_none()
+        return account
 
     @classmethod
     def get_all(cls):
         users_list = cls.query.all()
         return users_list
-        #[user.serialize() for user in users_list]
 
 class Client(db.Model):
     __tablename__ = 'client'
@@ -124,12 +133,23 @@ class Client(db.Model):
                     backref="client")
     #2
     def __repr__(self):
-        return f'Client {self.id}'
+        return f'Client {self.id} {self.account_id}'
    #3
     def serialize(self):
+        client = Account.get_by_id(self.account_id)
         return {
             "id": self.id,
+            "account_id": self.account_id,
         }
+
+    def create(self):
+        db.session.add(self)
+        db.session.commit()
+    
+    @classmethod
+    def get_all(cls):
+        client_list = cls.query.all()
+        return client_list
         
 
 class Business(db.Model):
@@ -159,6 +179,15 @@ class Business(db.Model):
             "schedule": self.schedule
             #aquí no ponemos la password porque no queremos que se vea en el front
         }
+
+    def create(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_all(cls):
+        business_list = cls.query.all()
+        return business_list
 
 class Services(db.Model):
     __tablename__ = 'services'
