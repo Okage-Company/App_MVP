@@ -4,6 +4,7 @@ import { Context } from "../store/appContext";
 import "../../styles/client_profile.scss";
 import { useParams } from "react-router-dom";
 import { CallToActionSharp } from "@material-ui/icons";
+import ButtonUploadImage from "../component/buttonUploadImage.jsx";
 
 const Client_Profile = () => {
 	const { store, actions } = useContext(Context);
@@ -21,6 +22,7 @@ const Client_Profile = () => {
 						<div className="clientProfileSidebar">
 							<div className="clientProfileSidebar">
 								<div className="clientProfileImage"></div>
+								<ButtonUploadImage />
 							</div>
 						</div>
 						<div className="clientProfileMain">

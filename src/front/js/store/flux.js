@@ -42,6 +42,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ clientId: new Array(responseAsJson) });
 						console.log(getStore().clientId);
 					});
+			},
+			getBusinessId: id => {
+				console.log(id);
+				fetch(BASE_URL.concat("account/", id))
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						setStore({ businessId: new Array(responseAsJson) });
+						console.log(getStore().businessId);
+					});
 			}
 		}
 	};

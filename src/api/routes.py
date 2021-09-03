@@ -135,7 +135,7 @@ def get_client_by_id(id):
 #Get Business by ID
 @api.route('/business/<int:id>', methods =['GET'])
 def get_business_by_id(id):
-    business = Business.get_by_id(id)
+    business = Business.get_business_id(id)
     if business:
         return jsonify(business.serialize()), 200
     return jsonify({'message':'Business not found'}), 404

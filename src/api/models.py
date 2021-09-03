@@ -205,6 +205,11 @@ class Business(db.Model):
         business_list = cls.query.all()
         return business_list
 
+    @classmethod
+    def get_business_id(cls, id):
+        business = cls.query.filter_by(id=id).one_or_none()
+        print (business)
+        return business
 
 class Services(db.Model):
     __tablename__ = 'services'
