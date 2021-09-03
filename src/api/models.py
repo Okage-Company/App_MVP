@@ -126,11 +126,9 @@ class Account(db.Model):
         return users_list
 
     @classmethod
-    def disable_user(cls, id):
-        user_disabled = cls.query.get(id)
-        user_disabled._is_active = False
+    def disable_user(self, id):
+        self._is_active = False
         db.session.commit()
-        return user_disabled
 
     
 

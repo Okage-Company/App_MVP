@@ -130,14 +130,16 @@ def delete_users(id):
     return jsonify({'msg' : 'Account not foud'}), 404'''
 
 
+#ELIMINAR CUENTA
 @api.route('/account/<int:id>', methods = ['DELETE'])
-def disable_user(id):
+@jwt_required
+def delete_account(id):
+    if not id == get_jwt_identity():
+        return jsonify({'message': 'not authorized'}), 301
+
     user = Account.get_by_id(id)
     if user:
-        if (user._is_active==True):
-            user.disable_user(id)
-            return jsonify(user.serialize()), 200
-        return jsonify({'msg' : 'Account already disabled'}), 404
-
-    return jsonify({'msg' : 'Account not foud'}), 404
+        user.disable_user()
+        return jsonify({'message': 'user deleted'}, user.serialize()), 200
+    return jsonify({'message': 'user not found'}), 404
 
