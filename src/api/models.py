@@ -215,7 +215,7 @@ class Services(db.Model):
     def __repr__(self):
         return f'Services {self.title}'
         
-    def serialize(self):
+    def serialize(self):  
         return {
             "id": self.id,
             "title": self.title,

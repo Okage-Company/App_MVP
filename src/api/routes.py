@@ -139,21 +139,30 @@ def disable_user(id):
             return jsonify(user.serialize()), 200
         return jsonify({'msg' : 'Account already disabled'}), 404
 
-    return jsonify({'msg' : 'Account not foud'}), 404
+    return jsonify({'msg' : 'Account not found'}), 404
 
 
-#MOSTRAR SERVICIOS:
+#MOSTRAR TIPOS DE SERVICIOS
 @api.route('/services', methods = ['GET'])
 def get_services():
     all_services = Services.get_all()
     if all_services:
-        return jsonify([services.serialize() for services in all_services]), 200
-    return jsonify ({'message':'No service created'}), 500
+        return jsonify ([services.serialize() for services in all_services])
+    return jsonify ({'message': 'No services created'}), 500
 
-#CREAR SERVICIO:
-@api.route('/services', methods = ['POST'])
+#CREAR TIPOS DE SERVICIOS
+@api.route('services', methods = ['POST'])
 def create_service():
     title = request.json.get('title', None)
-    
+
+    service = Services(
+        title = title
+    )
+
+    try:
+        service.create()
+        return jsonify(service.serialize()), 201
+    except exc.IntegrityError:
+        return {'error': 'Something is wrong'}, 409
 
 
