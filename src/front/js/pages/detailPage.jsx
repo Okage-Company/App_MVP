@@ -5,7 +5,13 @@ import Card from "/workspace/react-flask-hello/src/front/js/component/card.jsx";
 import StaffCard from "/workspace/react-flask-hello/src/front/js/component/staffCard.jsx";
 import Review from "/workspace/react-flask-hello/src/front/js/component/review.jsx";
 
+import getState from "/workspace/react-flask-hello/src/front/js/store/flux.js";
+
 const detailPage = () => {
+	// useEffect(() => {
+	// 	state.actions.getServices(); // <---- calling this function from the flux.js actions
+	// }, []);
+
 	return (
 		<Fragment>
 			<div className="grid_container_detail_page">
