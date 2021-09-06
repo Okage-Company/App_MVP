@@ -23,6 +23,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log(error);
 				}
+			},
+			deleteAccount: id => {
+				let token = localStorage.getItem("access_token");
+				fetch(BASE_URL.concat("account/", id), {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${token}`
+					}
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error("Account could not be deleted");
+						}
+						return response.json();
+					})
+					.then(responseAsJson => {
+						//aquí iría una redirección a la página principal de la aplicación
+					})
+					.catch(error => {
+						console.log(error);
+					});
 			}
 		}
 	};
