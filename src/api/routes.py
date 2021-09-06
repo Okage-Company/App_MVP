@@ -179,7 +179,7 @@ def get_services():
     return jsonify ({'message': 'No services created'}), 500
 
 #CREAR TIPOS DE SERVICIOS
-@api.route('services', methods = ['POST'])
+@api.route('/services', methods = ['POST'])
 def create_service():
     title = request.json.get('title', None)
 
