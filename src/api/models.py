@@ -104,6 +104,18 @@ class Account(db.Model):
             "adress": self.adress,
             "profile_photo": self.profile_foto
         }
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            "phone": self.phone,
+            "name": self.name,
+            "last_name": self.last_name,
+            "province": self.province,
+            "post_code": self.post_code,
+            "adress": self.adress,
+            "profile_photo": self.profile_foto
+        }
     
     def create(self):
         db.session.add(self)
@@ -190,6 +202,13 @@ class Client(db.Model):
     #2
     def __repr__(self):
         return f'Client {self.id} {self.account_id}'
+        
+    def serialize(self):
+        client = Account.get_by_id(self.account_id)
+        return {
+            "id": self.id,
+            "account_id": self.account_id,
+        }
    #3
     def to_dict(self):
         client = Account.get_by_id(self.account_id)

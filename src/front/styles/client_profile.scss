@@ -1,5 +1,8 @@
 @import '../styles/index.scss';
 
+body {
+    background-color: $background-body-color;
+}
    .clientProfileContainer {
        padding-left: 5.938rem;
        padding-right: 5.938rem;
