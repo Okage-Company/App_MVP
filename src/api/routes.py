@@ -12,7 +12,7 @@ from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_requir
 
 from api.models import db, Account, Client, Business, Services, Reviews
 from api.utils import generate_sitemap, APIException
-
+import jwt
 #Poner API delante
 api = Blueprint('api', __name__)
 
@@ -45,6 +45,7 @@ def get_business():
     if all_businesses:
         return jsonify([business.to_dict() for business in all_businesses]), 200
     return jsonify({'message': 'No business created'}), 500
+
 
 #4-Crear un usuario Business/Client según el booleano is_client:
 @api.route('/register', methods=['POST'])
@@ -102,7 +103,9 @@ def create_account():
             )
             try:
                 business.create()
+
                 access_token = create_access_token(identity=business.to_dict(), expires_delta=timedelta(minutes=120))
+  
                 return jsonify(business.serialize(), access_token), 201
             except exc.IntegrityError:
                 return {'error': 'Something is wrong'}, 409
@@ -144,12 +147,12 @@ def get_business_by_id(id):
 #LOGIN + JWT TOKEN
 @api.route('/login', methods=['POST'])
 def login():
+    print('llega??')
     email = request.json.get('email', None)
     password = request.json.get('password', None)
     if not (email and password):
         return {'error': 'Missing information'}, 401 #BadRequest
     user = Account.get_by_email(email)
-
     if user and check_password_hash(user._password, password) and user._is_active:
         access_token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=120))
         return {'token': access_token}, 200
@@ -203,3 +206,4 @@ def update_user(id):
         return jsonify(updated_user.serialize()), 200
 
     return {'error': 'User not found'}, 400
+

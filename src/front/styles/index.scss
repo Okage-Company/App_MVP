@@ -28,3 +28,15 @@ $container-grid-padding: 5.938rem;
 $container-elements-margin: 0.75rem;
 $grid-gap: 2rem;
 $border-radius: 0.3rem;
+
+a:hover {
+    cursor: pointer;
+    color: $primary-color-hover;
+    text-decoration: none;
+}
+
+a:active {
+    cursor: pointer;
+    color: $primary-color-active;
+    text-decoration: none;
+}
