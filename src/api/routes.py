@@ -108,13 +108,14 @@ def create_account():
 #LOGIN + JWT TOKEN
 @api.route('/login', methods=['POST'])
 def login():
+    print('llega??')
     email = request.json.get('email', None)
     password = request.json.get('password', None)
-
+    print(email, password)
     if not (email and password):
         return {'error': 'Missing information'}, 401 #BadRequest
     user = Account.get_by_email(email)
-
+    print(user)
     if user and check_password_hash(user._password, password) and user._is_active:
         access_token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=120))
         return {'token': access_token}, 200

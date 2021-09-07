@@ -6,8 +6,8 @@ import jwt_decode from "jwt-decode";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			BASE_URL: "https://brown-chicken-oj9mv0gl.ws-eu16.gitpod.io/",
-			URL_API: "https://3001-brown-chicken-oj9mv0gl.ws-eu16.gitpod.io/api/",
+			BASE_URL: "https://brown-chicken-oj9mv0gl.ws-eu15.gitpod.io/",
+			URL_API: "https://3001-brown-chicken-oj9mv0gl.ws-eu15.gitpod.io/api/",
 			user: {},
 			currentUser: {}
 		},
@@ -37,11 +37,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				const redirectToHome = () => {
 					if (localStorage.getItem("tokenID") != null) {
-						//location.replace("./");//
-						//.concat(localStorage.getItem("tokenID"))//
+						location.replace("./");
 					}
 				};
-
+				console.log(credentials);
 				fetch(getStore().URL_API.concat("register"), {
 					method: "POST",
 					headers: new Headers({
@@ -51,7 +50,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: credentials
 				})
 					.then(function(response) {
-						console.log("Llega");
 						console.log(response);
 						if (!response.ok) {
 							throw Error("This account can't be registered");
@@ -75,7 +73,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let decoded = jwt_decode(access_token);
 					return decoded;
 				};
-				const setUserFromToken = access_token => {
+				const setUserFromToken = token => {
 					localStorage.setItem("tokenID", token.sub.id);
 				};
 				const redirectToHome = () => {
@@ -83,9 +81,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						location.replace("./");
 					}
 				};
+				console.log(credentials);
 				fetch(getStore().URL_API.concat("login"), {
 					method: "POST",
-					body: "credentials",
+					body: credentials,
 					headers: { "Content-Type": "application/json" }
 				})
 					.then(function(response) {
@@ -95,8 +94,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response.json();
 					})
 					.then(function(responseAsJson) {
-						localStorage.setItem("access_token", responseAsJson);
-						const tokenDecoded = tokenDecode(responseAsJson);
+						console.log("ya llegaaa", responseAsJson);
+						localStorage.setItem("access_token", responseAsJson.token);
+						const tokenDecoded = tokenDecode(responseAsJson.token);
 						setUserFromToken(tokenDecoded);
 						redirectToHome();
 					})

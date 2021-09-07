@@ -9,13 +9,9 @@ import ButtonSign from "./buttonSign.jsx"; //alguien convertir a otro path i can
 const ModalSign = ({ LogWorks }) => {
 	const [signModalContent, setSignModalContent] = useState("");
 	const [modalViewSign, setModalViewSign] = useState(false);
-	const { store, actions } = useContext(Context);
 	const { register, handleSubmit } = useForm();
-
-	const submitAction = credentials => {
-		console.log("Llega");
-		actions.getRegister(JSON.stringify(credentials));
-	};
+	const { store, actions } = useContext(Context);
+	const onSubmit = data => actions.getRegister(JSON.stringify(data));
 
 	useEffect(() => {
 		if (modalViewSign == true) {
@@ -23,7 +19,12 @@ const ModalSign = ({ LogWorks }) => {
 				<Fragment>
 					<div className="form_imputs">
 						<div className="form_sign_up_header">
-							<button className="form_sign_up_arrow_button" onClick={() => setModalViewSign(false)}>
+							<button
+								className="form_sign_up_arrow_button"
+								onClick={e => {
+									e.preventDefault();
+									setModalViewSign(false);
+								}}>
 								<i className="fas fa-chevron-left"></i>
 							</button>
 							<span className="form_sign_up_title">Sign up</span>
@@ -151,7 +152,7 @@ const ModalSign = ({ LogWorks }) => {
 		}
 	}, [modalViewSign]);
 
-	return signModalContent;
+	return <form onSubmit={handleSubmit(onSubmit)}>{signModalContent}</form>;
 };
 
 ModalSign.propTypes = {
