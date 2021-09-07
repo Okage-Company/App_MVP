@@ -110,12 +110,23 @@ def get_service():
         return jsonify([service.serialize() for service in service_result]), 200
     return {'oh my god': 'Something is terribly wrong'}, 409    
 
+#Get buservices ALL them mothethef*****
 @api.route('/buservices', methods=['GET'])
 def get_buservice():
     buservice_result = Buservices.get_all()
     if buservice_result:
         return jsonify([buservice.serialize() for buservice in buservice_result]), 200
     return {'almitghty Thor!': 'Raise us from perdition'}, 409
+
+#Get buservices ONLY ONE OF 'EM mothethef*****
+@api.route('/buservices/<int:id>', methods=['GET'])
+def get_by_id_buservices(id):
+    print('hello')
+    buservices_variable = Buservices.get_by_id_buservices(id)
+    print(buservices_variable)
+    if not (buservices_variable):
+        return jsonify({'there is hope': 'even if you are not reading what you expected. Know that this means that you did the back-end correctly, and you might find peace in that, at last.'}), 404
+    return jsonify(buservices_variable.serialize()), 200
 
 #Get business by ID
 @api.route('/business/<int:id>', methods=['GET'])
@@ -128,11 +139,17 @@ def get_by_id(id):
 @api.route('/business/<int:id>/services', methods=['POST'])
 @jwt_required()
 def post_service(id):
- 
-    if not id == get_jwt_identity().get('id'):
+
+    if not id == get_jwt_identity()['id']:
         return {'error':'T_T'}, 401
 
     business_id = id
+    title_bus = request.json.get('title_bus', None)
+    phone = request.json.get('phone', None)
+    email = request.json.get('email', None)
+    professional_name = request.json.get('professional_name', None)
+    professional_studies = request.json.get('professional_studies', None)
+    professional_techniques = request.json.get('professional_techniques', None)
     offer = request.json.get('offer', None)
     adress = request.json.get('adress', None)
     specialty = request.json.get('specialty', None)
@@ -148,7 +165,13 @@ def post_service(id):
         buservice_variable = Buservices(
             business_id=business_id,
             services_id=service_result.id,
+            title_bus=title_bus,
             offer=offer,
+            phone=phone,
+            email=email,
+            professional_techniques=professional_techniques,
+            professional_studies=professional_studies,
+            professional_name=professional_name,
             adress=adress,
             specialty=specialty,
             numero_colegiado=numero_colegiado,
@@ -159,10 +182,12 @@ def post_service(id):
 
     if buservice_variable:
         try:
+            print(buservice_variable)
             buservice_variable.create()
             return jsonify(buservice_variable.serialize()), 201
         except exc.IntegrityError:
             return {'wake up': 'this is not a dream, this is a reality, there is no going back, there is no going home'}, 409
+    return {'error':'there is not'}
 
 @api.route('/reviews', methods=['GET'])
 def get_reviews():
@@ -196,6 +221,6 @@ def login():
     user = Account.get_by_email(email)
 
     if user and check_password_hash(user._password, password) and user._is_active:
-        access_token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=120))
+        access_token = create_access_token(identity=user.serialize(), expires_delta=timedelta(minutes=120))
         return {'token': access_token}, 200
     return {'error': 'User or password are incorrect'}, 400

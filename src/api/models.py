@@ -32,6 +32,12 @@ class Buservices(db.Model):
     business_id = db.Column(ForeignKey('business.id'), nullable=False)
     services_id = db.Column(ForeignKey('services.id'), nullable=False)
     #data
+    phone = db.Column(db.VARCHAR, nullable=True)
+    email = db.Column(db.VARCHAR, nullable=True)
+    title_bus = db.Column(db.VARCHAR, nullable=True)
+    professional_name = db.Column(db.VARCHAR, nullable=True)
+    professional_studies = db.Column(db.VARCHAR, nullable=True)
+    professional_techniques = db.Column(db.VARCHAR, nullable=True)
     offer = db.Column(db.Boolean, default=True, nullable=False)
     adress = db.Column(db.VARCHAR, nullable=False)
     specialty = db.Column(db.VARCHAR, nullable=False)
@@ -48,11 +54,17 @@ class Buservices(db.Model):
 
 
     def __repr__(self):
-        return f'Buservices {self.title}, {self.specialty}, {self.numero_colegiado}'
+        return f'Buservices {self.specialty}, {self.numero_colegiado}, {self.business}'
 
     def serialize(self):
         return {
-            # "title": self.title,
+            "title_bus": self.title_bus,
+            "professional_techniques": self.professional_techniques,
+            "professional_studies": self.professional_studies,
+            "professional_name": self.professional_name,
+            "phone": self.phone,
+            "email": self.email,
+            "id": self.id,
             "offer": self.offer,
             "adress" : self.adress,
             "specialty": self.specialty,
@@ -60,6 +72,10 @@ class Buservices(db.Model):
             "description": self.description,
             "tecniques": self.tecniques,
             "photos": self.photos,
+            "business": {"cif":self.business.cif, "centre_name":self.business.centre_name},
+            "business": self.business.serialize()
+            # "account": {"email":self.account.email, "phone":self.account.phone, "post_code":self.account.post_code, "province":self.account.province},
+            # "account": self.account.serialize()
         }
 
     def create(self):
@@ -70,6 +86,12 @@ class Buservices(db.Model):
     def get_all(cls):
         get_all_buservice = cls.query.all()
         return get_all_buservice
+
+    @classmethod
+    def get_by_id_buservices(cls, id):
+        get_by_id_buservices_variable = cls.query.filter_by(id=id).one_or_none()
+        return get_by_id_buservices_variable
+        
 
 #1.1-Declaro el nombre de la primera tabla
 class Account(db.Model):
@@ -99,6 +121,7 @@ class Account(db.Model):
     #3(Serialize)-Transforma en formato json la base de datos, 
     def serialize(self):
         return {
+            "is_client": self.is_client,
             "id": self.id,
             "email": self.email,
             "phone": self.phone,
@@ -200,7 +223,7 @@ class Business(db.Model):
 
     @classmethod
     def get_by_id_business(cls, id):
-        get_by_id_business_variable = cls.query.get(id)
+        get_by_id_business_variable = cls.query.filter_by(id=id).one_or_none()
         return get_by_id_business_variable
 
 class Services(db.Model):
