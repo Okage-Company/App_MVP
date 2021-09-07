@@ -5,6 +5,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.dialects.postgresql import VARCHAR
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, ForeignKey, Integer, String, Enum, Boolean, Table
+#Import del cifrado de la password
+from werkzeug.security import check_password_hash
 
 db = SQLAlchemy()
 
@@ -86,7 +88,7 @@ class Account(db.Model):
 
     #2(__repr__)Esto sirve para que python pueda print por e-mail+id sin bugs ni problemas,
     def __repr__(self):
-        return f'Account {self.email}, {self.id}, {self.account_type}'
+        return f'Account {self.email}, {self.id}, {self.is_client}'
     #3(Serialize)-Transforma en formato json la base de datos, 
     def serialize(self):
         return {
@@ -104,6 +106,10 @@ class Account(db.Model):
     def create(self):
         db.session.add(self)
         db.session.commit()
+
+    def validate_password(self, password):
+        is_valid = check_password_hash(self._password, password)
+        return is_valid
     
     @classmethod
     def get_by_id(cls, id):

@@ -16,6 +16,7 @@ const Button = props => {
 
 Button.propTypes = {
 	text: PropTypes.string.isRequired
+	// continueSignUp: PropTypes.func.isRequired
 };
 
 export default Button;

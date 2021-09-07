@@ -1,28 +1,109 @@
-const BASE_URL = "https://3001-cyan-catshark-l8ojkpuu.ws-eu16.gitpod.io/api/";
+import jwt_decode from "jwt-decode";
+
+//localStorage es una variable que ya existe en el navegador, es decir no hay
+//que declararla ni nada por el estilo.
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			//lista donde se almacena todos los fetch que hagamos :)
-			account: []
+			BASE_URL: "https://brown-chicken-oj9mv0gl.ws-eu15.gitpod.io/",
+			URL_API: "https://3001-brown-chicken-oj9mv0gl.ws-eu15.gitpod.io/api/",
+			user: {},
+			currentUser: {}
 		},
 		actions: {
-			//abrimos otra lista donde se llaman todos los fetch, una acción es hacer un fetch
-			// asincrono, funcion que hace el GET ACCOUNT del BACK
-			getAccount: async () => {
-				try {
-					let response = await fetch(BASE_URL.concat("account/"));
-
-					if (response.ok) {
-						let responseAsJson = await response.json();
-						setStore({ account: responseAsJson });
-						console.log(responseAsJson); // respuesta que recibo de la API, important, para ver siempre el array en la consola pa sacar los datos :) nos da un array con muchos objetos
-					} else {
-						throw new Error(response.statusText, "code", response.status);
-					}
-				} catch (error) {
-					console.log(error);
+			verifyLogin: () => {
+				if (!localStorage.getItem("access_token")) {
+					location.replace(getStore().BASE_URL.concat("login"));
 				}
+			},
+			isLoggedUser: () => {
+				if (localStorage.getItem("access_token")) {
+					location.replace(getStore().BASE_URL.concat("profile/", localStorage.getItem("tokenID")));
+				}
+			},
+			//REGISTER FLUX
+			getRegister: credentials => {
+				//Decodificar el token
+				console.log("Llega");
+				const tokenDecode = access_token => {
+					let decoded = jwt_decode(access_token);
+					return decoded;
+				};
+				//
+				const setUserFromToken = token => {
+					localStorage.setItem("tokenID", token.sub.id);
+					console.log(localStorage);
+				};
+				const redirectToHome = () => {
+					if (localStorage.getItem("tokenID") != null) {
+						location.replace("./");
+					}
+				};
+				console.log(credentials);
+				fetch(getStore().URL_API.concat("register"), {
+					method: "POST",
+					headers: new Headers({
+						"Content-type": "application/json",
+						"Sec-Fetch-Mode": "no-cors"
+					}),
+					body: credentials
+				})
+					.then(function(response) {
+						console.log(response);
+						if (!response.ok) {
+							throw Error("This account can't be registered");
+						}
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						console.log("ya llegaaa", responseAsJson);
+						localStorage.setItem("access_token", responseAsJson[1]);
+						const tokenDecoded = tokenDecode(responseAsJson[1]);
+						setUserFromToken(tokenDecoded);
+						redirectToHome();
+					})
+					.catch(function(error) {
+						console.log("There's a problem", error);
+					});
+			},
+			//LOGGIN FLUX
+			getLogin: credentials => {
+				const tokenDecode = access_token => {
+					let decoded = jwt_decode(access_token);
+					return decoded;
+				};
+				const setUserFromToken = token => {
+					localStorage.setItem("tokenID", token.sub.id);
+				};
+				const redirectToHome = () => {
+					if (localStorage.getItem("tokenID") != null) {
+						location.replace("./");
+					}
+				};
+				console.log(credentials);
+				fetch(getStore().URL_API.concat("login"), {
+					method: "POST",
+					body: credentials,
+					headers: { "Content-Type": "application/json" }
+				})
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error("Login failed");
+						}
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						console.log("ya llegaaa", responseAsJson);
+						localStorage.setItem("access_token", responseAsJson.token);
+						const tokenDecoded = tokenDecode(responseAsJson.token);
+						setUserFromToken(tokenDecoded);
+						redirectToHome();
+					})
+					.catch(function(error) {
+						alert("User/password incorrects");
+						localStorage.removeItem("access_token");
+					});
 			}
 		}
 	};

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { alpha, makeStyles, Grid } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -15,6 +15,7 @@ import LanguageIcon from "@material-ui/icons/Language";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import "../../styles/navbar.scss";
 import logosvg from "../../img/logo-navbar-01.png";
+import Modal from "../component/modal.jsx";
 
 const useStyles = makeStyles(theme => ({
 	grow: {
@@ -102,19 +103,20 @@ const useStyles = makeStyles(theme => ({
 const Navbar = () => {
 	//Declaro todas las constantes
 	const classes = useStyles();
-	const [anchorEl, setAnchorEl] = React.useState(null);
-	const [anchorEl2, setAnchorEl2] = React.useState(null);
-	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+	const [profileMenu, setProfileMenu] = useState(null);
+	const [languagesMenu, setLanguagesMenu] = useState(null);
+	const [openModal, setOpenModal] = useState(false);
+	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
-	const isMenuOpen = Boolean(anchorEl);
-	const isMenuLanguagesOpen = Boolean(anchorEl2);
+	const isMenuOpen = Boolean(profileMenu);
+	const isMenuLanguagesOpen = Boolean(languagesMenu);
 
 	const handleProfileMenuOpen = event => {
-		setAnchorEl(event.currentTarget);
+		setProfileMenu(event.currentTarget);
 	};
 
 	const handleLanguagesMenuOpen = event => {
-		setAnchorEl2(event.currentTarget);
+		setLanguagesMenu(event.currentTarget);
 	};
 
 	const handleMobileMenuClose = () => {
@@ -122,42 +124,42 @@ const Navbar = () => {
 	};
 
 	const handleMenuClose = () => {
-		setAnchorEl(null);
+		setProfileMenu(null);
 		handleMobileMenuClose();
 	};
-	const handleMenuClose2 = () => {
-		setAnchorEl2(null);
+	const handleMenuLanguagesClose = () => {
+		setLanguagesMenu(null);
 		handleMobileMenuClose();
 	};
 
 	const menuId = "primary-search-account-menu";
-	const menuId2 = "language-search-account-menu";
+	const menuLanguagesId = "language-search-account-menu";
 	const renderMenu = (
 		<Menu
-			anchorEl={anchorEl}
+			profileMenu={profileMenu}
 			anchorOrigin={{ vertical: "top", horizontal: "right" }}
 			id={menuId}
 			keepMounted
 			transformOrigin={{ vertical: "top", horizontal: "right" }}
 			open={isMenuOpen}
 			onClose={handleMenuClose}>
-			<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-			<MenuItem onClick={handleMenuClose}>My account</MenuItem>
-			<MenuItem onClick={handleMenuClose}>Log Out</MenuItem>
+			<MenuItem onClick={handleMenuLanguagesClose}>Profile</MenuItem>
+			<MenuItem onClick={handleMenuLanguagesClose}>My account</MenuItem>
+			<MenuItem onClick={handleMenuLanguagesClose}>Log Out</MenuItem>
 		</Menu>
 	);
 	const renderMenu2 = (
 		<Menu
-			anchorEl={anchorEl2}
+			profileMenu={languagesMenu}
 			anchorOrigin={{ vertical: "top", horizontal: "right" }}
-			id={menuId2}
+			id={menuLanguagesId}
 			keepMounted
 			transformOrigin={{ vertical: "top", horizontal: "right" }}
 			open={isMenuLanguagesOpen}
-			onClose={handleMenuClose2}>
-			<MenuItem onClick={handleMenuClose2}>Español</MenuItem>
-			<MenuItem onClick={handleMenuClose2}>English</MenuItem>
-			<MenuItem onClick={handleMenuClose2}>Català</MenuItem>
+			onClose={handleMenuLanguagesClose}>
+			<MenuItem onClick={handleMenuLanguagesClose}>Español</MenuItem>
+			<MenuItem onClick={handleMenuLanguagesClose}>English</MenuItem>
+			<MenuItem onClick={handleMenuLanguagesClose}>Català</MenuItem>
 		</Menu>
 	);
 
@@ -195,7 +197,7 @@ const Navbar = () => {
 							className={classes.mobileIcons}
 							color="inherit"
 							onClick={handleLanguagesMenuOpen}
-							aria-controls={menuId2}>
+							aria-controls={menuLanguagesId}>
 							<LanguageIcon />
 						</IconButton>
 						{/*DMs icon */}
@@ -212,10 +214,7 @@ const Navbar = () => {
 						<IconButton
 							edge="end"
 							className={classes.mobileIcons}
-							aria-label="account of current user"
-							aria-controls={menuId}
-							aria-haspopup="true"
-							onClick={handleProfileMenuOpen}
+							onClick={() => setOpenModal(true)}
 							color="inherit">
 							<AccountCircle />
 						</IconButton>
@@ -239,10 +238,10 @@ const Navbar = () => {
 					</div>
 				</Toolbar>
 			</AppBar>
+			{openModal && <Modal closeModal={setOpenModal} />}
 			{renderMenu}
 			{renderMenu2}
 		</div>
 	);
 };
-
 export default Navbar;
