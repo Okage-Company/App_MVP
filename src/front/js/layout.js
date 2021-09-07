@@ -5,10 +5,12 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
+import Client_Profile from "./pages/client_profile.jsx";
 import injectContext from "./store/appContext";
 
 import Footer from "./component/footer.jsx";
 import Navbar from "./component/navbar.jsx";
+import Business_Profile from "./component/business_profile.jsx";
 
 //create your first component
 const Layout = () => {
@@ -21,13 +23,15 @@ const Layout = () => {
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Navbar />
-
 					<Switch>
 						<Route exact path="/">
 							<Home />
 						</Route>
-						<Route exact path="/demo">
-							<Demo />
+						<Route exact path="/profile/:id">
+							<Client_Profile />
+						</Route>
+						<Route exact path="/business/:id">
+							<Business_Profile />
 						</Route>
 						<Route exact path="/single/:theid">
 							<Single />
