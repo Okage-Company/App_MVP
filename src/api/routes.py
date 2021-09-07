@@ -34,10 +34,10 @@ def get_user_by_id(id):
 
 #ELIMINAR CUENTA
 @api.route('/account/<int:id>', methods = ['DELETE'])
-#@jwt_required()
+@jwt_required()
 def delete_account(id):
-    #if not id == get_jwt_identity():
-    #    return jsonify({'message': 'not authorized'}), 301
+    if not id == get_jwt_identity():
+        return jsonify({'message': 'not authorized'}), 301
 
     user = Account.get_by_id(id)
     if user:

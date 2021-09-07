@@ -1,14 +1,10 @@
 import React from "react";
 
 import "../../styles/home.scss";
-<<<<<<< HEAD
-import Delete from "../component/delete.jsx";
-=======
 import "../../styles/profile.scss";
 
 import CardHome from "../component/cardHome.jsx";
 import Button from "../component/button.jsx";
->>>>>>> 0b2210979de7c2273bba0f302ab92eafc2d340a3
 
 export const Home = () => {
 	// Maleficent used her evil forces to make us make this map, probably the worst curse that's ever been cast ! Our heroes were able to do it, but the pain it caused will forever last...
@@ -54,9 +50,6 @@ export const Home = () => {
 		return <CardHome key={index} category={parameter.service} image={parameter.url} />;
 	});
 
-<<<<<<< HEAD
-	return <Delete />;
-=======
 	return (
 		<div className="grid_container">
 			<div className="grid_container_title">
@@ -94,5 +87,4 @@ export const Home = () => {
 			</div>
 		</div>
 	);
->>>>>>> 0b2210979de7c2273bba0f302ab92eafc2d340a3
 };
