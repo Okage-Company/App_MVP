@@ -86,8 +86,8 @@ def create_account():
             client=Client(account_id=user.id)
             try:
                 client.create()
-                access_token = create_access_token(identity=client.serialize(), expires_delta=timedelta(minutes=120))
-                return jsonify(client.serialize(), access_token), 201
+                access_token = create_access_token(identity=client.to_dict(), expires_delta=timedelta(minutes=120))
+                return jsonify(client.to_dict(), access_token), 201
             except exc.IntegrityError:
                 return {'error': 'Something is wrong'}, 409
         else:
@@ -102,7 +102,7 @@ def create_account():
             )
             try:
                 business.create()
-                access_token = create_access_token(identity=business.serialize(), expires_delta=timedelta(minutes=120))
+                access_token = create_access_token(identity=business.to_dict(), expires_delta=timedelta(minutes=120))
                 return jsonify(business.serialize(), access_token), 201
             except exc.IntegrityError:
                 return {'error': 'Something is wrong'}, 409
@@ -157,9 +157,49 @@ def login():
 
 #Get user by ID using login
 @api.route('/client-login/<int:id>', methods=['GET'])
-#@jwt_required()
+@jwt_required()
 def get_user_ID(id):
     client = Client.get_by_id(id)
     if not client:
         return {'error': 'User doesnt exits'},400
     return jsonify(client.to_dict()), 200
+
+#Modify user by ID
+@api.route('/client/<int:id>', methods=['PATCH'])
+@jwt_required()
+def update_user(id):
+   
+    client = get_jwt_identity()
+    
+    if client != id:
+        return {'error': 'Invalid action'}, 400
+
+    update_user = {
+        'email': request.json.get('email', None),
+        '_password': request.json.get("password", None),
+        'phone': request.json.get('phone', None),
+        'name': request.json.get('name', None),
+        'last_name': request.json.get('last_name', None),
+        'province': request.json.get('province', None),
+        'post_code': request.json.get('post_code', None),
+        'address': request.json.get('address', None),
+        
+        'profile_foto': request.json.get('profile_foto', None),
+
+    }
+    if update_user["_password"]:
+        password = generate_password_hash(
+            update_user["_password"], method='pbkdf2:sha256', salt_length=16),
+        update_user["_password"] = password
+
+    user = Account.get_by_id(id)
+
+    if user:
+        updated_user = user.update(**{
+            key: value for key, value in update_user.items()
+            if value is not None
+        })
+
+        return jsonify(updated_user.serialize()), 200
+
+    return {'error': 'User not found'}, 400

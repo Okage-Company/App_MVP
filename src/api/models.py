@@ -132,6 +132,42 @@ class Account(db.Model):
     def get_by_email(cls, email):
         user = cls.query.filter_by(email=email).one_or_none()
         return user
+    
+    def update(self, **kwargs):
+        for key, value in kwargs.items():
+            if key == "_password" and not value:
+                continue            
+            setattr(self, key, value)
+        db.session.commit()
+        return self
+
+    def validate_password(self,password):
+        is_valid = check_password_hash(self._password,password)
+        print(is_valid)
+        return is_valid
+        
+    def validate_email(self, email):
+        if self.email == email:
+            return True
+        else:
+            return False
+ 
+    def delete(self):
+        self._is_active = False
+        db.session.commit()
+    
+    def reactive_account(self, name, last_name, password, email, phone, province, post_code, adress):
+        self.name = name
+        self.last_name = last_name
+        self._password = password
+        self.email = email
+        self.phone = phone
+        self.province = province
+        self. post_code = post_code
+        self.adress = adress
+        self._is_active = True
+        db.session.commit()
+
 
 class Client(db.Model):
     __tablename__ = 'client'

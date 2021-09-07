@@ -63,7 +63,6 @@ const Business_Profile = () => {
 					</div>
 				);
 			})}
-			;
 		</div>
 	);
 };
