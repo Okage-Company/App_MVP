@@ -1,0 +1,187 @@
+@import '../styles/index.scss';
+
+$profile-photo: url('https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2850&q=80') no-repeat center;
+
+.grid_container_detail_page {
+    font-family: $primary-font;
+    color: $body-color;
+    font-size: $medium-size;
+    margin-top: $page-margin-top;
+    display: grid;
+    padding-left: 5.938rem;
+    padding-right: 5.938rem;
+    padding-bottom: $container-grid-padding;
+    grid-gap: $grid-gap;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: auto auto auto;
+    grid-template-areas: "main main main main main main main main main sidebar sidebar sidebar"
+                        "review review review review review review review review review sidebar sidebar sidebar"
+                        "more more more more more more more more more sidebar sidebar sidebar";
+}
+
+@media (max-width: 1200px) {
+    .grid_container_detail_page {
+        padding-left: 4.063rem;
+        padding-right: 4.063rem;
+        grid-template-columns: 1fr;
+        grid-template-areas: "sidebar"
+                            "main"
+                            "review"
+                            "more";
+    }
+}
+
+@media (max-width: 600px) {
+    .grid_container_detail_page {
+        padding-left: 2.188rem;
+        padding-right: 2.188rem;
+        grid-template-columns: 1fr;
+        grid-template-areas: "sidebar"
+                            "main"
+                            "review"
+                            "more";
+    }
+}
+
+.main_detail_page {
+    grid-area: main;
+    display: grid;
+    grid-gap: $grid-gap;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "description staff";
+}
+
+.staff_card_container_detail {
+    grid-area: staff;
+}
+
+.ay-no-se {
+    grid-area: description;
+}
+
+.review_detail_page {
+    grid-area: review;
+}
+
+.review_detail_page_inside {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-gap: $grid-gap;
+}
+
+.review_detail_more_services {
+    grid-area: more;
+    display: grid;
+}
+
+.review_detail_more_services_inside {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-gap: $grid-gap;
+}
+
+.sidebar_detail_page {
+    grid-area: sidebar;
+}
+
+@media (max-width: 600px) {
+    .sidebar_detail_page {
+        grid-area: sidebar;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-gap: $grid-gap;
+    }
+}
+
+.main_detail_page_header {
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+.main_detail_page_header_image {
+    background: $profile-photo;
+    border-radius: $border-radius;
+    background-size: cover;
+    width: 7.5rem;
+    height: 7.5rem;
+}
+
+.main_detail_page_header_body {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+}
+
+.main_detail_page_header_footer {
+    display: flex;
+    margin-top: auto;
+    align-items: center;
+    color: $primary-color;
+}
+
+.main_detail_page_footer_margin {
+    margin-left: 2rem;
+}
+
+.main_detail_page_header_footer_text {
+    text-decoration: underline;
+    font-weight: $medium-weight;
+    margin-left: 0.3rem;
+}
+
+.title_profile_service {
+    font-size: $large-size;
+    color: $primary-color;
+    font-weight: $bold-weight;
+}
+
+.tags_profile_service {
+    font-family: $secondary-font;
+    color: $dark-grey-color;
+}
+
+.sidebar_detail_page_section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+}
+
+.sidebar_detail_page_section_last {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar_list_element_title {
+    margin-left: 0.4rem;
+}
+
+.small_icon_sidebar {
+    font-size: 0.7rem;
+    padding-bottom: 0.1rem;
+}
+
+.sidebar_title_section {
+    display: flex;
+    align-items: center;
+    margin-bottom: $container-elements-margin;
+}
+
+.sidebar_list_element {
+    color: $dark-grey-color;
+}
+
+.sidebar_list_element_contact {
+    color: $body-color;
+}
+
+.sidebar_list_element_contact_value {
+    margin-left: 0.4rem;
+    color: $dark-grey-color;
+}
+
+.card_section_title_detail {
+    margin-bottom: 1rem;
+    font-size: $large-size;
+    color: $dark-grey-color;
+    font-weight: $medium-weight;
+}

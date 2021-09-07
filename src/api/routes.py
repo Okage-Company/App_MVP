@@ -10,7 +10,7 @@ from sqlalchemy import exc
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 
-from api.models import db, Account, Client, Business, Services, Reviews
+from api.models import db, Account, Client, Business, Services, Reviews, Buservices
 from api.utils import generate_sitemap, APIException
 import jwt
 #Poner API delante
@@ -45,6 +45,7 @@ def get_business():
     if all_businesses:
         return jsonify([business.to_dict() for business in all_businesses]), 200
     return jsonify({'message': 'No business created'}), 500
+
 
 
 #4-Crear un usuario Business/Client según el booleano is_client:
@@ -89,6 +90,7 @@ def create_account():
                 client.create()
                 access_token = create_access_token(identity=client.to_dict(), expires_delta=timedelta(minutes=120))
                 return jsonify(client.to_dict(), access_token), 201
+
             except exc.IntegrityError:
                 return {'error': 'Something is wrong'}, 409
         else:
@@ -103,12 +105,94 @@ def create_account():
             )
             try:
                 business.create()
-
-                access_token = create_access_token(identity=business.to_dict(), expires_delta=timedelta(minutes=120))
-  
+                access_token = create_access_token(identity=business.to_dict(), expires_delta=timedelta(minutes=120)
                 return jsonify(business.serialize(), access_token), 201
             except exc.IntegrityError:
                 return {'error': 'Something is wrong'}, 409
+
+@api.route('/services', methods=['GET'])
+def get_service():
+    service_result = Services.get_all()
+    if service_result:
+        return jsonify([service.serialize() for service in service_result]), 200
+    return {'oh my god': 'Something is terribly wrong'}, 409    
+
+#Get buservices ALL them mothethef*****
+@api.route('/buservices', methods=['GET'])
+def get_buservice():
+    buservice_result = Buservices.get_all()
+    if buservice_result:
+        return jsonify([buservice.serialize() for buservice in buservice_result]), 200
+    return {'almitghty Thor!': 'Raise us from perdition'}, 409
+
+#Get buservices ONLY ONE OF 'EM mothethef*****
+@api.route('/buservices/<int:id>', methods=['GET'])
+def get_by_id_buservices(id):
+    print('hello')
+    buservices_variable = Buservices.get_by_id_buservices(id)
+    print(buservices_variable)
+    if not (buservices_variable):
+        return jsonify({'there is hope': 'even if you are not reading what you expected. Know that this means that you did the back-end correctly, and you might find peace in that, at last.'}), 404
+    return jsonify(buservices_variable.serialize()), 200
+
+#Get business by ID
+@api.route('/business/<int:id>', methods=['GET'])
+def get_by_id(id):
+    business_variable = Business.get_by_id_business(id)
+    if not (business_variable):
+        return jsonify({'what?': 'i did not find it but try again little dove'}),404
+    return jsonify(business_variable.serialize()), 200
+
+@api.route('/business/<int:id>/services', methods=['POST'])
+@jwt_required()
+def post_service(id):
+
+    if not id == get_jwt_identity()['id']:
+        return {'error':'T_T'}, 401
+
+    business_id = id
+    title_bus = request.json.get('title_bus', None)
+    phone = request.json.get('phone', None)
+    email = request.json.get('email', None)
+    professional_name = request.json.get('professional_name', None)
+    professional_studies = request.json.get('professional_studies', None)
+    professional_techniques = request.json.get('professional_techniques', None)
+    offer = request.json.get('offer', None)
+    adress = request.json.get('adress', None)
+    specialty = request.json.get('specialty', None)
+    numero_colegiado = request.json.get('numero_colegiado', None)
+    description = request.json.get('description', None)
+    tecniques = request.json.get('tecniques', None)
+    photos = request.json.get('photos', None)
+
+    # '''get service by title (specialty)'''
+    service_result = Services.get_by_title(specialty)
+    if service_result:
+        buservice_variable = Buservices(
+            business_id=business_id,
+            services_id=service_result.id,
+            title_bus=title_bus,
+            offer=offer,
+            phone=phone,
+            email=email,
+            professional_techniques=professional_techniques,
+            professional_studies=professional_studies,
+            professional_name=professional_name,
+            adress=adress,
+            specialty=specialty,
+            numero_colegiado=numero_colegiado,
+            description=description,
+            tecniques=tecniques,
+            photos=photos
+        )
+
+    if buservice_variable:
+        try:
+            print(buservice_variable)
+            buservice_variable.create()
+            return jsonify(buservice_variable.serialize()), 201
+        except exc.IntegrityError:
+            return {'wake up': 'this is not a dream, this is a reality, there is no going back, there is no going home'}, 409
 
 #Get user by ID
 @api.route('/account/<int:id>', methods=['GET'])
@@ -142,7 +226,27 @@ def get_business_by_id(id):
         return jsonify({'message':'Business not found'}), 404
     
     return jsonify(business.to_dict()), 200
-    
+
+@api.route('/reviews', methods=['GET'])
+def get_reviews():
+    reviews_result = Reviews.get_all()
+    if reviews_result:
+        return jsonify([baby_review.serialize() for baby_review in reviews_result]), 200
+    return {'dang it!': 'In the kingswood, there lived a mother and her cub, she loved him very much. But there were all sort of things living in the woods, evil things... like stags and wolves... you could hear them howling in the night, and the cub was frightened, but his mother said: God only knows what went wrong, but you must not lose faith little lion, for one day all the beast will bow to you, and rest a crown upon your head. You will be king. You will be strong and fierce, just like your father.'}, 409
+
+@api.route('/reviews', methods=['POST'])
+def post_reviews():
+    review = request.json.get('review', None)
+
+    review_variable = Reviews(
+        review=review
+    )
+
+    try:
+        review_variable.create()
+        return jsonify(review_variable.serialize()), 201
+    except exc.IntegrityError:
+        return {'I will be singing the song again': 'Even if it gives me nightmares, again: I will sing with no end'}, 409
 
 #LOGIN + JWT TOKEN
 @api.route('/login', methods=['POST'])

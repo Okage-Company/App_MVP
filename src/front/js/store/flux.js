@@ -5,9 +5,13 @@ import jwt_decode from "jwt-decode";
 //localStorage es una variable que ya existe en el navegador, es decir no hay
 //que declararla ni nada por el estilo.
 
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			//lista donde se almacena todos los fetch que hagamos :)
+			buservices: [],
+			buservicesById: {},
 			account: [],
 			clientId: [],
 			businessId: [],
@@ -35,6 +39,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
+			getBuservices: async () => {
+				try {
+					let response = await fetch(BASE_URL.concat("buservices/"));
+
+					if (response.ok) {
+						let responseAsJson = await response.json();
+						setStore({ buservices: responseAsJson });
+						console.log(responseAsJson); // respuesta que recibo de la API, important, para ver siempre el array en la consola pa sacar los datos :) nos da un array con muchos objetos
+					} else {
+						throw new Error(response.statusText, "code", response.status);
+					}
+				} catch (error) {
+					console.log(error);
+				}
+			},
+			getBuservicesById: async id => {
+				try {
+					let response = await fetch(BASE_URL.concat("buservices/", id));
+
+					if (response.ok) {
+						let responseAsJson = await response.json();
+						setStore({ buservicesById: responseAsJson });
+						console.log(responseAsJson); // respuesta que recibo de la API, important, para ver siempre el array en la consola pa sacar los datos :) nos da un array con muchos objetos
+					} else {
+						throw new Error(response.statusText, "code", response.status);
+					}
+				} catch (error) {
+					console.log(error);
+				}
+      },
 			getClientId: id => {
 				console.log(id);
 				fetch(getStore().URL_API.concat("account/", id))
