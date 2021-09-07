@@ -5,6 +5,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.dialects.postgresql import VARCHAR
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, ForeignKey, Integer, String, Enum, Boolean, Table
+#Import del cifrado de la password
+from werkzeug.security import check_password_hash
 
 db = SQLAlchemy()
 
@@ -50,7 +52,8 @@ class Buservices(db.Model):
     business = db.relationship("Business")
     client_ = db.relationship("Client",
                     secondary=favourites,
-                    backref="buservices")
+                    backref="buservices",
+                    overlaps="buservices,client_")
 
 
     def __repr__(self):
@@ -117,7 +120,8 @@ class Account(db.Model):
 
     #2(__repr__)Esto sirve para que python pueda print por e-mail+id sin bugs ni problemas,
     def __repr__(self):
-        return f'Account {self.email}, {self.id}, {self.account_type}'
+        return f'Account {self.email}, {self.id}, {self.is_client}'
+
     #3(Serialize)-Transforma en formato json la base de datos, 
     def serialize(self):
         return {
@@ -132,14 +136,30 @@ class Account(db.Model):
             "adress": self.adress,
             "profile_photo": self.profile_foto
         }
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            "phone": self.phone,
+            "name": self.name,
+            "last_name": self.last_name,
+            "province": self.province,
+            "post_code": self.post_code,
+            "adress": self.adress,
+            "profile_photo": self.profile_foto
+        }
     
     def create(self):
         db.session.add(self)
         db.session.commit()
+
+    def validate_password(self, password):
+        is_valid = check_password_hash(self._password, password)
+        return is_valid
     
     @classmethod
     def get_by_id(cls, id):
-        account = cls.query.get(id)
+        account = cls.query.filter_by(id=id).one_or_none()
         return account
 
     @classmethod
@@ -149,8 +169,56 @@ class Account(db.Model):
 
     @classmethod
     def get_all(cls):
-        users_list = cls.query.all()
+        #Pasamos la clase por parametro en este caso Account
+        users_list = cls.query.all() 
+        #Asignamos a user_list todos los usuarios de Account
         return users_list
+
+    @classmethod
+    def read_by_id(cls, id):    
+        user = cls.query.get(id)
+        return user
+        
+    @classmethod
+    def get_by_email(cls, email):
+        user = cls.query.filter_by(email=email).one_or_none()
+        return user
+    
+    def update(self, **kwargs):
+        for key, value in kwargs.items():
+            if key == "_password" and not value:
+                continue            
+            setattr(self, key, value)
+        db.session.commit()
+        return self
+
+    def validate_password(self,password):
+        is_valid = check_password_hash(self._password,password)
+        print(is_valid)
+        return is_valid
+        
+    def validate_email(self, email):
+        if self.email == email:
+            return True
+        else:
+            return False
+ 
+    def delete(self):
+        self._is_active = False
+        db.session.commit()
+    
+    def reactive_account(self, name, last_name, password, email, phone, province, post_code, adress):
+        self.name = name
+        self.last_name = last_name
+        self._password = password
+        self.email = email
+        self.phone = phone
+        self.province = province
+        self. post_code = post_code
+        self.adress = adress
+        self._is_active = True
+        db.session.commit()
+
 
 class Client(db.Model):
     __tablename__ = 'client'
@@ -166,13 +234,18 @@ class Client(db.Model):
     #2
     def __repr__(self):
         return f'Client {self.id} {self.account_id}'
-   #3
+        
     def serialize(self):
         client = Account.get_by_id(self.account_id)
         return {
             "id": self.id,
             "account_id": self.account_id,
         }
+   #3
+    def to_dict(self):
+        client = Account.get_by_id(self.account_id)
+        client = client.serialize().update({"client_id" : self.id})
+        return client
 
     def create(self):
         db.session.add(self)
@@ -182,7 +255,12 @@ class Client(db.Model):
     def get_all(cls):
         client_list = cls.query.all()
         return client_list
-        
+
+    @classmethod
+    def get_by_id(cls, id):
+        client = cls.query.filter_by(id=id).one_or_none()
+        print (client)
+        return client
 
 class Business(db.Model):
     __tablename__ = 'business'
@@ -201,8 +279,7 @@ class Business(db.Model):
     def __repr__(self):
         return f'Business {self.id}'
         
-    #3
-    def serialize(self):
+    def to_dict(self):
         return {
             "id": self.id,
             "account_id": self.account_id,
@@ -222,9 +299,9 @@ class Business(db.Model):
         return business_list
 
     @classmethod
-    def get_by_id_business(cls, id):
-        get_by_id_business_variable = cls.query.filter_by(id=id).one_or_none()
-        return get_by_id_business_variable
+    def get_business_id(cls, id):
+        business = cls.query.filter_by(id=id).one_or_none()
+        return business
 
 class Services(db.Model):
     __tablename__ = 'services'
