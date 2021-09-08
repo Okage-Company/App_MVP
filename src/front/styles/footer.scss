@@ -10,28 +10,57 @@
     background-color: $body-color;
     display: grid;
     grid-gap: $grid-gap;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr 1fr;
-    grid-template-areas: "logo aboutContact socialMedia socialMedia socialMedia socialMedia socialMedia socialMedia"
-                        "terms terms terms terms terms terms terms terms"
+    grid-template-areas: "logo socialMedia"
+                        "terms terms";
 }
 
-.footer_logo {
+@media (max-width: 970px) {
+    .footer_container {
+        font-size: $small-size;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        display: grid;
+        grid-gap: $grid-gap;
+    }
+}
+
+.life_is_what_you_make {
+    display: flex;
     grid-area: logo;
 }
 
-.footer_logo_img {
-    width: 5rem;
+.footer_logo {
+    margin-right: 1.5rem;
 }
 
-.footer_text {
-    grid-area: aboutContact;
+.footer_logo_img {
+    width: 3rem;
 }
+
+// .footer_text {
+//     grid-area: aboutContact;
+// }
 
 .footer_social {
     grid-area: socialMedia;
     margin-left: auto;
     font-size: $large-size;
+}
+
+@media (max-width: 970px) {
+    .footer_terms {
+        grid-area: terms;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer_terms_text {
+        font-size: $small-size;
+        text-align: center;
+    }
 }
 
 .footer_terms {

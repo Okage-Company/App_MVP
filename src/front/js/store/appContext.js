@@ -22,7 +22,7 @@ const injectContext = PassedComponent => {
 		);
 
 		useEffect(() => {
-			state.actions.getAccount(); // <---- calling this function from the flux.js actions
+			state.actions.getAccount(localStorage.getItem("tokenID"), true); // <---- calling this function from the flux.js actions
 		}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,

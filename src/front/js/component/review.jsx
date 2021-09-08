@@ -6,7 +6,7 @@ import "../../styles/review.scss";
 const Review = props => {
 	return (
 		<div className="review_container">
-			<header>
+			<div className="header_review">
 				<div className="review_profile_image" />
 				<div className="review_profile_text">
 					<span className="review_name">{props.name}</span>
@@ -14,7 +14,7 @@ const Review = props => {
 						<i className="fas fa-comment-dots" /> Send a message
 					</span>
 				</div>
-			</header>
+			</div>
 			<span className="review_date">{props.date}</span>
 			<span className="review_text">{props.text}</span>
 			<span className="review_report">
