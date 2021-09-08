@@ -28,6 +28,28 @@ def get_user():
     #Si all_user esta vacio devuelve un error
     return jsonify({'message': 'No account created'}), 500
 
+#1.1-Usuario por ID
+@api.route('/account/<int:id>', methods=['GET'])
+def get_user_by_id(id):
+    user = Account.get_by_id(id)
+    if user:
+        return jsonify(user.serialize()), 200
+    return jsonify({'message':'Account not found'}), 404
+
+#ELIMINAR CUENTA
+@api.route('/account/<int:id>', methods = ['DELETE'])
+@jwt_required()
+def delete_account(id):
+    if not id == get_jwt_identity():
+        return jsonify({'message': 'not authorized'}), 301
+
+    user = Account.get_by_id(id)
+    if user:
+        user.disable_user()
+        return jsonify({'message': 'user deleted'}, user.serialize())
+    return jsonify({'message': 'user not found'}), 404
+
+
 #2-Recibir toda la lista de clientes
 @api.route('/client', methods=['GET'])
 def get_client():
@@ -36,6 +58,13 @@ def get_client():
         return jsonify([client.serialize() for client in all_clients]), 200
     return jsonify({'message': 'No account created'}), 500
     
+#2.1-Cliente por ID
+@api.route('/client/<int:id>', methods =['GET'])
+def get_client_by_id(id):
+    client = Client.get_by_id(id)
+    if client:
+        return jsonify(client.serialize()), 200
+    return jsonify({'message':'Client not found'}), 404
     #return jsonify({'message': 'No clients created'}), 500
 
 #3-Recibir toda la lista de business
@@ -46,7 +75,13 @@ def get_business():
         return jsonify([business.to_dict() for business in all_businesses]), 200
     return jsonify({'message': 'No business created'}), 500
 
-
+#3.1-Business por ID
+@api.route('/business/<int:id>', methods =['GET'])
+def get_business_by_id(id):
+    business = Business.get_by_id(id)
+    if business:
+        return jsonify(business.serialize()), 200
+    return jsonify({'message':'Business not found'}), 404
 
 #4-Crear un usuario Business/Client según el booleano is_client:
 @api.route('/register', methods=['POST'])
@@ -251,6 +286,41 @@ def login():
     if user and check_password_hash(user._password, password) and user._is_active:
         access_token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=120))
         return {'token': access_token}, 200
+    return {'error': 'Some parameter is wrong'}, 400
+
+'''@api.route('/account/<int:id>', methods = ['DELETE'])
+def delete_users(id):
+    user = Account.get_by_id(id)
+
+    if user:
+        user.delete()
+        return jsonify(user.serialize(),{'msg':'Account deleted'}), 200
+
+    return jsonify({'msg' : 'Account not foud'}), 404'''
+
+
+#MOSTRAR TIPOS DE SERVICIOS
+@api.route('/services', methods = ['GET'])
+def get_services():
+    all_services = Services.get_all()
+    if all_services:
+        return jsonify ([services.serialize() for services in all_services])
+    return jsonify ({'message': 'No services created'}), 500
+
+#CREAR TIPOS DE SERVICIOS
+@api.route('/services', methods = ['POST'])
+def create_service():
+    title = request.json.get('title', None)
+
+    service = Services(
+        title = title
+    )
+
+    try:
+        service.create()
+        return jsonify(service.serialize()), 201
+    except exc.IntegrityError:
+        return {'error': 'Something is wrong'}, 409
     return {'error': 'User or password are incorrect'}, 400
 
 #Get user by ID using login
@@ -299,6 +369,6 @@ def update_user(id):
         })
 
         return jsonify(updated_user.serialize()), 200
-
     return {'error': 'User not found'}, 400
+
 
