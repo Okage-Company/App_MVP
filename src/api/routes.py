@@ -33,7 +33,7 @@ def get_user():
 def get_client():
     all_clients = Client.get_all()
     if all_clients:
-        return jsonify([client.to_dict() for client in all_clients]), 200
+        return jsonify([client.serialize() for client in all_clients]), 200
     return jsonify({'message': 'No account created'}), 500
     
     #return jsonify({'message': 'No clients created'}), 500
@@ -89,7 +89,7 @@ def create_account():
             try:
                 client.create()
                 access_token = create_access_token(identity=client.to_dict(), expires_delta=timedelta(minutes=120))
-                return jsonify(client.to_dict(), access_token), 201
+                return jsonify(client.serialize(), access_token), 201
 
             except exc.IntegrityError:
                 return {'error': 'Something is wrong'}, 409
@@ -207,7 +207,7 @@ def get_client_by_id(id):
     client = Client.get_by_id(id)
     if not (client):
         return jsonify({'message':'Client not found'}), 404
-    return jsonify(client.to_dict()), 200
+    return jsonify(client.serialize()), 200
 
 #Get Business by ID
 @api.route('/business/<int:id>', methods =['GET'])

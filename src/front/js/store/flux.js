@@ -23,7 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getAccount: async () => {
 				console.log("fetch");
 				try {
-					let response = await fetch(URL_API.concat("account/"));
+					let response = await fetch(getStore().URL_API.concat("account/"));
 					console.log("response", response);
 
 					if (response.ok) {
@@ -39,7 +39,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getBuservices: async () => {
 				try {
-					let response = await fetch(URL_API.concat("buservices/"));
+					let response = await fetch(getStore().URL_API.concat("buservices/"));
 
 					if (response.ok) {
 						let responseAsJson = await response.json();
@@ -54,7 +54,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getBuservicesById: async id => {
 				try {
-					let response = await fetch(BASE_URL.concat("buservices/", id));
+					let response = await fetch(getStore().BASE_URL.concat("buservices/", id));
 
 					if (response.ok) {
 						let responseAsJson = await response.json();
@@ -83,7 +83,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getBusinessId: id => {
 				console.log(id);
-				fetch(URL_API.concat("business/", id))
+				fetch(getStore().URL_API.concat("business/", id))
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
