@@ -266,9 +266,9 @@ def get_user_ID(id):
 @api.route('/client/<int:id>', methods=['PATCH'])
 @jwt_required()
 def update_user(id):
-   
+    print ('helloooooooo')
     client = get_jwt_identity()
-    
+    print (id, client)
     if client != id:
         return {'error': 'Invalid action'}, 400
 
@@ -289,7 +289,7 @@ def update_user(id):
         password = generate_password_hash(
             update_user["_password"], method='pbkdf2:sha256', salt_length=16),
         update_user["_password"] = password
-
+    
     user = Account.get_by_id(id)
 
     if user:

@@ -14,8 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			account: [],
 			clientId: [],
 			businessId: [],
-			BASE_URL: "https://jade-cattle-13cvqdzj.ws-eu16.gitpod.io/",
-			URL_API: "https://3001-jade-cattle-13cvqdzj.ws-eu16.gitpod.io/api/",
+			BASE_URL: "https://kumquat-stork-h2a6bqzx.ws-eu16.gitpod.io/",
+			URL_API: "https://3001-kumquat-stork-h2a6bqzx.ws-eu16.gitpod.io/api/",
 			user: {},
 			currentUser: {}
 		},
@@ -150,7 +150,48 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log("There's a problem", error);
 					});
 			},
-			getUpdate: (dataUpdated, newUSer) => {
+			getUpdateClient: (value, newUser, nameValue) => {
+				const token = localStorage.getItem("access_token");
+				const tokenID = localStorage.getItem("tokenID");
+				const redirectToProfile = () => {
+					if (localStorage.getItem("tokenID") != null) {
+						location.replace("./client/".concat(tokenID));
+					}
+				};
+				let dataUpdated = {};
+				dataUpdated[nameValue] = value;
+				console.log(dataUpdated);
+				fetch(getStore().URL_API.concat("client/", localStorage.getItem("tokenID")), {
+					method: "PATCH",
+					body: JSON.stringify(dataUpdated),
+					headers: {
+						"Sec-Fetch-Mode": "no-cors",
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${token}`
+					}
+				})
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error("I can't update this user!");
+						}
+						return response.json();
+						//console.log(response);
+					})
+					.then(function(responseAsJson) {
+						setStore({ user: responseAsJson });
+						if (newUser[0]) {
+							setTimeout(() => {
+								redirectToProfile();
+							}, 2000);
+						} else {
+							redirectToProfile();
+						}
+					})
+					.catch(function(error) {
+						console.log("Something is wrong: \n", error);
+					});
+			},
+			getUpdate: (dataUpdated, newUser) => {
 				const token = localStorage.getItem("token");
 				const tokenID = localStorage.getItem("tokenID");
 				const redirectToProfile = () => {

@@ -5,6 +5,7 @@ import "../../styles/client_profile.scss";
 import { useParams } from "react-router-dom";
 import { CallToActionSharp } from "@material-ui/icons";
 import ButtonUploadImage from "./buttonUploadImage.jsx";
+import Modal from "@material-ui/core/Modal";
 
 const Business_Profile = () => {
 	const { store, actions } = useContext(Context);
@@ -35,7 +36,16 @@ const Business_Profile = () => {
 										<div className="dataContainerTitle">Centre Name</div>
 										<div>{business.centre_name}</div>
 									</div>
-									<div className="dataContainerEdit">Edit</div>
+									<div className="dataContainerEdit" onClick={handleOpen}>
+										Edit
+									</div>
+									<Modal
+										open={open}
+										onClose={handleClose}
+										aria-labelledby="simple-modal-title"
+										aria-describedby="simple-modal-description">
+										{body}
+									</Modal>
 								</div>
 							</div>
 							<div>
