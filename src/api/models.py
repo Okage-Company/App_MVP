@@ -57,7 +57,7 @@ class Buservices(db.Model):
 
 
     def __repr__(self):
-        return f'Buservices {self.specialty}, {self.numero_colegiado}, {self.business}'
+        return f'Buservices {self.specialty}, {self.numero_colegiado}, {self.business_id}'
 
     def serialize(self):
         return {

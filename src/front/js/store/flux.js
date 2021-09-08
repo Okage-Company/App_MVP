@@ -5,7 +5,6 @@ import jwt_decode from "jwt-decode";
 //localStorage es una variable que ya existe en el navegador, es decir no hay
 //que declararla ni nada por el estilo.
 
-
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -15,9 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			account: [],
 			clientId: [],
 			businessId: [],
-			BASE_URL2: "https://3001-brown-roundworm-pv0d4gpt.ws-eu15.gitpod.io/api/",
-			BASE_URL: "https://brown-chicken-oj9mv0gl.ws-eu15.gitpod.io/",
-			URL_API: "https://3001-brown-chicken-oj9mv0gl.ws-eu15.gitpod.io/api/",
+			BASE_URL: "https://jade-cattle-13cvqdzj.ws-eu16.gitpod.io/",
+			URL_API: "https://3001-jade-cattle-13cvqdzj.ws-eu16.gitpod.io/api/",
 			user: {},
 			currentUser: {}
 		},
@@ -25,7 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getAccount: async () => {
 				console.log("fetch");
 				try {
-					let response = await fetch(BASE_URL.concat("account/"));
+					let response = await fetch(URL_API.concat("account/"));
 					console.log("response", response);
 
 					if (response.ok) {
@@ -41,7 +39,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getBuservices: async () => {
 				try {
-					let response = await fetch(BASE_URL.concat("buservices/"));
+					let response = await fetch(URL_API.concat("buservices/"));
 
 					if (response.ok) {
 						let responseAsJson = await response.json();
@@ -68,7 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log(error);
 				}
-      },
+			},
 			getClientId: id => {
 				console.log(id);
 				fetch(getStore().URL_API.concat("account/", id))
@@ -85,7 +83,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getBusinessId: id => {
 				console.log(id);
-				fetch(BASE_URL.concat("business/", id))
+				fetch(URL_API.concat("business/", id))
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);

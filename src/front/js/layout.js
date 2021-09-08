@@ -32,8 +32,6 @@ const Layout = () => {
 						<Route exact path="/buservices/:id">
 							<DetailPage />
 						</Route>
-						<Route exact path="/demo">
-							<Demo />
 						<Route exact path="/profile/:id">
 							<Client_Profile />
 						</Route>

@@ -2,11 +2,11 @@ import React, { Fragment, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/detailPage.scss";
-import Card from "/workspace/react-flask-hello/src/front/js/component/card.jsx";
-import StaffCard from "/workspace/react-flask-hello/src/front/js/component/staffCard.jsx";
-import Review from "/workspace/react-flask-hello/src/front/js/component/review.jsx";
+import Card from "../component/card.jsx";
+import StaffCard from "../component/staffCard.jsx";
+import Review from "../component/review.jsx";
 
-import getState from "/workspace/react-flask-hello/src/front/js/store/flux.js";
+import getState from "../store/flux.js";
 
 const detailPage = () => {
 	const { store, actions } = useContext(Context);

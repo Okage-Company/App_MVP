@@ -105,8 +105,8 @@ def create_account():
             )
             try:
                 business.create()
-                access_token = create_access_token(identity=business.to_dict(), expires_delta=timedelta(minutes=120)
-                return jsonify(business.serialize(), access_token), 201
+                access_token = create_access_token(identity=business.to_dict(), expires_delta=timedelta(minutes=120))
+                return jsonify(business.to_dict(), access_token), 201
             except exc.IntegrityError:
                 return {'error': 'Something is wrong'}, 409
 
@@ -135,19 +135,10 @@ def get_by_id_buservices(id):
         return jsonify({'there is hope': 'even if you are not reading what you expected. Know that this means that you did the back-end correctly, and you might find peace in that, at last.'}), 404
     return jsonify(buservices_variable.serialize()), 200
 
-#Get business by ID
-@api.route('/business/<int:id>', methods=['GET'])
-def get_by_id(id):
-    business_variable = Business.get_by_id_business(id)
-    if not (business_variable):
-        return jsonify({'what?': 'i did not find it but try again little dove'}),404
-    return jsonify(business_variable.serialize()), 200
-
 @api.route('/business/<int:id>/services', methods=['POST'])
 @jwt_required()
 def post_service(id):
-
-    if not id == get_jwt_identity()['id']:
+    if not id == get_jwt_identity():
         return {'error':'T_T'}, 401
 
     business_id = id
@@ -167,6 +158,7 @@ def post_service(id):
 
     # '''get service by title (specialty)'''
     service_result = Services.get_by_title(specialty)
+    print(service_result.title)
     if service_result:
         buservice_variable = Buservices(
             business_id=business_id,
@@ -188,12 +180,11 @@ def post_service(id):
 
     if buservice_variable:
         try:
-            print(buservice_variable)
+            print('hi', buservice_variable)
             buservice_variable.create()
             return jsonify(buservice_variable.serialize()), 201
         except exc.IntegrityError:
             return {'wake up': 'this is not a dream, this is a reality, there is no going back, there is no going home'}, 409
-
 #Get user by ID
 @api.route('/account/<int:id>', methods=['GET'])
 def get_by_id(id):

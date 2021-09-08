@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: f4dc8a96f768
+Revision ID: 814be37d7ef1
 Revises: 
-Create Date: 2021-08-26 12:06:40.217881
+Create Date: 2021-09-07 20:55:37.885928
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f4dc8a96f768'
+revision = '814be37d7ef1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -41,7 +41,7 @@ def upgrade():
     )
     op.create_table('services',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.VARCHAR(), nullable=False),
+    sa.Column('title', sa.VARCHAR(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('business',
@@ -63,6 +63,12 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('business_id', sa.Integer(), nullable=False),
     sa.Column('services_id', sa.Integer(), nullable=False),
+    sa.Column('phone', sa.VARCHAR(), nullable=True),
+    sa.Column('email', sa.VARCHAR(), nullable=True),
+    sa.Column('title_bus', sa.VARCHAR(), nullable=True),
+    sa.Column('professional_name', sa.VARCHAR(), nullable=True),
+    sa.Column('professional_studies', sa.VARCHAR(), nullable=True),
+    sa.Column('professional_techniques', sa.VARCHAR(), nullable=True),
     sa.Column('offer', sa.Boolean(), nullable=False),
     sa.Column('adress', sa.VARCHAR(), nullable=False),
     sa.Column('specialty', sa.VARCHAR(), nullable=False),
