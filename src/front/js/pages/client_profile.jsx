@@ -8,6 +8,7 @@ import ButtonUploadImage from "../component/buttonUploadImage.jsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import PropTypes from "prop-types";
+import "../../styles/buttonProfile.scss";
 
 function rand() {
 	return Math.round(Math.random() * 20) - 10;
@@ -51,27 +52,43 @@ function SimpleModal(props) {
 	const [value, setValue] = useState(null);
 
 	const body = (
-		<div style={modalStyle} className={classes.paper}>
-			<h2 id="simple-modal-title">{"Edit ".concat(props.nameValue)}</h2>
-			<input
-				id="simple-modal-description"
-				onChange={event => {
-					setValue(event.target.value);
-				}}></input>
-			<button
-				type="button"
-				onClick={() => {
-					actions.getUpdateClient(value, props.nameValue);
-				}}>
-				Save
-			</button>
+		<div id="iwin" style={modalStyle} className={classes.paper}>
+			<div className="flex-modal">
+				<span id="simple-modal-title">
+					Edit <i className="far fa-edit margin-icon-left-profile"></i>
+				</span>
+				<span id="simple-modal-title-property">{props.nameValue}</span>
+				<div className="flex_modal_profile_flex">
+					<input
+						className="form_placeholder_ayuda"
+						id="simple-modal-description"
+						onChange={event => {
+							setValue(event.target.value);
+						}}></input>
+					{/* <button
+						type="button"
+						onClick={() => {
+							actions.getUpdateClient(value, props.nameValue);
+						}}>
+						Save
+					</button> */}
+					<button
+						onClick={() => {
+							actions.getUpdateClient(value, props.nameValue);
+						}}
+						className="buttonProfile margin-button-modal"
+						type="button">
+						Save
+					</button>
+				</div>
+			</div>
 		</div>
 	);
 
 	return (
 		<div>
 			<div className="dataContainerEdit" onClick={handleOpen}>
-				Edit
+				<i className="far fa-edit"></i>
 			</div>
 			<Modal
 				open={open}
@@ -112,22 +129,22 @@ const Client_Profile = () => {
 								<div className="dataContainer">
 									<div>
 										<div className="dataContainerTitle">Name</div>
-										<div>{account.name}</div>
+										<div className="dataContainerText">{account.name}</div>
 									</div>
 
-									<SimpleModal nameValue="name" />
+									<SimpleModal nameValue="Name" />
 								</div>
 								<div className="dataContainer">
 									<div>
 										<div className="dataContainerTitle">Last Name</div>
-										<div>{account.last_name}</div>
+										<div className="dataContainerText">{account.last_name}</div>
 									</div>
-									<SimpleModal nameValue="last_name" />
+									<SimpleModal nameValue="Last Name" />
 								</div>
 								<div className="dataContainer">
 									<div>
 										<div className="dataContainerTitle">Email</div>
-										<div>{account.email}</div>
+										<div className="dataContainerText">{account.email}</div>
 									</div>
 									<SimpleModal nameValue="email" />
 								</div>
@@ -136,7 +153,7 @@ const Client_Profile = () => {
 								<div className="dataContainer">
 									<div>
 										<div className="dataContainerTitle">Province</div>
-										<div>{account.province}</div>
+										<div className="dataContainerText">{account.province}</div>
 									</div>
 									<SimpleModal nameValue="province" />
 								</div>
@@ -144,16 +161,16 @@ const Client_Profile = () => {
 									<div className="dataContainer">
 										<div>
 											<div className="dataContainerTitle">Post Code</div>
-											<div>{account.post_code}</div>
+											<div className="dataContainerText">{account.post_code}</div>
 										</div>
-										<SimpleModal nameValue="post_code" />
+										<SimpleModal nameValue="Post Code" />
 									</div>
 								</div>
 								<div>
 									<div className="dataContainer">
 										<div>
 											<div className="dataContainerTitle">Address</div>
-											<div>{account.adress}</div>
+											<div className="dataContainerText">{account.adress}</div>
 										</div>
 										<SimpleModal nameValue="adress" />
 									</div>
@@ -162,9 +179,9 @@ const Client_Profile = () => {
 									<div className="dataContainer">
 										<div>
 											<div className="dataContainerTitle">Phone</div>
-											<div>{account.phone}</div>
+											<div className="dataContainerText">{account.phone}</div>
 										</div>
-										<SimpleModal nameValue="phone" />
+										<SimpleModal nameValue="Phone" />
 									</div>
 								</div>
 							</div>
