@@ -19,6 +19,7 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import MyServices from "./pages/myServices.jsx";
 import MyFavourites from "./pages/myFavourites.jsx";
 
+
 const theme = createMuiTheme({
 	palette: {
 		primary: {

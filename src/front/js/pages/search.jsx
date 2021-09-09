@@ -7,6 +7,7 @@ import Card from "../component/card.jsx";
 
 import "../../styles/search.scss";
 
+
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 // import LocationMenu from "../component/locationMenu.jsx";
