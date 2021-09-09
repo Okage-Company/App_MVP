@@ -112,7 +112,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getBusinessId: id => {
 				console.log(id);
-				fetch(getStore().URL_API.concat("business/", id))
+				fetch(getStore().URL_API.concat("account/", id))
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -122,6 +122,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(function(responseAsJson) {
 						setStore({ businessId: new Array(responseAsJson) });
 						console.log(getStore().businessId);
+					});
+				fetch(getStore().URL_API.concat("business/", id))
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						setStore({ businessIdCif: new Array(responseAsJson) });
+						console.log(getStore().businessIdCif);
 					});
 			},
 			verifyLogin: () => {
@@ -216,14 +227,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log("Something is wrong: \n", error);
 					});
 			},
-			getUpdate: (dataUpdated, newUser) => {
+			getUpdateBusiness: (value, nameValue) => {
 				const token = localStorage.getItem("token");
 				const tokenID = localStorage.getItem("tokenID");
 				const redirectToProfile = () => {
 					if (localStorage.getItem("tokenID") != null) {
-						location.replace("./client/".concat(localStorage.getItem("tokenID")));
+						location.replace("./".concat(tokenID));
 					}
 				};
+				let dataUpdated = {};
+				dataUpdated[nameValue] = value;
+
 				fetch(getStore().URL_API.concat("business/", localStorage.getItem("tokenID")), {
 					method: "PATCH",
 					body: dataUpdated,
@@ -242,13 +256,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(function(responseAsJson) {
 						setStore({ user: responseAsJson });
-						if (newUser[0]) {
-							setTimeout(() => {
-								redirectToProfile();
-							}, 2000);
-						} else {
+						setTimeout(() => {
 							redirectToProfile();
-						}
+						}, 500);
 					})
 					.catch(function(error) {
 						console.log("Somethin is wrong: \n", error);
