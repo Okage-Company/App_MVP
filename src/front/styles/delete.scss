@@ -1,0 +1,23 @@
+@import "../styles/index.scss";
+
+.deleteContainer {
+    display: flex;
+    justify-content: center;
+}
+ 
+.deleteButton {
+    border: 2px solid rgba(255, 0, 0, 0.753);
+    border-radius: 1em;
+    padding: 1em;
+    background-color: red;
+    color: white;
+    text-align: center;
+    font-size: $medium-size;
+    cursor: pointer;
+    
+}
+
+.deleteButton:hover {
+    background-color: $secondary-color;
+    opacity: 0.8;
+}

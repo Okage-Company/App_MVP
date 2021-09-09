@@ -1,0 +1,19 @@
+@import '../styles/index.scss';
+
+body {
+    background-color: $background-body-color;
+}
+
+.infoContainer{
+    margin-top: $page-margin-top;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-bottom: 4rem;
+}
+.tittle{
+    display: flex;
+    flex-direction: column;
+    line-height: 6em;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}

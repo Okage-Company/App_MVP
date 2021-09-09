@@ -146,11 +146,17 @@ class Account(db.Model):
             "province": self.province,
             "post_code": self.post_code,
             "adress": self.adress,
-            "profile_photo": self.profile_foto
+            "profile_photo": self.profile_foto,
+            "_is_active": self._is_active
         }
     
     def create(self):
         db.session.add(self)
+        db.session.commit()
+
+
+    def delete(self):
+        db.session.delete(self)
         db.session.commit()
 
     def validate_password(self, password):
@@ -161,6 +167,7 @@ class Account(db.Model):
     def get_by_id(cls, id):
         account = cls.query.filter_by(id=id).one_or_none()
         return account
+
 
     @classmethod
     def get_by_email(cls, email):
@@ -174,6 +181,13 @@ class Account(db.Model):
         #Asignamos a user_list todos los usuarios de Account
         return users_list
 
+
+    
+    def disable_user(self):
+        self._is_active = False
+        db.session.commit()
+
+    
     @classmethod
     def read_by_id(cls, id):    
         user = cls.query.get(id)
@@ -299,6 +313,9 @@ class Business(db.Model):
         return business_list
 
     @classmethod
+    def get_by_id(cls, id):
+        business = cls.query.get(id)
+    @classmethod
     def get_business_id(cls, id):
         business = cls.query.filter_by(id=id).one_or_none()
         return business
@@ -315,7 +332,7 @@ class Services(db.Model):
     def __repr__(self):
         return f'Services {self.title}'
         
-    def serialize(self):
+    def serialize(self):  
         return {
             "id": self.id,
             "title": self.title
@@ -324,13 +341,18 @@ class Services(db.Model):
 
     @classmethod
     def get_all(cls):
-        service_list = cls.query.all()
-        return service_list
+        services_list = cls.query.all()
+        return services_list
+
+    def create(self):
+        db.session.add(self)
+        db.session.commit()
 
     @classmethod
     def get_by_title(cls, title):
         service_title = cls.query.filter_by(title=title).one_or_none()
         return service_title
+
 
 class Reviews(db.Model):
     __tablename__ = 'reviews'

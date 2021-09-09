@@ -1,14 +1,8 @@
 """empty message
 
-<<<<<<< HEAD:migrations/versions/a71859c19787_.py
-Revision ID: a71859c19787
+Revision ID: 304d410ab262
 Revises: 
-Create Date: 2021-09-08 14:18:56.760870
-=======
-Revision ID: 51682daebf78
-Revises: 
-Create Date: 2021-09-08 13:55:40.402090
->>>>>>> 6a0e3e263bdc7d198960d642cf833d051f4ff85a:migrations/versions/51682daebf78_.py
+Create Date: 2021-08-30 15:00:38.808480
 
 """
 from alembic import op
@@ -16,11 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<< HEAD:migrations/versions/a71859c19787_.py
-revision = 'a71859c19787'
-=======
-revision = '51682daebf78'
->>>>>>> 6a0e3e263bdc7d198960d642cf833d051f4ff85a:migrations/versions/51682daebf78_.py
+revision = '304d410ab262'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -51,7 +41,7 @@ def upgrade():
     )
     op.create_table('services',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.VARCHAR(), nullable=True),
+    sa.Column('title', sa.VARCHAR(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('business',
@@ -73,12 +63,6 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('business_id', sa.Integer(), nullable=False),
     sa.Column('services_id', sa.Integer(), nullable=False),
-    sa.Column('phone', sa.VARCHAR(), nullable=True),
-    sa.Column('email', sa.VARCHAR(), nullable=True),
-    sa.Column('title_bus', sa.VARCHAR(), nullable=True),
-    sa.Column('professional_name', sa.VARCHAR(), nullable=True),
-    sa.Column('professional_studies', sa.VARCHAR(), nullable=True),
-    sa.Column('professional_techniques', sa.VARCHAR(), nullable=True),
     sa.Column('offer', sa.Boolean(), nullable=False),
     sa.Column('adress', sa.VARCHAR(), nullable=False),
     sa.Column('specialty', sa.VARCHAR(), nullable=False),

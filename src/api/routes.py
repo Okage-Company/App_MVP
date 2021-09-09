@@ -28,14 +28,44 @@ def get_user():
     #Si all_user esta vacio devuelve un error
     return jsonify({'message': 'No account created'}), 500
 
+#Get user by ID
+@api.route('/account/<int:id>', methods=['GET'])
+def get_by_id(id):
+    user = Account.get_by_id(id)
+    if not (user):
+        return jsonify({'msg': 'Account not found'}),404
+    return jsonify(user.serialize()),200           
+
+
+#ELIMINAR CUENTA
+@api.route('/account/<int:id>', methods = ['DELETE'])
+@jwt_required()
+def delete_account(id):
+    if not id == get_jwt_identity():
+        return jsonify({'message': 'not authorized'}), 301
+
+    user = Account.get_by_id(id)
+    if user:
+        user.disable_user()
+        return jsonify({'message': 'user deleted'}, user.serialize())
+    return jsonify({'message': 'user not found'}), 404
+
+
 #2-Recibir toda la lista de clientes
 @api.route('/client', methods=['GET'])
 def get_client():
     all_clients = Client.get_all()
     if all_clients:
-        return jsonify([client.to_dict() for client in all_clients]), 200
+        return jsonify([client.serialize() for client in all_clients]), 200
     return jsonify({'message': 'No account created'}), 500
     
+#2.1-Cliente por ID
+@api.route('/client/<int:id>', methods =['GET'])
+def get_client_by_id(id):
+    client = Client.get_by_id(id)
+    if client:
+        return jsonify(client.serialize()), 200
+    return jsonify({'message':'Client not found'}), 404
     #return jsonify({'message': 'No clients created'}), 500
 
 #3-Recibir toda la lista de business
@@ -46,7 +76,13 @@ def get_business():
         return jsonify([business.to_dict() for business in all_businesses]), 200
     return jsonify({'message': 'No business created'}), 500
 
-
+#3.1-Business por ID
+@api.route('/business/<int:id>', methods =['GET'])
+def get_business_by_id(id):
+    business = Business.get_by_id(id)
+    if business:
+        return jsonify(business.serialize()), 200
+    return jsonify({'message':'Business not found'}), 404
 
 #4-Crear un usuario Business/Client según el booleano is_client:
 @api.route('/register', methods=['POST'])
@@ -88,8 +124,8 @@ def create_account():
             client=Client(account_id=user.id)
             try:
                 client.create()
-                access_token = create_access_token(identity=client.to_dict(), expires_delta=timedelta(minutes=120))
-                return jsonify(client.to_dict(), access_token), 201
+                access_token = create_access_token(identity=client.id, expires_delta=timedelta(minutes=120))
+                return jsonify(client.serialize(), access_token), 201
 
             except exc.IntegrityError:
                 return {'error': 'Something is wrong'}, 409
@@ -105,7 +141,7 @@ def create_account():
             )
             try:
                 business.create()
-                access_token = create_access_token(identity=business.to_dict(), expires_delta=timedelta(minutes=120))
+                access_token = create_access_token(identity=business.id, expires_delta=timedelta(minutes=120))
                 return jsonify(business.to_dict(), access_token), 201
             except exc.IntegrityError:
                 return {'error': 'Something is wrong'}, 409
@@ -185,13 +221,6 @@ def post_service(id):
             return jsonify(buservice_variable.serialize()), 201
         except exc.IntegrityError:
             return {'wake up': 'this is not a dream, this is a reality, there is no going back, there is no going home'}, 409
-#Get user by ID
-@api.route('/account/<int:id>', methods=['GET'])
-def get_by_id(id):
-    user = Account.get_by_id(id)
-    if not (user):
-        return jsonify({'msg': 'Account not found'}),404
-    return jsonify(user.serialize()),200           
 
 #Get user by EMAIL
 @api.route('/account/<email>', methods=['GET'])
@@ -200,23 +229,6 @@ def get_by_email(email):
     if not (user):
         return jsonify({'msg': 'Account not found, please check your email or Sign Up'}), 404
     return jsonify(user.serialize()),200    
-
-#Get Client by ID
-@api.route('/client/<int:id>', methods =['GET'])
-def get_client_by_id(id):
-    client = Client.get_by_id(id)
-    if not (client):
-        return jsonify({'message':'Client not found'}), 404
-    return jsonify(client.to_dict()), 200
-
-#Get Business by ID
-@api.route('/business/<int:id>', methods =['GET'])
-def get_business_by_id(id):
-    business = Business.get_business_id(id)
-    if not business:
-        return jsonify({'message':'Business not found'}), 404
-    
-    return jsonify(business.to_dict()), 200
 
 @api.route('/reviews', methods=['GET'])
 def get_reviews():
@@ -251,6 +263,39 @@ def login():
     if user and check_password_hash(user._password, password) and user._is_active:
         access_token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=120))
         return {'token': access_token}, 200
+    return {'error': 'Some parameter is wrong'}, 400
+
+'''@api.route('/account/<int:id>', methods = ['DELETE'])
+def delete_users(id):
+    user = Account.get_by_id(id)
+
+    if user:
+        user.delete()
+        return jsonify(user.serialize(),{'msg':'Account deleted'}), 200
+
+    return jsonify({'msg' : 'Account not foud'}), 404'''
+
+
+#MOSTRAR TIPOS DE SERVICIOS
+@api.route('/services', methods = ['GET'])
+def get_services():
+    all_services = Services.get_all()
+    if all_services:
+        return jsonify ([services.serialize() for services in all_services])
+    return jsonify ({'message': 'No services created'}), 500
+
+#CREAR TIPOS DE SERVICIOS
+@api.route('/services', methods = ['POST'])
+def create_service():
+    title = request.json.get('title', None)
+    service = Services(
+        title = title
+    )
+    try:
+        service.create()
+        return jsonify(service.serialize()), 201
+    except exc.IntegrityError:
+        return {'error': 'Something is wrong'}, 409
     return {'error': 'User or password are incorrect'}, 400
 
 #Get user by ID using login
@@ -266,9 +311,9 @@ def get_user_ID(id):
 @api.route('/client/<int:id>', methods=['PATCH'])
 @jwt_required()
 def update_user(id):
-   
+    print ('helloooooooo')
     client = get_jwt_identity()
-    
+    print (id, client)
     if client != id:
         return {'error': 'Invalid action'}, 400
 
@@ -289,7 +334,7 @@ def update_user(id):
         password = generate_password_hash(
             update_user["_password"], method='pbkdf2:sha256', salt_length=16),
         update_user["_password"] = password
-
+    
     user = Account.get_by_id(id)
 
     if user:
@@ -299,6 +344,6 @@ def update_user(id):
         })
 
         return jsonify(updated_user.serialize()), 200
-
     return {'error': 'User not found'}, 400
+
 

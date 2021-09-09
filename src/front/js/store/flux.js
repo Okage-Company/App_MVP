@@ -14,8 +14,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			account: [],
 			clientId: [],
 			businessId: [],
+<<<<<<< HEAD
 			BASE_URL: "https://amethyst-squid-3raxmqqj.ws-eu16.gitpod.io/",
 			URL_API: "https://3001-amethyst-squid-3raxmqqj.ws-eu16.gitpod.io/api/",
+=======
+			BASE_URL: "https://kumquat-stork-h2a6bqzx.ws-eu16.gitpod.io/",
+			URL_API: "https://3001-kumquat-stork-h2a6bqzx.ws-eu16.gitpod.io/api/",
+>>>>>>> 6a0e3e263bdc7d198960d642cf833d051f4ff85a
 			user: {},
 			currentUser: {}
 		},
@@ -23,7 +28,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getAccount: async () => {
 				console.log("fetch");
 				try {
-					let response = await fetch(URL_API.concat("account/"));
+					let response = await fetch(getStore().URL_API.concat("account/"));
 					console.log("response", response);
 
 					if (response.ok) {
@@ -39,7 +44,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getBuservices: async () => {
 				try {
-					let response = await fetch(URL_API.concat("buservices/"));
+					let response = await fetch(getStore().URL_API.concat("buservices/"));
 
 					if (response.ok) {
 						let responseAsJson = await response.json();
@@ -52,9 +57,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
+			deleteAccount: id => {
+				let token = localStorage.getItem("access_token");
+				fetch(getStore().BASE_URL.concat("account/", id), {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${token}`
+					}
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error("Account could not be deleted");
+						}
+						return response.json();
+					})
+					.then(responseAsJson => {
+						//aquí iría una redirección a la página principal de la aplicación
+					})
+					.catch(error => {
+						console.log(error);
+					});
+			},
 			getBuservicesById: async id => {
 				try {
-					let response = await fetch(BASE_URL.concat("buservices/", id));
+					let response = await fetch(getStore().BASE_URL.concat("buservices/", id));
 
 					if (response.ok) {
 						let responseAsJson = await response.json();
@@ -83,7 +110,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getBusinessId: id => {
 				console.log(id);
-				fetch(URL_API.concat("business/", id))
+				fetch(getStore().URL_API.concat("business/", id))
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -120,7 +147,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				const redirectToHome = () => {
 					if (localStorage.getItem("tokenID") != null) {
-						location.replace("./");
+						location.replace("./profile/");
 					}
 				};
 				console.log(credentials);
@@ -140,8 +167,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response.json();
 					})
 					.then(function(responseAsJson) {
-						console.log("ya llegaaa", responseAsJson);
+						console.log("ya llegaaa", responseAsJson[1]);
 						localStorage.setItem("access_token", responseAsJson[1]);
+						console.log(tokenDecoded);
 						const tokenDecoded = tokenDecode(responseAsJson[1]);
 						setUserFromToken(tokenDecoded);
 						redirectToHome();
@@ -150,7 +178,44 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log("There's a problem", error);
 					});
 			},
-			getUpdate: (dataUpdated, newUSer) => {
+			getUpdateClient: (value, nameValue) => {
+				const token = localStorage.getItem("access_token");
+				const tokenID = localStorage.getItem("tokenID");
+				const redirectToProfile = () => {
+					if (localStorage.getItem("tokenID") != null) {
+						location.replace("./".concat(tokenID));
+					}
+				};
+				let dataUpdated = {};
+				dataUpdated[nameValue] = value;
+				console.log(dataUpdated);
+				fetch(getStore().URL_API.concat("client/", localStorage.getItem("tokenID")), {
+					method: "PATCH",
+					body: JSON.stringify(dataUpdated),
+					headers: {
+						"Sec-Fetch-Mode": "no-cors",
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${token}`
+					}
+				})
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error("I can't update this user!");
+						}
+						return response.json();
+						//console.log(response);
+					})
+					.then(function(responseAsJson) {
+						setStore({ user: responseAsJson });
+						setTimeout(() => {
+							redirectToProfile();
+						}, 500);
+					})
+					.catch(function(error) {
+						console.log("Something is wrong: \n", error);
+					});
+			},
+			getUpdate: (dataUpdated, newUser) => {
 				const token = localStorage.getItem("token");
 				const tokenID = localStorage.getItem("tokenID");
 				const redirectToProfile = () => {
