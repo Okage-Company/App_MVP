@@ -129,7 +129,7 @@ const Client_Profile = () => {
 										<div className="dataContainerTitle">Email</div>
 										<div>{account.email}</div>
 									</div>
-									<SimpleModal nameValue="Email" />
+									<SimpleModal nameValue="email" />
 								</div>
 							</div>
 							<div>
@@ -138,7 +138,7 @@ const Client_Profile = () => {
 										<div className="dataContainerTitle">Province</div>
 										<div>{account.province}</div>
 									</div>
-									<SimpleModal nameValue="Province" />
+									<SimpleModal nameValue="province" />
 								</div>
 								<div>
 									<div className="dataContainer">
@@ -155,7 +155,7 @@ const Client_Profile = () => {
 											<div className="dataContainerTitle">Address</div>
 											<div>{account.adress}</div>
 										</div>
-										<SimpleModal nameValue="address" />
+										<SimpleModal nameValue="adress" />
 									</div>
 								</div>
 								<div>
