@@ -60,6 +60,9 @@ class Buservices(db.Model):
         return f'Buservices {self.specialty}, {self.numero_colegiado}, {self.business_id}'
 
     def serialize(self):
+
+        business = Business.get_business_id(self.business_id)
+        print(business)
         return {
             "title_bus": self.title_bus,
             "professional_techniques": self.professional_techniques,
@@ -75,13 +78,17 @@ class Buservices(db.Model):
             "description": self.description,
             "tecniques": self.tecniques,
             "photos": self.photos,
-            "business": {"cif":self.business.cif, "centre_name":self.business.centre_name},
-            "business": self.business.serialize()
+            "cif": business.cif,
+            "centre_name": business.centre_name,
+            "schedule": business.schedule
+            # "business": {"cif":self.business.cif, "centre_name":self.business.centre_name},
+            # "business": self.business.serialize()
             # "account": {"email":self.account.email, "phone":self.account.phone, "post_code":self.account.post_code, "province":self.account.province},
             # "account": self.account.serialize()
         }
 
     def create(self):
+        print('create', self)
         db.session.add(self)
         db.session.commit()
 
@@ -317,8 +324,9 @@ class Business(db.Model):
         business = cls.query.get(id)
     @classmethod
     def get_business_id(cls, id):
-        business = cls.query.filter_by(id=id).one_or_none()
+        business = cls.query.filter_by(account_id=id).one_or_none()
         return business
+
 
 class Services(db.Model):
     __tablename__ = 'services'
