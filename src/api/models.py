@@ -47,19 +47,15 @@ class Buservices(db.Model):
     description = db.Column(db.VARCHAR, nullable=False, unique=False)
     tecniques = db.Column(db.VARCHAR, nullable=True, unique=False)
     photos = db.Column(db.VARCHAR, nullable=True, unique=False)
-    #Relationship
-    services = db.relationship("Services")
-    business = db.relationship("Business")
-    client_ = db.relationship("Client",
-                    secondary=favourites,
-                    backref="buservices",
-                    overlaps="buservices,client_")
 
 
     def __repr__(self):
         return f'Buservices {self.specialty}, {self.numero_colegiado}, {self.business_id}'
 
     def serialize(self):
+
+        business = Business.get_business_id(self.business_id)
+        print(business)
         return {
             "title_bus": self.title_bus,
             "professional_techniques": self.professional_techniques,
@@ -75,13 +71,17 @@ class Buservices(db.Model):
             "description": self.description,
             "tecniques": self.tecniques,
             "photos": self.photos,
-            "business": {"cif":self.business.cif, "centre_name":self.business.centre_name},
-            "business": self.business.serialize()
+            "cif": business.cif,
+            "centre_name": business.centre_name,
+            "schedule": business.schedule
+            # "business": {"cif":self.business.cif, "centre_name":self.business.centre_name},
+            # "business": self.business.serialize()
             # "account": {"email":self.account.email, "phone":self.account.phone, "post_code":self.account.post_code, "province":self.account.province},
             # "account": self.account.serialize()
         }
 
     def create(self):
+        print('create', self)
         db.session.add(self)
         db.session.commit()
 
@@ -244,7 +244,7 @@ class Client(db.Model):
     reviews_ = db.relationship("Comments", back_populates="client")
     buservices_ = db.relationship("Buservices",
                     secondary=favourites,
-                    backref="client")
+                    backref="clients")
     #2
     def __repr__(self):
         return f'Client {self.id} {self.account_id}'
@@ -288,12 +288,21 @@ class Business(db.Model):
     #Poner la jornada partida
     schedule = db.Column(db.VARCHAR, unique=False, nullable=False)
     #Relationships
-    services_ = db.relationship("Buservices", back_populates="business")
+    services_ = db.relationship("Buservices", backref="business")
     #2
     def __repr__(self):
         return f'Business {self.id}'
         
     def to_dict(self):
+        return {
+            "id": self.id,
+            "account_id": self.account_id,
+            "centre_name": self.centre_name,
+            "cif" : self.cif,
+            "schedule": self.schedule
+            #aquí no ponemos la password porque no queremos que se vea en el front
+        }
+    def serialize(self):
         return {
             "id": self.id,
             "account_id": self.account_id,
@@ -315,10 +324,12 @@ class Business(db.Model):
     @classmethod
     def get_by_id(cls, id):
         business = cls.query.get(id)
+        return business
     @classmethod
     def get_business_id(cls, id):
-        business = cls.query.filter_by(id=id).one_or_none()
+        business = cls.query.filter_by(account_id=id).one_or_none()
         return business
+
 
 class Services(db.Model):
     __tablename__ = 'services'
@@ -327,7 +338,7 @@ class Services(db.Model):
     #Data
     title = db.Column(db.VARCHAR, nullable=True, unique=False)
     #relation
-    business_ = db.relationship("Buservices", back_populates="services")
+    business_ = db.relationship("Buservices", backref="services")
 
     def __repr__(self):
         return f'Services {self.title}'

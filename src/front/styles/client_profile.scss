@@ -1,65 +1,164 @@
 @import '../styles/index.scss';
 
+$profile-photo-client: url('https://i.ibb.co/8xbT20q/profile-01.png') no-repeat center;
+
 body {
     background-color: $background-body-color;
 }
-   .clientProfileContainer {
-       padding-left: 5.938rem;
-       padding-right: 5.938rem;
-       padding-top: 6rem;
-       display: grid;
-       grid-gap: 2rem;
-       grid-template-columns: repeat(12, minmax(0, 1fr));
-       grid-template-rows: repeat(1, minmax(0, 1fr));
-       grid-template-areas: "sidebar sidebar sidebar main main main main main main main main main";
-   }
-   .clientProfileSidebar {
-       grid-area: sidebar;
-   }
-   .clientProfileMain {
-       grid-area: main;
-   }
-   .clientProfileImage{
-    height: 10rem;
-    width: 10rem;
-    background: rgb(197, 197, 197);
-    border-radius: 10rem;
-    align-self: center;
+
+.clientProfileContainer {
+    color: $body-color;
+    font-size: $medium-size;
+    font-family: $primary-font;
+    padding-left: 5.938rem;
+    padding-right: 5.938rem;
+    padding-bottom: 5.938rem;
+    padding-top: 6rem;
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: repeat(1, minmax(0, 1fr));
+    grid-template-areas: "sidebar sidebar sidebar main main main main main main main main main";
 }
-   @media (max-width: 600px) {
-       .clientProfileContainer {
-           padding-left: 2rem;
-           padding-right: 2rem;
-           grid-template-columns: repeat(1, minmax(0, 1fr));
-           grid-template-rows: repeat(2, minmax(0, 1fr));
-           grid-template-areas: "sidebar"
-                                   "main";
-       }
-   }
-   .dataContainer{
-    padding-bottom: 1rem;
+
+.clientProfileSidebar {
+    grid-area: sidebar;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.clientProfileMain {
+    grid-area: main;
+}
+
+.clientProfileImage{
+    background: $profile-photo-client;
+    border-radius: $border-radius;
+    background-size: cover;
+    width: 7.5rem;
+    height: 7.5rem;
+    margin-bottom: 1rem;
+}
+//    @media (max-width: 600px) {
+//        .clientProfileContainer {
+//            padding-left: 2rem;
+//            padding-right: 2rem;
+//            grid-template-columns: repeat(1, minmax(0, 1fr));
+//            grid-template-rows: repeat(2, minmax(0, 1fr));
+//            grid-template-areas: "sidebar"
+//                                    "main";
+//        }
+//    }
+
+.dataContainer{
+    margin-bottom: 2rem;
     border-bottom: rgb(224, 224, 224)  solid 1px;
     display: flex;
     justify-content: space-between;
 }
+
 .clientProfileTitle{
     padding-bottom: 2rem;
     font-weight: $bold-weight;
+    color: $primary-color;
 }
+
 .dataContainerTitle{
     font-weight: $medium-weight;
     padding-bottom: 0.2rem;
     padding-top: 0.2rem;
 }
+
+.dataContainerText{
+    font-family: $secondary-font;
+    color: $dark-grey-color;
+    font-size: $small-size;
+}
+
 .dataContainerEdit{
     padding-bottom: 0.2rem;
     padding-top: 0.2rem;
     color: $primary-color;
     cursor: pointer;
 }
+
 .buttonProfileUpload{
     margin-top: 1rem;
     display: flex;
     justify-content: center;
     
+}
+
+@media (max-width: 1185px) {
+    .clientProfileContainer {
+        padding-left: 4.063rem;
+        padding-right: 4.063rem;
+        padding-bottom: 5.938rem;
+        grid-template-columns: 1fr;
+        grid-template-areas: "sidebar"
+                            "main";
+    }
+}
+
+@media (max-width: 800px) {
+    .clientProfileContainer {
+        padding-left: 2.188rem;
+        padding-right: 2.188rem;
+        padding-bottom: 5.938rem;
+        padding-top: 9rem;
+        grid-template-columns: 1fr;
+        grid-template-areas: "sidebar"
+                            "main";
+    }
+}
+
+#simple-modal-title {
+    font-family: $primary-font;
+    font-size: $medium-size;
+    color: $dark-grey-color;
+}
+
+#simple-modal-title-property {
+    font-family: $primary-font;
+    font-size: $large-size;
+    color: $primary-color;
+    font-weight: $medium-weight;
+    margin-bottom: 0.5rem;
+}
+
+.margin-icon-left-profile {
+    margin-left: 0.3rem;
+}
+
+.flex-modal {
+    display: flex;
+    flex-direction: column;
+}
+
+.form_placeholder_ayuda {
+    font-family: $secondary-font;
+    font-size: $small-size;
+    background-color: $light-grey-color;
+    border: 0;
+    border-radius: 0.3rem;
+    padding: 0.8rem;
+    width: 100%;
+    color: $dark-grey-color;
+    margin-bottom: 1rem;
+}
+
+#iwin {
+    border: none;
+    box-shadow: none;
+    border-radius: $border-radius;
+}
+
+.flex_modal_profile_flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.margin-button-modal {
+    margin-left: auto;
 }
