@@ -47,13 +47,6 @@ class Buservices(db.Model):
     description = db.Column(db.VARCHAR, nullable=False, unique=False)
     tecniques = db.Column(db.VARCHAR, nullable=True, unique=False)
     photos = db.Column(db.VARCHAR, nullable=True, unique=False)
-    #Relationship
-    services = db.relationship("Services")
-    business = db.relationship("Business")
-    client_ = db.relationship("Client",
-                    secondary=favourites,
-                    backref="buservices",
-                    overlaps="buservices,client_")
 
 
     def __repr__(self):
@@ -251,7 +244,7 @@ class Client(db.Model):
     reviews_ = db.relationship("Comments", back_populates="client")
     buservices_ = db.relationship("Buservices",
                     secondary=favourites,
-                    backref="client")
+                    backref="clients")
     #2
     def __repr__(self):
         return f'Client {self.id} {self.account_id}'
@@ -295,7 +288,7 @@ class Business(db.Model):
     #Poner la jornada partida
     schedule = db.Column(db.VARCHAR, unique=False, nullable=False)
     #Relationships
-    services_ = db.relationship("Buservices", back_populates="business")
+    services_ = db.relationship("Buservices", backref="business")
     #2
     def __repr__(self):
         return f'Business {self.id}'
@@ -335,7 +328,7 @@ class Services(db.Model):
     #Data
     title = db.Column(db.VARCHAR, nullable=True, unique=False)
     #relation
-    business_ = db.relationship("Buservices", back_populates="services")
+    business_ = db.relationship("Buservices", backref="services")
 
     def __repr__(self):
         return f'Services {self.title}'
