@@ -16,6 +16,8 @@ import DetailPage from "./pages/detailPage.jsx";
 import Search from "./pages/search.jsx";
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import MyServices from "./pages/myServices.jsx";
+import MyFavourites from "./pages/myFavourites.jsx";
 
 const theme = createMuiTheme({
 	palette: {
@@ -59,6 +61,12 @@ const Layout = () => {
 							</Route>
 							<Route exact path="/profile/:id">
 								<Client_Profile />
+							</Route>
+							<Route exact path="/myServices/">
+								<MyServices />
+							</Route>
+							<Route exact path="/myFavourites/">
+								<MyFavourites />
 							</Route>
 							<Route exact path="/business/:id">
 								<Business_Profile />

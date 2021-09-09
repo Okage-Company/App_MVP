@@ -1,0 +1,71 @@
+@import '../styles/index.scss';
+
+.grid_container_myServices {
+    display: grid;
+    padding-top: 5.938rem;
+    padding-left: 5.938rem;
+    padding-right: 5.938rem;
+    padding-bottom: 5.938rem;
+    grid-gap: $grid-gap;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: repeat(1, minmax(0, 1fr));
+    grid-template-areas: "sidebar sidebar sidebar main main main main main main map map map"
+}
+h6 {
+    margin-bottom: 2rem;
+}
+.main_search_page {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-gap: $grid-gap;
+}
+
+.sidebar_search_page {
+    grid-area: sidebar;
+    padding: 0;
+}
+
+
+.search_menu_container {
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 1185px) {
+    .grid_container_myServices {
+        padding-left: 4.063rem;
+        padding-right: 4.063rem;
+        grid-template: 3fr / 1fr;
+        grid-template-areas: "sidebar"
+                            "map"
+                            "main";
+    }
+}
+
+@media (max-width: 600px) {
+    .grid_container_myServices {
+        padding-top: 9rem;
+        padding-left: 2.188rem;
+        padding-right: 2.188rem;
+        grid-template: 3fr / 2fr;
+        grid-template-areas: "sidebar"
+                            "map"
+                            "main";
+    }
+    .sidebar_search_page {
+        grid-area: sidebar;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        padding: 0;
+        grid-gap: $grid-gap;
+    }
+    .main_search_page {
+        grid-area: main;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: $grid-gap;
+    }
+    .search_menu_container {
+        margin-bottom: 0rem;
+    }
+}

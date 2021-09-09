@@ -14,13 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			account: [],
 			clientId: [],
 			businessId: [],
-<<<<<<< HEAD
-			BASE_URL: "https://amethyst-squid-3raxmqqj.ws-eu16.gitpod.io/",
-			URL_API: "https://3001-amethyst-squid-3raxmqqj.ws-eu16.gitpod.io/api/",
-=======
-			BASE_URL: "https://kumquat-stork-h2a6bqzx.ws-eu16.gitpod.io/",
-			URL_API: "https://3001-kumquat-stork-h2a6bqzx.ws-eu16.gitpod.io/api/",
->>>>>>> 6a0e3e263bdc7d198960d642cf833d051f4ff85a
+			BASE_URL: "https://3000-jade-cattle-13cvqdzj.ws-eu16.gitpod.io/",
+			URL_API: "https://3001-jade-cattle-13cvqdzj.ws-eu16.gitpod.io/api/",
 			user: {},
 			currentUser: {}
 		},
@@ -96,7 +91,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getClientId: id => {
 				console.log(id);
-				fetch(getStore().URL_API.concat("account/", id))
+				const token = localStorage.getItem("access_token");
+				fetch(getStore().URL_API.concat("account/", id), {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${token}`
+					}
+				})
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -142,12 +144,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				//
 				const setUserFromToken = token => {
-					localStorage.setItem("tokenID", token.sub.id);
-					console.log(localStorage);
+					localStorage.setItem("tokenID", token.sub);
 				};
 				const redirectToHome = () => {
 					if (localStorage.getItem("tokenID") != null) {
-						location.replace("./profile/");
+						location.replace(getStore().BASE_URL.concat("profile/", localStorage.getItem("tokenID")));
 					}
 				};
 				console.log(credentials);
@@ -260,7 +261,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return decoded;
 				};
 				const setUserFromToken = token => {
-					localStorage.setItem("tokenID", token.sub.id);
+					localStorage.setItem("tokenID", token.sub);
 				};
 				const redirectToHome = () => {
 					if (localStorage.getItem("tokenID") != null) {

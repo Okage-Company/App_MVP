@@ -5,7 +5,7 @@ import SelectInsurance from "../component/selectInsurance.jsx";
 import SelectLocation from "../component/selectLocation.jsx";
 import Card from "../component/card.jsx";
 
-import "/workspace/App_MVP/src/front/styles/search.scss";
+import "../../styles/search.scss";
 
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
