@@ -61,7 +61,7 @@ function SimpleModal(props) {
 			<button
 				type="button"
 				onClick={() => {
-					actions.getUpdateClient(value, null, props.nameValue);
+					actions.getUpdateClient(value, props.nameValue);
 				}}>
 				Save
 			</button>
@@ -122,14 +122,14 @@ const Client_Profile = () => {
 										<div className="dataContainerTitle">Last Name</div>
 										<div>{account.last_name}</div>
 									</div>
-									<div className="dataContainerEdit">Edit</div>
+									<SimpleModal nameValue="last_name" />
 								</div>
 								<div className="dataContainer">
 									<div>
 										<div className="dataContainerTitle">Email</div>
 										<div>{account.email}</div>
 									</div>
-									<div className="dataContainerEdit">Edit</div>
+									<SimpleModal nameValue="Email" />
 								</div>
 							</div>
 							<div>
@@ -138,7 +138,7 @@ const Client_Profile = () => {
 										<div className="dataContainerTitle">Province</div>
 										<div>{account.province}</div>
 									</div>
-									<div className="dataContainerEdit">Edit</div>
+									<SimpleModal nameValue="Province" />
 								</div>
 								<div>
 									<div className="dataContainer">
@@ -146,7 +146,7 @@ const Client_Profile = () => {
 											<div className="dataContainerTitle">Post Code</div>
 											<div>{account.post_code}</div>
 										</div>
-										<div className="dataContainerEdit">Edit</div>
+										<SimpleModal nameValue="post_code" />
 									</div>
 								</div>
 								<div>
@@ -155,7 +155,7 @@ const Client_Profile = () => {
 											<div className="dataContainerTitle">Address</div>
 											<div>{account.adress}</div>
 										</div>
-										<div className="dataContainerEdit">Edit</div>
+										<SimpleModal nameValue="address" />
 									</div>
 								</div>
 								<div>
@@ -164,7 +164,7 @@ const Client_Profile = () => {
 											<div className="dataContainerTitle">Phone</div>
 											<div>{account.phone}</div>
 										</div>
-										<div className="dataContainerEdit">Edit</div>
+										<SimpleModal nameValue="phone" />
 									</div>
 								</div>
 							</div>

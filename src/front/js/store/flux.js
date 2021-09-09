@@ -150,12 +150,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log("There's a problem", error);
 					});
 			},
-			getUpdateClient: (value, newUser, nameValue) => {
+			getUpdateClient: (value, nameValue) => {
 				const token = localStorage.getItem("access_token");
 				const tokenID = localStorage.getItem("tokenID");
 				const redirectToProfile = () => {
 					if (localStorage.getItem("tokenID") != null) {
-						location.replace("./client/".concat(tokenID));
+						location.replace("./".concat(tokenID));
 					}
 				};
 				let dataUpdated = {};
@@ -179,13 +179,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(function(responseAsJson) {
 						setStore({ user: responseAsJson });
-						if (newUser[0]) {
-							setTimeout(() => {
-								redirectToProfile();
-							}, 2000);
-						} else {
+						setTimeout(() => {
 							redirectToProfile();
-						}
+						}, 500);
 					})
 					.catch(function(error) {
 						console.log("Something is wrong: \n", error);
