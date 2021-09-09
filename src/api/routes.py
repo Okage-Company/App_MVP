@@ -30,7 +30,11 @@ def get_user():
 
 #Get user by ID
 @api.route('/account/<int:id>', methods=['GET'])
+@jwt_required()
 def get_by_id(id):
+    if not id == get_jwt_identity():
+        return jsonify({'message': 'not authorized'}), 301
+        
     user = Account.get_by_id(id)
     if not (user):
         return jsonify({'msg': 'Account not found'}),404
@@ -174,6 +178,7 @@ def get_by_id_buservices(id):
 @api.route('/business/<int:id>/services', methods=['POST'])
 @jwt_required()
 def post_service(id):
+    print('token', get_jwt_identity())
     if not id == get_jwt_identity():
         return {'error':'T_T'}, 401
 
@@ -194,8 +199,8 @@ def post_service(id):
 
     # '''get service by title (specialty)'''
     service_result = Services.get_by_title(specialty)
-    print(service_result.title)
-    if service_result:
+    print(service_result)
+    if service_result.title:
         buservice_variable = Buservices(
             business_id=business_id,
             services_id=service_result.id,
@@ -216,8 +221,9 @@ def post_service(id):
 
     if buservice_variable:
         try:
-            print('hi', buservice_variable)
+            print('hi', buservice_variable.serialize())
             buservice_variable.create()
+           
             return jsonify(buservice_variable.serialize()), 201
         except exc.IntegrityError:
             return {'wake up': 'this is not a dream, this is a reality, there is no going back, there is no going home'}, 409
