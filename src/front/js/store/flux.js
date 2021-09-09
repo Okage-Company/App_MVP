@@ -23,7 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getAccount: async () => {
 				console.log("fetch");
 				try {
-					let response = await fetch(URL_API.concat("account/"));
+					let response = await fetch(getStore().URL_API.concat("account/"));
 					console.log("response", response);
 
 					if (response.ok) {
@@ -39,7 +39,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getBuservices: async () => {
 				try {
-					let response = await fetch(URL_API.concat("buservices/"));
+					let response = await fetch(getStore().URL_API.concat("buservices/"));
 
 					if (response.ok) {
 						let responseAsJson = await response.json();
@@ -52,9 +52,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
+			deleteAccount: id => {
+				let token = localStorage.getItem("access_token");
+				fetch(getStore().BASE_URL.concat("account/", id), {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${token}`
+					}
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw Error("Account could not be deleted");
+						}
+						return response.json();
+					})
+					.then(responseAsJson => {
+						//aquí iría una redirección a la página principal de la aplicación
+					})
+					.catch(error => {
+						console.log(error);
+					});
+			},
 			getBuservicesById: async id => {
 				try {
-					let response = await fetch(BASE_URL.concat("buservices/", id));
+					let response = await fetch(getStore().BASE_URL.concat("buservices/", id));
 
 					if (response.ok) {
 						let responseAsJson = await response.json();
@@ -83,7 +105,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getBusinessId: id => {
 				console.log(id);
-				fetch(URL_API.concat("business/", id))
+				fetch(getStore().URL_API.concat("business/", id))
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -120,7 +142,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				const redirectToHome = () => {
 					if (localStorage.getItem("tokenID") != null) {
-						location.replace("./");
+						location.replace("./profile/");
 					}
 				};
 				console.log(credentials);
@@ -140,8 +162,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response.json();
 					})
 					.then(function(responseAsJson) {
-						console.log("ya llegaaa", responseAsJson);
+						console.log("ya llegaaa", responseAsJson[1]);
 						localStorage.setItem("access_token", responseAsJson[1]);
+						console.log(tokenDecoded);
 						const tokenDecoded = tokenDecode(responseAsJson[1]);
 						setUserFromToken(tokenDecoded);
 						redirectToHome();
