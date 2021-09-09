@@ -8,6 +8,7 @@ import ButtonUploadImage from "../component/buttonUploadImage.jsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import PropTypes from "prop-types";
+import ImageAvatars from "../component/buttonUploadImage.jsx";
 
 function rand() {
 	return Math.round(Math.random() * 20) - 10;
@@ -99,6 +100,10 @@ const Business_Profile = () => {
 	return (
 		<div>
 			{store.businessId.map((business, index) => {
+				console.log(store.businessIdCif);
+				//let businessIdCif = store.businessIdCif.find(=>{
+
+				//})
 				return (
 					<div className="clientProfileContainer" key={index}>
 						<div className="clientProfileSidebar">
@@ -115,7 +120,7 @@ const Business_Profile = () => {
 								<div className="dataContainer">
 									<div>
 										<div className="dataContainerTitle">Centre Name</div>
-										<div>{business.centre_name}</div>
+										<div>{store.businessIdCif[0].centre_name}</div>
 									</div>
 									<SimpleModal nameValue="centre_name" />
 								</div>
@@ -173,7 +178,7 @@ const Business_Profile = () => {
 								<div className="dataContainer">
 									<div>
 										<div className="dataContainerTitle">Schedule</div>
-										<div>{business.schedule}</div>
+										<div>{store.businessIdCif[0].schedule}</div>
 									</div>
 									<SimpleModal nameValue="schedule" />
 								</div>

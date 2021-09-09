@@ -79,9 +79,10 @@ def get_business():
 #3.1-Business por ID
 @api.route('/business/<int:id>', methods =['GET'])
 def get_business_by_id(id):
-    business = Business.get_by_id(id)
+    print('hell@@@@@@@@@@@@@@@@@')
+    business = Business.get_business_id(id)
     if business:
-        return jsonify(business.serialize()), 200
+        return jsonify(business.to_dict()), 200
     return jsonify({'message':'Business not found'}), 404
 
 #4-Crear un usuario Business/Client según el booleano is_client:

@@ -14,6 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			account: [],
 			clientId: [],
 			businessId: [],
+			businessIdCif: [],
 			BASE_URL: "https://kumquat-stork-h2a6bqzx.ws-eu16.gitpod.io/",
 			URL_API: "https://3001-kumquat-stork-h2a6bqzx.ws-eu16.gitpod.io/api/",
 			user: {},
@@ -115,6 +116,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(function(responseAsJson) {
 						setStore({ businessId: new Array(responseAsJson) });
 						console.log(getStore().businessId);
+					});
+				fetch(getStore().URL_API.concat("business/", id))
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(function(responseAsJson) {
+						setStore({ businessIdCif: new Array(responseAsJson) });
+						console.log(getStore().businessIdCif);
 					});
 			},
 			verifyLogin: () => {
