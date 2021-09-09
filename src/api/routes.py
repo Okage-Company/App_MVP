@@ -28,13 +28,14 @@ def get_user():
     #Si all_user esta vacio devuelve un error
     return jsonify({'message': 'No account created'}), 500
 
-#1.1-Usuario por ID
+#Get user by ID
 @api.route('/account/<int:id>', methods=['GET'])
-def get_user_by_id(id):
+def get_by_id(id):
     user = Account.get_by_id(id)
-    if user:
-        return jsonify(user.serialize()), 200
-    return jsonify({'message':'Account not found'}), 404
+    if not (user):
+        return jsonify({'msg': 'Account not found'}),404
+    return jsonify(user.serialize()),200           
+
 
 #ELIMINAR CUENTA
 @api.route('/account/<int:id>', methods = ['DELETE'])
@@ -123,7 +124,7 @@ def create_account():
             client=Client(account_id=user.id)
             try:
                 client.create()
-                access_token = create_access_token(identity=client.to_dict(), expires_delta=timedelta(minutes=120))
+                access_token = create_access_token(identity=client.id, expires_delta=timedelta(minutes=120))
                 return jsonify(client.serialize(), access_token), 201
 
             except exc.IntegrityError:
@@ -140,7 +141,7 @@ def create_account():
             )
             try:
                 business.create()
-                access_token = create_access_token(identity=business.to_dict(), expires_delta=timedelta(minutes=120))
+                access_token = create_access_token(identity=business.id, expires_delta=timedelta(minutes=120))
                 return jsonify(business.to_dict(), access_token), 201
             except exc.IntegrityError:
                 return {'error': 'Something is wrong'}, 409
@@ -220,13 +221,6 @@ def post_service(id):
             return jsonify(buservice_variable.serialize()), 201
         except exc.IntegrityError:
             return {'wake up': 'this is not a dream, this is a reality, there is no going back, there is no going home'}, 409
-#Get user by ID
-@api.route('/account/<int:id>', methods=['GET'])
-def get_by_id(id):
-    user = Account.get_by_id(id)
-    if not (user):
-        return jsonify({'msg': 'Account not found'}),404
-    return jsonify(user.serialize()),200           
 
 #Get user by EMAIL
 @api.route('/account/<email>', methods=['GET'])
@@ -235,23 +229,6 @@ def get_by_email(email):
     if not (user):
         return jsonify({'msg': 'Account not found, please check your email or Sign Up'}), 404
     return jsonify(user.serialize()),200    
-
-#Get Client by ID
-@api.route('/client/<int:id>', methods =['GET'])
-def get_client_by_id(id):
-    client = Client.get_by_id(id)
-    if not (client):
-        return jsonify({'message':'Client not found'}), 404
-    return jsonify(client.serialize()), 200
-
-#Get Business by ID
-@api.route('/business/<int:id>', methods =['GET'])
-def get_business_by_id(id):
-    business = Business.get_business_id(id)
-    if not business:
-        return jsonify({'message':'Business not found'}), 404
-    
-    return jsonify(business.to_dict()), 200
 
 @api.route('/reviews', methods=['GET'])
 def get_reviews():
@@ -311,11 +288,9 @@ def get_services():
 @api.route('/services', methods = ['POST'])
 def create_service():
     title = request.json.get('title', None)
-
     service = Services(
         title = title
     )
-
     try:
         service.create()
         return jsonify(service.serialize()), 201

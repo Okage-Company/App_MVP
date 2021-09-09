@@ -52,9 +52,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
-      deleteAccount: id => {
+			deleteAccount: id => {
 				let token = localStorage.getItem("access_token");
-				fetch(BASE_URL.concat("account/", id), {
+				fetch(getStore().BASE_URL.concat("account/", id), {
 					method: "DELETE",
 					headers: {
 						"Content-Type": "application/json",
@@ -142,7 +142,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				const redirectToHome = () => {
 					if (localStorage.getItem("tokenID") != null) {
-						location.replace("./");
+						location.replace("./profile/");
 					}
 				};
 				console.log(credentials);
@@ -162,8 +162,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response.json();
 					})
 					.then(function(responseAsJson) {
-						console.log("ya llegaaa", responseAsJson);
+						console.log("ya llegaaa", responseAsJson[1]);
 						localStorage.setItem("access_token", responseAsJson[1]);
+						console.log(tokenDecoded);
 						const tokenDecoded = tokenDecode(responseAsJson[1]);
 						setUserFromToken(tokenDecoded);
 						redirectToHome();
