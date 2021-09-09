@@ -13,6 +13,27 @@ import Navbar from "./component/navbar.jsx";
 import Business_Profile from "./component/business_profile.jsx";
 
 import DetailPage from "./pages/detailPage.jsx";
+import Search from "./pages/search.jsx";
+
+import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: "#5C74FF"
+		},
+		action: {
+			hover: "#FFDB7D",
+			active: "#5C74FF"
+		},
+		text: {
+			primary: "#0A0A0A"
+		}
+	}
+	// typography: {
+	// 	fontSize: "0.875rem"
+	// }
+});
 
 //create your first component
 const Layout = () => {
@@ -22,33 +43,38 @@ const Layout = () => {
 
 	return (
 		<div className="d-flex flex-column h-100">
-			<BrowserRouter basename={basename}>
-				<ScrollToTop>
-					<Navbar />
-					<Switch>
-						<Route exact path="/">
-							<Home />
-						</Route>
-						<Route exact path="/buservices/:id">
-							<DetailPage />
-						</Route>
-						<Route exact path="/profile/:id">
-							<Client_Profile />
-						</Route>
-						<Route exact path="/business/:id">
-							<Business_Profile />
-						</Route>
-						<Route exact path="/single/:theid">
-							<Single />
-						</Route>
-						----{" "}
-						<Route>
-							<h1>Not found!</h1>
-						</Route>
-					</Switch>
-					<Footer />
-				</ScrollToTop>
-			</BrowserRouter>
+			<ThemeProvider theme={theme}>
+				<BrowserRouter basename={basename}>
+					<ScrollToTop>
+						<Navbar />
+						<Switch>
+							<Route exact path="/">
+								<Home />
+							</Route>
+							<Route exact path="/buservices/:id">
+								<DetailPage />
+							</Route>
+							<Route exact path="/search">
+								<Search />
+							</Route>
+							<Route exact path="/profile/:id">
+								<Client_Profile />
+							</Route>
+							<Route exact path="/business/:id">
+								<Business_Profile />
+							</Route>
+							<Route exact path="/single/:theid">
+								<Single />
+							</Route>
+							----{" "}
+							<Route>
+								<h1>Not found!</h1>
+							</Route>
+						</Switch>
+						<Footer />
+					</ScrollToTop>
+				</BrowserRouter>
+			</ThemeProvider>
 		</div>
 	);
 };

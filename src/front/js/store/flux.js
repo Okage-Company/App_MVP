@@ -14,8 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			account: [],
 			clientId: [],
 			businessId: [],
-			BASE_URL: "https://jade-cattle-13cvqdzj.ws-eu16.gitpod.io/",
-			URL_API: "https://3001-jade-cattle-13cvqdzj.ws-eu16.gitpod.io/api/",
+			BASE_URL: "https://amethyst-squid-3raxmqqj.ws-eu16.gitpod.io/",
+			URL_API: "https://3001-amethyst-squid-3raxmqqj.ws-eu16.gitpod.io/api/",
 			user: {},
 			currentUser: {}
 		},
