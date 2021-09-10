@@ -62,14 +62,14 @@ const Layout = () => {
 							<Route exact path="/profile/:id">
 								<Client_Profile />
 							</Route>
+							<Route exact path="/business/:id">
+								<Business_Profile />
+							</Route>
 							<Route exact path="/myServices/">
 								<MyServices />
 							</Route>
 							<Route exact path="/myFavourites/">
 								<MyFavourites />
-							</Route>
-							<Route exact path="/business/:id">
-								<Business_Profile />
 							</Route>
 							<Route exact path="/single/:theid">
 								<Single />

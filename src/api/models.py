@@ -325,6 +325,7 @@ class Business(db.Model):
     def get_by_id(cls, id):
         business = cls.query.get(id)
         return business
+        
     @classmethod
     def get_business_id(cls, id):
         business = cls.query.filter_by(account_id=id).one_or_none()

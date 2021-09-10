@@ -32,6 +32,7 @@ def get_user():
 @api.route('/account/<int:id>', methods=['GET'])
 @jwt_required()
 def get_by_id(id):
+    print(get_jwt_identity())
     if not id == get_jwt_identity():
         return jsonify({'message': 'not authorized'}), 301
         
@@ -129,7 +130,7 @@ def create_account():
             client=Client(account_id=user.id)
             try:
                 client.create()
-                access_token = create_access_token(identity=client.id, expires_delta=timedelta(minutes=120))
+                access_token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=120))
                 return jsonify(client.serialize(), access_token), 201
 
             except exc.IntegrityError:
@@ -146,7 +147,7 @@ def create_account():
             )
             try:
                 business.create()
-                access_token = create_access_token(identity=business.id, expires_delta=timedelta(minutes=120))
+                access_token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=120))
                 return jsonify(business.to_dict(), access_token), 201
             except exc.IntegrityError:
                 return {'error': 'Something is wrong'}, 409
