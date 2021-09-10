@@ -353,3 +353,15 @@ def update_user(id):
     return {'error': 'User not found'}, 400
 
 
+    #Get Services by Business
+    @api.route('/business/<int:business_id>/buservices', methods=['GET'])
+    def get_buservices_by_business(id):
+        business = get_business_by_id(id)
+        print(business)
+        if not business:
+            return jsonify({'msg': 'Business not found'}), 404
+
+        buservice_business = Buservices.get_by_business(business_id)
+        if buservice_business:
+            return jsonify(buservices.serialize()), 200
+        return jsonify({'msg': 'there is no buservice created'}), 500

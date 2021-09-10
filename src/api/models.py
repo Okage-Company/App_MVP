@@ -94,6 +94,11 @@ class Buservices(db.Model):
     def get_by_id_buservices(cls, id):
         get_by_id_buservices_variable = cls.query.filter_by(id=id).one_or_none()
         return get_by_id_buservices_variable
+
+    @classmethod
+    def get_by_business(cls, business_id):
+        get_by_business_buservices_variable = cls.query.filter_by(business_id=business_id)
+        return get_by_business_buservices_variable
         
 
 #1.1-Declaro el nombre de la primera tabla
