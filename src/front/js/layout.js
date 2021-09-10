@@ -71,8 +71,8 @@ const Layout = () => {
 							<Route exact path="/business/:id">
 								<Business_Profile />
 							</Route>
-							<Route exact path="/single/:theid">
-								<Single />
+							<Route exact path="/demo/">
+								<Demo />
 							</Route>
 							----{" "}
 							<Route>
