@@ -1,6 +1,7 @@
 @import '../styles/index.scss';
 
 .footer_container {
+    margin-top: auto;
     color: #fff;
     font-size: $medium-size;
     padding-top: 2rem;
@@ -81,4 +82,8 @@
 
 .sm-icon {
     margin-left: 1rem;
+}
+
+a {
+    color: white;
 }

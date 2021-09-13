@@ -9,7 +9,7 @@
     grid-gap: $grid-gap;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     grid-template-rows: repeat(1, minmax(0, 1fr));
-    grid-template-areas: "sidebar sidebar sidebar main main main main main main map map map"
+    grid-template-areas: "sidebar sidebar sidebar main main main main main main map map map";
 }
 .seach_menu_submit{
     margin-top: 2rem;
@@ -41,6 +41,7 @@
 .mapita { 
     border-radius: $border-radius;
     height: 100%;
+    z-index: 100;
 }
 
 .search_menu_container {

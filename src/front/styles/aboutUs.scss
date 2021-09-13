@@ -1,0 +1,102 @@
+@import '../styles/index.scss';
+$profile-photo: url('https://i.ibb.co/sJB6ddc/About-us.png') no-repeat center;
+$logo-photo: url('https://i.ibb.co/vvrtTKW/0logo-navbar-08.png') no-repeat center;
+
+.about-us-container {
+    margin-top: $page-margin-top;
+    padding-left: $container-grid-padding;
+    padding-right: $container-grid-padding;
+    padding-bottom: $container-grid-padding;
+    font-size: $medium-size;
+    font-family: $primary-font;
+    display: grid;
+    grid-gap: $grid-gap;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: repeat(1, minmax(0, 1fr));
+    grid-template-areas: "witch witch witch witch witch witch cook cook cook cook cook cook";
+
+}
+
+.about-us-witch {
+    grid-area: witch;
+    width: auto;
+}
+
+.about-us-main {
+    grid-area: cook;
+    display: flex;
+    flex-direction: column;
+}
+
+.about-us-title {
+    font-size: 5rem;
+    color: $primary-color;
+    font-weight: $bold-weight;
+    line-height: 4rem;
+}
+
+.about-us-japan {
+    font-size: 3rem;
+    color: $dark-grey-color;
+    font-weight: $bold-weight;
+}
+
+.about-us-image {
+    border-radius: $border-radius;
+    height: 100%;
+    background: $profile-photo;
+    background-size: cover;
+    background-position: top;
+}
+
+.about-us-logo {
+    width: 8.5rem;
+    height: 8.5rem;
+    background: $logo-photo;
+    background-size: cover;
+}
+
+.quote-div {
+    background-color: #fff;
+    font-family: $secondary-font;
+    color: $dark-grey-color;
+    font-size: $small-size;
+    border-radius: $border-radius;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.subtitle-about {
+    margin-top: 4rem;
+}
+
+.about-header-yeah {
+    display: flex;
+}
+
+.about-header-yeah-dos {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+}
+
+@media (max-width: 1000px) {
+    .about-us-container {
+        margin-top: 9rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        padding-bottom: $container-grid-padding;
+        font-size: $medium-size;
+        font-family: $primary-font;
+        display: grid;
+        grid-gap: $grid-gap;
+        grid-template-columns: 1fr;
+        grid-template-areas: "witch"
+                            "cook";
+    
+    }
+    .about-us-image {
+        height: 15rem;
+    }
+}

@@ -3,11 +3,11 @@
 .modal_container {
     position: fixed;
     width: 70%;
-    height: 90%;
+    height: 85%;
     left: 50%;
-    top: 50%;
+    top: 54%;
     transform: translate(-50%, -50%);
-    bottom: 50%;
+    // bottom: 50%;
     z-index: 250;
     background-color: #fff;
     overflow-y: auto;
@@ -41,12 +41,12 @@
 
 .modal_form {
     grid-area: form;
-    padding: 4rem;
+    padding: 3rem;
 }
 
 .modal_image {
     grid-area: banner;
-    background: url('https://i.ibb.co/5jH9LSh/Screenshot-2021-08-27-at-12-22-35.png') no-repeat center;
+    background: url('https://images.pexels.com/photos/3933276/pexels-photo-3933276.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260') no-repeat center;
     background-size: cover;
     display: flex;
 }
@@ -170,4 +170,67 @@
 
 .get-started-button:active {
     background-color: $primary-color-active;
+}
+
+.wow {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 800px) {
+    .modal_container {
+        width: 90%;
+        height: 85%;
+        left: 50%;
+        top: 54%;
+    }
+    .modal_content {
+        font-size: $small-size;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas: "banner"
+                            "form";
+    }
+    .modal_image {
+        background: none;
+    }
+    .modal_x_button {
+        color: $primary-color;;
+    }
+    .modal_x_button_div {
+        margin-left: auto;
+        // position: absolute;
+    }
+    .modal_form {
+        padding-top: 1rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .modal_container {
+        width: 90%;
+        height: 83%;
+        left: 50%;
+        top: 58%;
+    }
+    .modal_content {
+        font-size: $small-size;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas: "banner"
+                            "form";
+    }
+    .modal_image {
+        background: none;
+    }
+    .modal_x_button {
+        color: $primary-color;;
+    }
+    .modal_x_button_div {
+        margin-left: auto;
+        // position: absolute;
+    }
+    .modal_form {
+        padding-top: 1rem;
+    }
 }
