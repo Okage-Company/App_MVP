@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { alpha, makeStyles, Grid } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -16,6 +16,8 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import "../../styles/navbar.scss";
 import logosvg from "../../img/logo-navbar-01.png";
 import Modal from "../component/modal.jsx";
+import { Link } from "react-router-dom";
+import { Avatar } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
 	grow: {
@@ -102,11 +104,32 @@ const useStyles = makeStyles(theme => ({
 
 const Navbar = () => {
 	//Declaro todas las constantes
+	const linkProfile = "/profile/".concat(localStorage.getItem("tokenID"));
 	const classes = useStyles();
 	const [profileMenu, setProfileMenu] = useState(null);
 	const [languagesMenu, setLanguagesMenu] = useState(null);
 	const [openModal, setOpenModal] = useState(false);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+
+	const userLogedOrNot =
+		localStorage.getItem("tokenID") != null ? (
+			<>
+				<Link to="/myFavourites">
+					<IconButton className={classes.mobileIcons} aria-label="show 19 new messages" color="inherit">
+						<FavoriteIcon />
+					</IconButton>
+				</Link>
+				<Link to={linkProfile}>
+					<IconButton edge="end" className={classes.mobileIcons} color="secondary">
+						<AccountCircle />
+					</IconButton>
+				</Link>
+			</>
+		) : (
+			<IconButton edge="end" className={classes.mobileIcons} onClick={() => setOpenModal(true)} color="default">
+				<AccountCircle />
+			</IconButton>
+		);
 
 	const isMenuOpen = Boolean(profileMenu);
 	const isMenuLanguagesOpen = Boolean(languagesMenu);
@@ -170,7 +193,9 @@ const Navbar = () => {
 				<Toolbar>
 					{/*Logo*/}
 					<div className="d-flex flex-row">
-						<img src={logosvg} className="okageLogo" />
+						<Link to="/">
+							<img src={logosvg} className="okageLogo" />
+						</Link>
 						<Typography className={classes.title} variant="h6" noWrap>
 							Okage
 						</Typography>
@@ -200,24 +225,9 @@ const Navbar = () => {
 							aria-controls={menuLanguagesId}>
 							<LanguageIcon />
 						</IconButton>
-						{/*DMs icon */}
-						<IconButton className={classes.mobileIcons} aria-label="show 19 new messages" color="inherit">
-							<FavoriteIcon />
-						</IconButton>
-						{/*DMs icon */}
-						<IconButton className={classes.mobileIcons} aria-label="show 19 new messages" color="inherit">
-							<Badge badgeContent={17} color="secondary">
-								<MessageIcon />
-							</Badge>
-						</IconButton>
-						{/*ProfileBubble */}
-						<IconButton
-							edge="end"
-							className={classes.mobileIcons}
-							onClick={() => setOpenModal(true)}
-							color="inherit">
-							<AccountCircle />
-						</IconButton>
+						{/*FAVs icon */}
+						{/* Account Icon */}
+						{userLogedOrNot}
 					</div>
 				</Toolbar>
 				<Toolbar className={classes.searchBarMobileDiv}>

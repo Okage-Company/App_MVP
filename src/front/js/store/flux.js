@@ -14,22 +14,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 			account: [],
 			clientId: [],
 			businessId: [],
-			BASE_URL: "https://3000-jade-cattle-13cvqdzj.ws-eu16.gitpod.io/",
-			URL_API: "https://3001-jade-cattle-13cvqdzj.ws-eu16.gitpod.io/api/",
+			BASE_URL: "https://3000-emerald-wren-v2ln6zhp.ws-eu16.gitpod.io/",
+			URL_API: "https://3001-emerald-wren-v2ln6zhp.ws-eu16.gitpod.io/api/",
 			user: {},
 			currentUser: {}
 		},
 		actions: {
 			getAccount: async () => {
-				console.log("fetch");
 				try {
 					let response = await fetch(getStore().URL_API.concat("account/"));
-					console.log("response", response);
 
 					if (response.ok) {
 						let responseAsJson = await response.json();
 						setStore({ account: responseAsJson });
-						console.log(responseAsJson);
 					} else {
 						throw new Error(response.statusText, "code", response.status);
 					}
@@ -38,6 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			getBuservices: async () => {
+				console.log("fetch");
 				try {
 					let response = await fetch(getStore().URL_API.concat("buservices/"));
 
@@ -76,7 +74,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getBuservicesById: async id => {
 				try {
-					let response = await fetch(getStore().BASE_URL.concat("buservices/", id));
+					let response = await fetch(getStore().URL_API.concat("buservices/", id));
 
 					if (response.ok) {
 						let responseAsJson = await response.json();
@@ -112,7 +110,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getBusinessId: id => {
 				console.log(id);
-				fetch(getStore().URL_API.concat("account/", id))
+				const token = localStorage.getItem("access_token");
+				fetch(getStore().URL_API.concat("account/", id), {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${token}`
+					}
+				})
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -123,7 +128,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ businessId: new Array(responseAsJson) });
 						console.log(getStore().businessId);
 					});
-				fetch(getStore().URL_API.concat("business/", id))
+				fetch(getStore().URL_API.concat("business/", id), {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${token}`
+					}
+				})
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -214,6 +225,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (!response.ok) {
 							throw Error("I can't update this user!");
 						}
+						console.log(response);
 						return response.json();
 						//console.log(response);
 					})

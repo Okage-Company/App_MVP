@@ -1,9 +1,10 @@
-import React, { useState, useContext, Fragment } from "react";
+import React, { useState, useContext, Fragment, useEffect } from "react";
 import { Context } from "../store/appContext";
 import SelectCategory from "../component/selectCategory.jsx";
 import SelectInsurance from "../component/selectInsurance.jsx";
 import SelectLocation from "../component/selectLocation.jsx";
 import Card from "../component/card.jsx";
+import { useParams } from "react-router";
 
 import "../../styles/search.scss";
 
@@ -13,8 +14,12 @@ import "leaflet/dist/leaflet.css";
 
 const Search = () => {
 	const { store, actions } = useContext(Context);
+	let params = useParams();
 	const [openLocationMenu, setOpenLocationMenu] = useState(false);
 
+	useEffect(() => {
+		actions.getBuservices(params.id);
+	}, []);
 	return (
 		<Fragment>
 			<div className="grid_container_search_page">
@@ -50,41 +55,21 @@ const Search = () => {
 					</Map>
 				</div>
 				<div className="main_search_page">
-					<Card
-						category="Healthcare, Psychology"
-						title="ISEP Clinic Madrid"
-						profile="ISEP Clinic"
-						address="C/Jesús del Valle, 23, Bajo C"
-						icon={<i className="card_icon far fa-heart" />}
-					/>
-					<Card
-						category="Healthcare, Psychology"
-						title="ISEP Clinic Madrid"
-						profile="ISEP Clinic"
-						address="C/Jesús del Valle, 23, Bajo C"
-						icon={<i className="card_icon far fa-heart" />}
-					/>
-					<Card
-						category="Healthcare, Psychology"
-						title="ISEP Clinic Madrid"
-						profile="ISEP Clinic"
-						address="C/Jesús del Valle, 23, Bajo C"
-						icon={<i className="card_icon far fa-heart" />}
-					/>
-					<Card
-						category="Healthcare, Psychology"
-						title="ISEP Clinic Madrid"
-						profile="ISEP Clinic"
-						address="C/Jesús del Valle, 23, Bajo C"
-						icon={<i className="card_icon far fa-heart" />}
-					/>
-					<Card
-						category="Healthcare, Psychology"
-						title="ISEP Clinic Madrid"
-						profile="ISEP Clinic"
-						address="C/Jesús del Valle, 23, Bajo C"
-						icon={<i className="card_icon far fa-heart" />}
-					/>
+					{store.buservices.map((account, index) => {
+						console.log(account);
+						let ind = index + 1;
+						return (
+							<Card
+								key={index.toString()}
+								i={ind.toString()}
+								category={account.specialty}
+								title={account.title_bus}
+								profile={account.professional_name}
+								address={account.adress}
+								icon={<i className="card_icon far fa-heart" />}
+							/>
+						);
+					})}
 				</div>
 			</div>
 		</Fragment>

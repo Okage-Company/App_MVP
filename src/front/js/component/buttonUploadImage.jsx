@@ -9,18 +9,11 @@ const useStyles = makeStyles(theme => ({
 		"& > *": {
 			margin: theme.spacing(1)
 		}
+	},
+	input: {
+		display: "none"
 	}
 }));
-
-function ImageAvatars() {
-	const classes = useStyles();
-
-	return (
-		<div className={classes.root}>
-			<Avatar alt="Remy Sharp" src="https://es.web.img3.acsta.net/pictures/17/05/22/10/23/162388.jpg" />
-		</div>
-	);
-}
 
 export default function buttonUploadImage() {
 	const classes = useStyles();

@@ -13,15 +13,8 @@ const detailPage = () => {
 	let params = useParams();
 
 	useEffect(() => {
-		actions.getBuservices();
 		actions.getBuservicesById(params.id);
 	}, []);
-
-	useEffect(() => {
-		if (store.buservicesById) {
-			console.log("something", store.buservicesById);
-		}
-	}, [store.buservicesById]);
 
 	return (
 		<Fragment>
@@ -63,7 +56,7 @@ const detailPage = () => {
 						</div>
 						<div className="sidebar_list_contact_element">
 							<span className="sidebar_list_element_contact">Mail</span>
-							<span className="sidebar_list_element_contact_value">hasta@el.papo</span>
+							<span className="sidebar_list_element_contact_value">{store.buservicesById.email}</span>
 						</div>
 					</div>
 				</div>
@@ -101,9 +94,9 @@ const detailPage = () => {
 						<span>Reviews</span>
 					</div>
 					<div className="review_detail_page_inside">
-						<Review name="Fernando Avilés" date="04 Jun 2021" text="I didn't like that shit." />
-						<Review name="Fernando Avilés" date="04 Jun 2021" text="I didn't like that shit." />
-						<Review name="Fernando Avilés" date="04 Jun 2021" text="I didn't like that shit." />
+						<Review name="Fernando Avilés" text="I didn't like that shit." />
+						<Review name="Fernando Avilés" text="I didn't like that shit." />
+						<Review name="Fernando Avilés" text="I didn't like that shit." />
 					</div>
 				</div>
 				<div className="review_detail_more_services">
