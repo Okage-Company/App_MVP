@@ -1,0 +1,53 @@
+@import '../styles/index.scss';
+
+.modalService {
+    background-color: white;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    max-width: 40rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h5 {
+    margin-top: 2rem;
+    color: $dark-grey-color;
+}
+.buttonCreateService {
+    margin-top: 2rem;
+    align-self: flex-end;
+    display: flex;
+    justify-content: center;
+}
+.galleryBox {
+    height: 8rem;
+    width: 8rem;
+    background-color: whitesmoke;
+    border-radius: 00.5rem;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.modalServiceGallery{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2rem;
+
+}
+.buttonUploadImage{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+
+.MuiInputBase-input MuiOutlinedInput-input{
+    background-color: $light-grey-color;
+  
+}
+
