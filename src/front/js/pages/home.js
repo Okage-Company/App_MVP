@@ -81,7 +81,15 @@ export const Home = () => {
 			<div className="grid_container_card_home">
 				{cardHomeMap}
 				<div className="grid_container_card_home_button_container">
-					<Button text="See more" />
+					<button
+						className="button"
+						type="button"
+						onClick={e => {
+							e.preventDefault();
+							location.replace("/search");
+						}}>
+						Search
+					</button>
 					<div className="home_categories_text">
 						You’d be surprised to see how many things you have near you.
 					</div>
