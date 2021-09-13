@@ -1,19 +1,112 @@
 @import '../styles/index.scss';
 
-body {
-    background-color: $background-body-color;
-}
-
 .infoContainer{
     margin-top: $page-margin-top;
-    padding-left: 5rem;
-    padding-right: 5rem;
-    padding-bottom: 4rem;
+    padding-left: $container-grid-padding;
+    padding-right: $container-grid-padding;
+    padding-bottom: $container-grid-padding;
+    font-size: $medium-size;
+    font-family: $primary-font;
+    display: grid;
+    grid-gap: $grid-gap;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: repeat(1, minmax(0, 1fr));
+    grid-template-areas: "cook cook cook cook cook cook cook cook cook cook cook cook";
+
 }
 .tittle{
+    margin-bottom: 2rem;
+    font-weight: bold;
+    font-size: $large-size;
+    color: $primary-color;
+}
+
+.cookies_info {
+    grid-area: cook;
     display: flex;
     flex-direction: column;
-    line-height: 6em;
+}
+
+.cookies-body-text {
     margin-bottom: 1rem;
-    font-weight: bold;
+}
+
+.cookies-body-text-dos {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.cookies-body-text-tres {
+    margin-top: 1rem;
+}
+
+.cookies-body-quote {
+    margin-bottom: 1rem;
+    font-size: $small-size;
+    color: $dark-grey-color;
+}
+
+.cookies-body-quote-dos {
+    font-size: $small-size;
+    color: $dark-grey-color;
+}
+
+.quote-line {
+    width: 0.5rem;
+    height: auto;
+    border-radius: 0.2rem;
+    background-color: $primary-color;
+    margin-right: 1rem;
+}
+
+.cookies-quote-div {
+    display: flex;
+}
+
+.quote-line-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 600px) {
+    .infoContainer {
+        margin-top: 9rem;
+        font-size: $small-size;
+        display: grid;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        grid-template-columns: 1fr;
+        grid-template-areas: "cook"
+    }
+}
+
+.terms_title {
+    margin-bottom: 1rem;
+    font-weight: $medium-weight;
+}
+
+.cookies-body-text-terms {
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+}
+
+.cookies-body-text-terms-dos {
+    margin-bottom: 1rem;
+}
+
+.cookies-body-text-terms-tres {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.cookies-body-text-terms-div {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.bold-terms {
+    font-weight: $medium-weight;
+    color: $dark-grey-color;
+    margin-right: 0.5rem;
 }
