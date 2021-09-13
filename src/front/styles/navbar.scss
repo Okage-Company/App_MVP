@@ -19,6 +19,12 @@
     border-radius: 0.3rem;
     width: 100%;
 }
+.searchField {
+    position: absolute;
+    background-color: white;
+    border-radius: 0.3rem;
+    width: 100%;
+}
 .makeStyles-searchIcon-3 {
     color: #5C74FF;
     height: 100%;
@@ -41,9 +47,10 @@
 }
 
 .okageLogo {
-    width: 35px;
-    height: 35px;
+    width: 2.5rem;
+    height: 2.5rem;
     margin-right: 10px;
+    image-rendering: pixelated;
 }
 
 .navBar {

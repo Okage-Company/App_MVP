@@ -5,6 +5,9 @@ import SelectInsurance from "../component/selectInsurance.jsx";
 import SelectLocation from "../component/selectLocation.jsx";
 import Card from "../component/card.jsx";
 import { useParams } from "react-router";
+import "../../styles/button.scss";
+import Button from "../component/button.jsx";
+import { Link } from "react-router-dom";
 
 import "../../styles/search.scss";
 
@@ -24,13 +27,43 @@ const Search = () => {
 		<Fragment>
 			<div className="grid_container_search_page">
 				<div className="sidebar_search_page">
-					<div className="search_menu_container">
-						<SelectLocation placeholder="Location" />
+					<div>
+						<h5>
+							<span className="h6">Location</span>
+						</h5>
+						<div className="search_menu_container">
+							<SelectLocation placeholder="Location" />
+						</div>
 					</div>
-					<div className="search_menu_container">
-						<SelectCategory placeholder="Categories" />
+					<div>
+						<h5>
+							<span className="h6">Category</span>
+						</h5>
+						<div className="search_menu_container">
+							<SelectCategory placeholder="Categories" />
+						</div>
 					</div>
-					<SelectInsurance placeholder="Insurance" />
+					<div>
+						<h5>
+							<span className="h6">Insurance</span>
+						</h5>
+						<div className="search_menu_container"></div>
+						<SelectInsurance placeholder="Insurance" />
+					</div>
+					<div className="seach_menu_submit">
+						<div className="search_menu_container">
+							<button
+								className="button"
+								type="button"
+								onClick={e => {
+									e.preventDefault();
+									location.replace("/");
+									location.replace("/search");
+								}}>
+								Search
+							</button>
+						</div>
+					</div>
 					{/* <span className="search_menu_placeholder">Location</span>
 						<span
 							onClick={() => {

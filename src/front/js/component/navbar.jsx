@@ -14,10 +14,12 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import LanguageIcon from "@material-ui/icons/Language";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import "../../styles/navbar.scss";
-import logosvg from "../../img/logo-navbar-01.png";
+import logo from "../../img/logopng.png";
+import Logo from "../component/logo.jsx";
 import Modal from "../component/modal.jsx";
 import { Link } from "react-router-dom";
 import { Avatar } from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles(theme => ({
 	grow: {
@@ -67,6 +69,7 @@ const useStyles = makeStyles(theme => ({
 		[theme.breakpoints.up("md")]: {}
 	},
 	sectionDesktop: {
+		display: "flex",
 		[theme.breakpoints.up("md")]: {
 			display: "flex"
 		}
@@ -138,9 +141,9 @@ const Navbar = () => {
 	const isMenuOpen = Boolean(profileMenu);
 	const isMenuLanguagesOpen = Boolean(languagesMenu);
 
-	const handleProfileMenuOpen = event => {
-		setProfileMenu(event.currentTarget);
-	};
+	// const handleProfileMenuOpen = event => {
+	// 	setProfileMenu(event.currentTarget);
+	// };
 
 	const handleLanguagesMenuOpen = event => {
 		setLanguagesMenu(event.currentTarget);
@@ -150,10 +153,10 @@ const Navbar = () => {
 		setMobileMoreAnchorEl(null);
 	};
 
-	const handleMenuClose = () => {
-		setProfileMenu(null);
-		handleMobileMenuClose();
-	};
+	// const handleMenuClose = () => {
+	// 	setProfileMenu(null);
+	// 	handleMobileMenuClose();
+	// };
 	const handleMenuLanguagesClose = () => {
 		setLanguagesMenu(null);
 		handleMobileMenuClose();
@@ -161,28 +164,28 @@ const Navbar = () => {
 
 	const menuId = "primary-search-account-menu";
 	const menuLanguagesId = "language-search-account-menu";
-	const renderMenu = (
-		<Menu
-			profileMenu={profileMenu}
-			anchorOrigin={{ vertical: "top", horizontal: "right" }}
-			id={menuId}
-			keepMounted
-			transformOrigin={{ vertical: "top", horizontal: "right" }}
-			open={isMenuOpen}
-			onClose={handleMenuClose}>
-			<MenuItem onClick={handleMenuLanguagesClose}>Profile</MenuItem>
-			<MenuItem onClick={handleMenuLanguagesClose}>My account</MenuItem>
-			<MenuItem onClick={handleMenuLanguagesClose}>Log Out</MenuItem>
-		</Menu>
-	);
+	// const renderMenu = (
+	// 	<Menu
+	// 		profileMenu={profileMenu}
+	// 		anchorOrigin={{ vertical: "top", horizontal: "right" }}
+	// 		id={menuId}
+	// 		keepMounted
+	// 		transformOrigin={{ vertical: "top", horizontal: "right" }}
+	// 		open={isMenuOpen}
+	// 		onClose={handleMenuClose}>
+	// 		<MenuItem onClick={handleMenuLanguagesClose}>Profile</MenuItem>
+	// 		<MenuItem onClick={handleMenuLanguagesClose}>My account</MenuItem>
+	// 		<MenuItem onClick={handleMenuLanguagesClose}>Log Out</MenuItem>
+	// 	</Menu>
+	// );
 	const renderMenu2 = (
 		<Menu
-			profileMenu={languagesMenu}
-			anchorOrigin={{ vertical: "top", horizontal: "right" }}
 			id={menuLanguagesId}
 			keepMounted
-			transformOrigin={{ vertical: "top", horizontal: "right" }}
 			open={isMenuLanguagesOpen}
+			getContentAnchorEl={null}
+			anchorOrigin={{ vertical: "top", horizontal: "right" }}
+			transformOrigin={{ vertical: "top", horizontal: "center" }}
 			onClose={handleMenuLanguagesClose}>
 			<MenuItem onClick={handleMenuLanguagesClose}>Español</MenuItem>
 			<MenuItem onClick={handleMenuLanguagesClose}>English</MenuItem>
@@ -198,12 +201,14 @@ const Navbar = () => {
 					{/*Logo*/}
 					<div className="d-flex flex-row">
 						<Link to="/">
-							<img src={logosvg} className="okageLogo" />
+							<img src={logo} className="okageLogo" />
 						</Link>
+
 						<Typography className={classes.title} variant="h6" noWrap>
 							Okage
 						</Typography>
 					</div>
+
 					<div className={classes.grow} />
 					{/*Searchbar*/}
 					<div className={classes.search}>
@@ -211,6 +216,13 @@ const Navbar = () => {
 							<SearchIcon />
 						</div>
 						<InputBase
+							onKeyPress={e => {
+								if (e.key === "Enter") {
+									e.preventDefault();
+									console.log("hihihihihi");
+									location.replace("/search");
+								}
+							}}
 							placeholder="Where are you?"
 							classes={{
 								root: classes.inputRoot,
@@ -229,6 +241,7 @@ const Navbar = () => {
 							aria-controls={menuLanguagesId}>
 							<LanguageIcon />
 						</IconButton>
+
 						{/*FAVs icon */}
 						{/* Account Icon */}
 						{userLogedOrNot}
@@ -241,6 +254,13 @@ const Navbar = () => {
 								<SearchIcon />
 							</div>
 							<InputBase
+								onKeyPress={e => {
+									if (e.key === "Enter") {
+										e.preventDefault();
+										console.log("hihihihihi");
+										location.replace("/search");
+									}
+								}}
 								placeholder="Where are you?"
 								classes={{
 									root: classes.inputRoot,
@@ -253,7 +273,7 @@ const Navbar = () => {
 				</Toolbar>
 			</AppBar>
 			{openModal && <Modal closeModal={setOpenModal} />}
-			{renderMenu}
+			{/* {renderMenu} */}
 			{renderMenu2}
 		</div>
 	);

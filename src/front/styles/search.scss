@@ -11,7 +11,15 @@
     grid-template-rows: repeat(1, minmax(0, 1fr));
     grid-template-areas: "sidebar sidebar sidebar main main main main main main map map map"
 }
-
+.seach_menu_submit{
+    margin-top: 2rem;
+}
+.h6 {
+    font-weight: $medium-weight;
+    margin-bottom: 0rem;
+    margin-top: 0rem;
+    color: $primary-color;
+}
 .main_search_page {
     grid-area: main;
     display: grid;
