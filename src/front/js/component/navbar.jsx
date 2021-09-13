@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { alpha, makeStyles, Grid } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -14,8 +14,12 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import LanguageIcon from "@material-ui/icons/Language";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import "../../styles/navbar.scss";
-import logosvg from "../../img/logo-navbar-01.png";
+import logo from "../../img/logopng.png";
+import Logo from "../component/logo.jsx";
 import Modal from "../component/modal.jsx";
+import { Link } from "react-router-dom";
+import { Avatar } from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles(theme => ({
 	grow: {
@@ -53,13 +57,9 @@ const useStyles = makeStyles(theme => ({
 		pointerEvents: "none",
 		display: "flex",
 		alignItems: "center",
-		justifyContent: "center",
-		color: "#5C74FF"
+		justifyContent: "center"
 	},
 
-	inputRoot: {
-		color: "inherit"
-	},
 	inputInput: {
 		padding: theme.spacing(1, 1, 1, 0),
 		// vertical padding + font size from searchIcon
@@ -69,6 +69,7 @@ const useStyles = makeStyles(theme => ({
 		[theme.breakpoints.up("md")]: {}
 	},
 	sectionDesktop: {
+		display: "flex",
 		[theme.breakpoints.up("md")]: {
 			display: "flex"
 		}
@@ -94,6 +95,14 @@ const useStyles = makeStyles(theme => ({
 	},
 	mobileIcons: {
 		padding: "5px",
+		color: "#5C74FF",
+		[theme.breakpoints.up("sm")]: {
+			padding: "12px"
+		}
+	},
+	mobileProfileIcons: {
+		padding: "5px",
+		color: "#FFDB7D",
 		[theme.breakpoints.up("sm")]: {
 			padding: "12px"
 		}
@@ -102,18 +111,39 @@ const useStyles = makeStyles(theme => ({
 
 const Navbar = () => {
 	//Declaro todas las constantes
+	const linkProfile = "/profile/".concat(localStorage.getItem("tokenID"));
 	const classes = useStyles();
 	const [profileMenu, setProfileMenu] = useState(null);
 	const [languagesMenu, setLanguagesMenu] = useState(null);
 	const [openModal, setOpenModal] = useState(false);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
+	const userLogedOrNot =
+		localStorage.getItem("tokenID") != null ? (
+			<>
+				<Link to="/myFavourites">
+					<IconButton className={classes.mobileIcons} aria-label="show 19 new messages" color="inherit">
+						<FavoriteIcon />
+					</IconButton>
+				</Link>
+				<Link to={linkProfile}>
+					<IconButton edge="end" className={classes.mobileProfileIcons} color="secondary">
+						<AccountCircle />
+					</IconButton>
+				</Link>
+			</>
+		) : (
+			<IconButton edge="end" className={classes.mobileIcons} onClick={() => setOpenModal(true)} color="default">
+				<AccountCircle />
+			</IconButton>
+		);
+
 	const isMenuOpen = Boolean(profileMenu);
 	const isMenuLanguagesOpen = Boolean(languagesMenu);
 
-	const handleProfileMenuOpen = event => {
-		setProfileMenu(event.currentTarget);
-	};
+	// const handleProfileMenuOpen = event => {
+	// 	setProfileMenu(event.currentTarget);
+	// };
 
 	const handleLanguagesMenuOpen = event => {
 		setLanguagesMenu(event.currentTarget);
@@ -123,10 +153,10 @@ const Navbar = () => {
 		setMobileMoreAnchorEl(null);
 	};
 
-	const handleMenuClose = () => {
-		setProfileMenu(null);
-		handleMobileMenuClose();
-	};
+	// const handleMenuClose = () => {
+	// 	setProfileMenu(null);
+	// 	handleMobileMenuClose();
+	// };
 	const handleMenuLanguagesClose = () => {
 		setLanguagesMenu(null);
 		handleMobileMenuClose();
@@ -134,28 +164,28 @@ const Navbar = () => {
 
 	const menuId = "primary-search-account-menu";
 	const menuLanguagesId = "language-search-account-menu";
-	const renderMenu = (
-		<Menu
-			profileMenu={profileMenu}
-			anchorOrigin={{ vertical: "top", horizontal: "right" }}
-			id={menuId}
-			keepMounted
-			transformOrigin={{ vertical: "top", horizontal: "right" }}
-			open={isMenuOpen}
-			onClose={handleMenuClose}>
-			<MenuItem onClick={handleMenuLanguagesClose}>Profile</MenuItem>
-			<MenuItem onClick={handleMenuLanguagesClose}>My account</MenuItem>
-			<MenuItem onClick={handleMenuLanguagesClose}>Log Out</MenuItem>
-		</Menu>
-	);
+	// const renderMenu = (
+	// 	<Menu
+	// 		profileMenu={profileMenu}
+	// 		anchorOrigin={{ vertical: "top", horizontal: "right" }}
+	// 		id={menuId}
+	// 		keepMounted
+	// 		transformOrigin={{ vertical: "top", horizontal: "right" }}
+	// 		open={isMenuOpen}
+	// 		onClose={handleMenuClose}>
+	// 		<MenuItem onClick={handleMenuLanguagesClose}>Profile</MenuItem>
+	// 		<MenuItem onClick={handleMenuLanguagesClose}>My account</MenuItem>
+	// 		<MenuItem onClick={handleMenuLanguagesClose}>Log Out</MenuItem>
+	// 	</Menu>
+	// );
 	const renderMenu2 = (
 		<Menu
-			profileMenu={languagesMenu}
-			anchorOrigin={{ vertical: "top", horizontal: "right" }}
 			id={menuLanguagesId}
 			keepMounted
-			transformOrigin={{ vertical: "top", horizontal: "right" }}
 			open={isMenuLanguagesOpen}
+			getContentAnchorEl={null}
+			anchorOrigin={{ vertical: "top", horizontal: "right" }}
+			transformOrigin={{ vertical: "top", horizontal: "center" }}
 			onClose={handleMenuLanguagesClose}>
 			<MenuItem onClick={handleMenuLanguagesClose}>Español</MenuItem>
 			<MenuItem onClick={handleMenuLanguagesClose}>English</MenuItem>
@@ -170,11 +200,15 @@ const Navbar = () => {
 				<Toolbar>
 					{/*Logo*/}
 					<div className="d-flex flex-row">
-						<img src={logosvg} className="okageLogo" />
+						<Link to="/">
+							<img src={logo} className="okageLogo" />
+						</Link>
+
 						<Typography className={classes.title} variant="h6" noWrap>
 							Okage
 						</Typography>
 					</div>
+
 					<div className={classes.grow} />
 					{/*Searchbar*/}
 					<div className={classes.search}>
@@ -182,6 +216,13 @@ const Navbar = () => {
 							<SearchIcon />
 						</div>
 						<InputBase
+							onKeyPress={e => {
+								if (e.key === "Enter") {
+									e.preventDefault();
+									console.log("hihihihihi");
+									location.replace("/search");
+								}
+							}}
 							placeholder="Where are you?"
 							classes={{
 								root: classes.inputRoot,
@@ -200,24 +241,10 @@ const Navbar = () => {
 							aria-controls={menuLanguagesId}>
 							<LanguageIcon />
 						</IconButton>
-						{/*DMs icon */}
-						<IconButton className={classes.mobileIcons} aria-label="show 19 new messages" color="inherit">
-							<FavoriteIcon />
-						</IconButton>
-						{/*DMs icon */}
-						<IconButton className={classes.mobileIcons} aria-label="show 19 new messages" color="inherit">
-							<Badge badgeContent={17} color="secondary">
-								<MessageIcon />
-							</Badge>
-						</IconButton>
-						{/*ProfileBubble */}
-						<IconButton
-							edge="end"
-							className={classes.mobileIcons}
-							onClick={() => setOpenModal(true)}
-							color="inherit">
-							<AccountCircle />
-						</IconButton>
+
+						{/*FAVs icon */}
+						{/* Account Icon */}
+						{userLogedOrNot}
 					</div>
 				</Toolbar>
 				<Toolbar className={classes.searchBarMobileDiv}>
@@ -227,6 +254,13 @@ const Navbar = () => {
 								<SearchIcon />
 							</div>
 							<InputBase
+								onKeyPress={e => {
+									if (e.key === "Enter") {
+										e.preventDefault();
+										console.log("hihihihihi");
+										location.replace("/search");
+									}
+								}}
 								placeholder="Where are you?"
 								classes={{
 									root: classes.inputRoot,
@@ -239,7 +273,7 @@ const Navbar = () => {
 				</Toolbar>
 			</AppBar>
 			{openModal && <Modal closeModal={setOpenModal} />}
-			{renderMenu}
+			{/* {renderMenu} */}
 			{renderMenu2}
 		</div>
 	);

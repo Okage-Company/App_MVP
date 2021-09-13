@@ -5,7 +5,9 @@ const Footer = () => (
 	<div className="footer_container">
 		<div className="life_is_what_you_make">
 			<div className="footer_logo">
-				<img className="footer_logo_img" src="https://i.ibb.co/F82sCf8/0000-07.png"></img>
+				<Link to="/">
+					<img className="footer_logo_img" src="https://i.ibb.co/F82sCf8/0000-07.png"></img>
+				</Link>
 			</div>
 			<div>
 				<div className="footer_text">

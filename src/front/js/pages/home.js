@@ -2,7 +2,7 @@ import React from "react";
 
 import "../../styles/home.scss";
 import Client_Profile from "./client_profile.jsx";
-
+import { Link } from "react-router-dom";
 import CardHome from "../component/cardHome.jsx";
 import Button from "../component/button.jsx";
 
@@ -66,9 +66,11 @@ export const Home = () => {
 						life span, for the needs of people with autism and their families.
 					</span>
 				</div>
-				<div className="button_size">
-					<Button text="Get started" />
-				</div>
+				<Link to="/search">
+					<div className="button_size">
+						<Button text="Get started" />
+					</div>
+				</Link>
 			</div>
 			<div className="grid_container_banner">
 				<div className="home_banner_text">
@@ -79,7 +81,15 @@ export const Home = () => {
 			<div className="grid_container_card_home">
 				{cardHomeMap}
 				<div className="grid_container_card_home_button_container">
-					<Button text="See more" />
+					<button
+						className="button"
+						type="button"
+						onClick={e => {
+							e.preventDefault();
+							location.replace("/search");
+						}}>
+						Search
+					</button>
 					<div className="home_categories_text">
 						You’d be surprised to see how many things you have near you.
 					</div>

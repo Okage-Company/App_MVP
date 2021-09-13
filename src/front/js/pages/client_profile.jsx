@@ -8,6 +8,7 @@ import ButtonUploadImage from "../component/buttonUploadImage.jsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import "../../styles/buttonProfile.scss";
 
 function rand() {
@@ -108,7 +109,7 @@ SimpleModal.propTypes = {
 const Client_Profile = () => {
 	const { store, actions } = useContext(Context);
 	let params = useParams();
-
+	const linkHome = "/";
 	useEffect(() => {
 		actions.getClientId(params.id);
 	}, []);
@@ -125,7 +126,18 @@ const Client_Profile = () => {
 						</div>
 						<div className="clientProfileMain">
 							<div>
-								<div className="clientProfileTitle">Your Profile</div>
+								<div className="logOut">
+									<div className="clientProfileTitle">Your Profile</div>
+
+									<a
+										href="/"
+										className="closeSession"
+										onClick={() => {
+											localStorage.clear();
+										}}>
+										Log Out
+									</a>
+								</div>
 								<div className="dataContainer">
 									<div>
 										<div className="dataContainerTitle">Name</div>

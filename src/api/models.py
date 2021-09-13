@@ -302,6 +302,15 @@ class Business(db.Model):
             "schedule": self.schedule
             #aquí no ponemos la password porque no queremos que se vea en el front
         }
+    def serialize(self):
+        return {
+            "id": self.id,
+            "account_id": self.account_id,
+            "centre_name": self.centre_name,
+            "cif" : self.cif,
+            "schedule": self.schedule
+            #aquí no ponemos la password porque no queremos que se vea en el front
+        }
 
     def serialize(self):
         return {
@@ -326,6 +335,7 @@ class Business(db.Model):
     def get_by_id(cls, id):
         business = cls.query.get(id)
         return business
+      
     @classmethod
     def get_business_id(cls, id):
         business = cls.query.filter_by(account_id=id).one_or_none()
