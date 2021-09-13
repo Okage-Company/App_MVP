@@ -55,13 +55,9 @@ const useStyles = makeStyles(theme => ({
 		pointerEvents: "none",
 		display: "flex",
 		alignItems: "center",
-		justifyContent: "center",
-		color: "#5C74FF"
+		justifyContent: "center"
 	},
 
-	inputRoot: {
-		color: "inherit"
-	},
 	inputInput: {
 		padding: theme.spacing(1, 1, 1, 0),
 		// vertical padding + font size from searchIcon
@@ -96,6 +92,14 @@ const useStyles = makeStyles(theme => ({
 	},
 	mobileIcons: {
 		padding: "5px",
+		color: "#5C74FF",
+		[theme.breakpoints.up("sm")]: {
+			padding: "12px"
+		}
+	},
+	mobileProfileIcons: {
+		padding: "5px",
+		color: "#FFDB7D",
 		[theme.breakpoints.up("sm")]: {
 			padding: "12px"
 		}
@@ -120,7 +124,7 @@ const Navbar = () => {
 					</IconButton>
 				</Link>
 				<Link to={linkProfile}>
-					<IconButton edge="end" className={classes.mobileIcons} color="secondary">
+					<IconButton edge="end" className={classes.mobileProfileIcons} color="secondary">
 						<AccountCircle />
 					</IconButton>
 				</Link>
