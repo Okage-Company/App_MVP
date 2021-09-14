@@ -10,9 +10,10 @@ from sqlalchemy import exc
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 
-from api.models import db, Account, Client, Business, Services, Reviews, Buservices
+from api.models import db, Account, Client, Business, Services, Reviews, Buservices, favourites
 from api.utils import generate_sitemap, APIException
 import jwt
+import json
 #Poner API delante
 api = Blueprint('api', __name__)
 
@@ -27,6 +28,39 @@ def get_user():
         return jsonify([user.serialize() for user in all_user]), 200
     #Si all_user esta vacio devuelve un error
     return jsonify({'message': 'No account created'}), 500
+
+@api.route('/favourites/<int:id>', methods = ['GET'])
+@jwt_required()
+def get_by_account_id(id):
+    if not id == get_jwt_identity():
+        return jsonify({'message': 'not authorized'}), 301
+
+    client = Client.get_by_account_id(id)
+
+    favourite = db.session.query(favourites).all()
+    favourite_ = json.dumps(dict(favourite))
+
+    favourite_list = []
+    for x in favourite:
+        if (x[0] == client.id):
+            favourite_list.append(x[1])
+            print('favourite_list',favourite_list)
+
+    buservices_list = {}
+    for y in favourite_list:
+        buservice = Buservices.get_by_id_buservices(y)
+        buservices_list[y] = buservice.serialize()
+        
+    print('buservice_list', buservices_list)
+ 
+    return buservices_list, 200
+
+
+    # client_list = Client.get_by_account_id(id)
+    # print(client_list)
+    # # favourite_list = favourites.filter(client_id=client_list.id)
+    # return jsonify(client_list), 200
+
 
 #Get user by ID
 @api.route('/account/<int:id>', methods=['GET'])

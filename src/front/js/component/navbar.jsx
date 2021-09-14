@@ -112,6 +112,7 @@ const useStyles = makeStyles(theme => ({
 const Navbar = () => {
 	//Declaro todas las constantes
 	const linkProfile = "/profile/".concat(localStorage.getItem("tokenID"));
+	const linkFavourites = "/myFavourites/".concat(localStorage.getItem("tokenID"));
 	const classes = useStyles();
 	const [profileMenu, setProfileMenu] = useState(null);
 	const [languagesMenu, setLanguagesMenu] = useState(null);
@@ -121,7 +122,7 @@ const Navbar = () => {
 	const userLogedOrNot =
 		localStorage.getItem("tokenID") != null ? (
 			<>
-				<Link to="/myFavourites">
+				<Link to={linkFavourites}>
 					<IconButton className={classes.mobileIcons} aria-label="show 19 new messages" color="inherit">
 						<FavoriteIcon />
 					</IconButton>

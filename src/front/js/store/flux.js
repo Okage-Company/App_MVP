@@ -13,9 +13,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			buservicesById: {},
 			account: [],
 			clientId: [],
+			favouritesId: [],
 			businessId: [],
-			BASE_URL: "https://3000-copper-anglerfish-t5encfcw.ws-eu16.gitpod.io/",
-			URL_API: "https://3001-copper-anglerfish-t5encfcw.ws-eu16.gitpod.io/api/",
+			BASE_URL: "https://3000-kumquat-salmon-ki4n17c8.ws-eu16.gitpod.io/",
+			URL_API: "https://3001-kumquat-salmon-ki4n17c8.ws-eu16.gitpod.io/api/",
 			user: {},
 			currentUser: {}
 		},
@@ -102,6 +103,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 						let responseAsJson = await response.json();
 						setStore({ clientId: new Array(responseAsJson) });
 						console.log(getStore().clientId);
+					} else {
+						throw new Error(response.statusText, "code", response.status);
+					}
+				} catch (error) {
+					console.log(error);
+				}
+			},
+			getFavouritesId: async id => {
+				console.log(id);
+				const token = localStorage.getItem("access_token");
+				try {
+					let response = await fetch(getStore().URL_API.concat("favourites/", id), {
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${token}`
+						}
+					});
+					if (response.ok) {
+						let responseAsJson = await response.json();
+						setStore({ favouritesId: new Array(responseAsJson) });
+						console.log(getStore().favouritesId[0]);
 					} else {
 						throw new Error(response.statusText, "code", response.status);
 					}

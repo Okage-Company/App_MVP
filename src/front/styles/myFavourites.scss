@@ -11,9 +11,7 @@
     grid-template-rows: repeat(1, minmax(0, 1fr));
     grid-template-areas: "sidebar sidebar sidebar main main main main main main map map map"
 }
-h6 {
-    margin-bottom: 2rem;
-}
+
 .main_search_page {
     grid-area: main;
     display: grid;
