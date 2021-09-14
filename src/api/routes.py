@@ -29,6 +29,17 @@ def get_user():
     #Si all_user esta vacio devuelve un error
     return jsonify({'message': 'No account created'}), 500
 
+@api.route('/favourites/<int:id>', methods = ['POST'])
+@jwt_required()
+def join_favourite(id):
+    body = request.get_json()
+    print('BODYBACK',body)
+    client = Client.get_by_account_id(id)
+    statement = favourites.insert().values(client_id=client.id, buservices_id=body)
+    db.session.execute(statement)
+    db.session.commit()
+    return jsonify({'message': 'NICE'}), 200
+
 @api.route('/favourites/<int:id>', methods = ['GET'])
 @jwt_required()
 def get_by_account_id(id):
@@ -38,7 +49,7 @@ def get_by_account_id(id):
     client = Client.get_by_account_id(id)
 
     favourite = db.session.query(favourites).all()
-    favourite_ = json.dumps(dict(favourite))
+    print(favourite)
 
     favourite_list = []
     for x in favourite:

@@ -132,9 +132,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
+			postFavouritesId: async buservice_id => {
+				const token = localStorage.getItem("access_token");
+				const tokenID = localStorage.getItem("tokenID");
+				try {
+					console.log("buservice", JSON.stringify(buservice_id));
+					let response = await fetch(getStore().URL_API.concat("favourites/", tokenID), {
+						method: "POST",
+						body: JSON.stringify(buservice_id),
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${token}`
+						}
+					});
+					if (response.ok) {
+						let responseAsJson = await response.json();
+					} else {
+						throw new Error(response.statusText, "code", response.status);
+					}
+				} catch (error) {
+					console.log(error);
+				}
+			},
 			getBusinessId: id => {
 				console.log(id);
 				const token = localStorage.getItem("access_token");
+				const tokenID = localStorage.getItem("tokenID");
 				fetch(getStore().URL_API.concat("account/", id), {
 					method: "GET",
 					headers: {

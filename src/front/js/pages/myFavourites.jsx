@@ -23,23 +23,28 @@ const myFavourites = () => {
 				</div>
 				<div className="main_search_page">
 					{store.favouritesId.map((account, index) => {
-						console.log(account[1]);
-						console.log(account[2]);
+						// console.log(account[4].id);
+						console.log(account.length);
+						console.log(account);
 						console.log(Object.keys(account).length);
-						// favLength = Object.keys(account).length;
+						const maxLength = Math.max.apply(null, Object.keys(account));
+						console.log(maxLength);
+						// Cambiar el .length por el MAX.
 						const arrayF = [];
-						for (let i = 1; i <= Object.keys(account).length; i++) {
-							arrayF.push(
-								<Card
-									key={i.toString()}
-									i={i.toString()}
-									category={account[i].specialty}
-									title={account[i].title_bus}
-									profile={account[i].professional_name}
-									address={account[i].adress}
-									icon={<i className="card_icon far fa-heart" />}
-								/>
-							);
+						for (let i = 1; i <= maxLength; i++) {
+							if (account[i] != undefined) {
+								arrayF.push(
+									<Card
+										key={i.toString()}
+										i={i.toString()}
+										category={account[i].specialty}
+										title={account[i].title_bus}
+										profile={account[i].professional_name}
+										address={account[i].adress}
+										icon={<i className="card_icon far fa-heart" />}
+									/>
+								);
+							}
 						}
 						return arrayF;
 					})}
