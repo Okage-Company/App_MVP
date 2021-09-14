@@ -102,7 +102,7 @@ function SimpleModal(props) {
 }
 
 SimpleModal.propTypes = {
-	nameValue: PropTypes.text
+	nameValue: PropTypes.string
 };
 
 const Business_Profile = () => {

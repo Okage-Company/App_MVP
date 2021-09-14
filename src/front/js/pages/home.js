@@ -72,9 +72,13 @@ export const Home = () => {
 					</div>
 				</Link>
 			</div>
+
 			<div className="grid_container_banner">
 				<div className="home_banner_text">
-					It is for them <i className="fas fa-arrow-left"></i> it is for you <i className="far fa-star"></i>
+					<Link to="/search">
+						It is for them <i className="fas fa-arrow-left"></i> it is for you{" "}
+						<i className="far fa-star"></i>
+					</Link>
 				</div>
 			</div>
 			{/* card_home */}

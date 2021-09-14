@@ -74,11 +74,12 @@ function SimpleModal(props) {
 						Save
 					</button> */}
 					<button
+						type="button"
+						debugger
 						onClick={() => {
 							actions.getUpdateClient(value, props.nameValue);
 						}}
-						className="buttonProfile margin-button-modal"
-						type="button">
+						className="buttonProfile margin-button-modal">
 						Save
 					</button>
 				</div>
@@ -103,7 +104,7 @@ function SimpleModal(props) {
 }
 
 SimpleModal.propTypes = {
-	nameValue: PropTypes.text
+	nameValue: PropTypes.string
 };
 
 const Client_Profile = () => {
@@ -144,14 +145,14 @@ const Client_Profile = () => {
 										<div className="dataContainerText">{account.name}</div>
 									</div>
 
-									<SimpleModal nameValue="Name" />
+									<SimpleModal nameValue="name" />
 								</div>
 								<div className="dataContainer">
 									<div>
 										<div className="dataContainerTitle">Last Name</div>
 										<div className="dataContainerText">{account.last_name}</div>
 									</div>
-									<SimpleModal nameValue="Last Name" />
+									<SimpleModal nameValue="last_name" />
 								</div>
 								<div className="dataContainer">
 									<div>
@@ -175,7 +176,7 @@ const Client_Profile = () => {
 											<div className="dataContainerTitle">Post Code</div>
 											<div className="dataContainerText">{account.post_code}</div>
 										</div>
-										<SimpleModal nameValue="Post Code" />
+										<SimpleModal nameValue="post_code" />
 									</div>
 								</div>
 								<div>
@@ -193,7 +194,7 @@ const Client_Profile = () => {
 											<div className="dataContainerTitle">Phone</div>
 											<div className="dataContainerText">{account.phone}</div>
 										</div>
-										<SimpleModal nameValue="Phone" />
+										<SimpleModal nameValue="phone" />
 									</div>
 								</div>
 							</div>
