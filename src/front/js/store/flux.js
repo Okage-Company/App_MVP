@@ -87,26 +87,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
-			getClientId: id => {
+			getClientId: async id => {
 				console.log(id);
 				const token = localStorage.getItem("access_token");
-				fetch(getStore().URL_API.concat("account/", id), {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${token}`
-					}
-				})
-					.then(function(response) {
-						if (!response.ok) {
-							throw Error(response.statusText);
+				try {
+					let response = await fetch(getStore().URL_API.concat("account/", id), {
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${token}`
 						}
-						return response.json();
-					})
-					.then(function(responseAsJson) {
+					});
+					if (response.ok) {
+						let responseAsJson = await response.json();
 						setStore({ clientId: new Array(responseAsJson) });
 						console.log(getStore().clientId);
-					});
+					} else {
+						throw new Error(response.statusText, "code", response.status);
+					}
+				} catch (error) {
+					console.log(error);
+				}
 			},
 			getBusinessId: id => {
 				console.log(id);
