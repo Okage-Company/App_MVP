@@ -126,9 +126,7 @@ const detailPage = () => {
 					</div>
 				</div>
 				<div className="review_detail_more_services">
-					<div className="card_section_title_detail">
-						<span>More by ISEP Clinic</span>
-					</div>
+					<div className="card_section_title_detail">{/* <span>More by ISEP Clinic</span> */}</div>
 					<div className="review_detail_more_services_inside">
 						{/* {store.buservicesById.map((buservicesParameter, index) => {
 							return (
