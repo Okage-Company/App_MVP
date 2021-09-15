@@ -225,7 +225,7 @@ const Navbar = () => {
 								if (e.key === "Enter") {
 									e.preventDefault();
 									actions.getBuservicesSearch();
-									// location.replace("/search");
+									location.replace("/search");
 								}
 							}}
 							placeholder="Where are you?"
