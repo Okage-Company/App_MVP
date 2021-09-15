@@ -55,11 +55,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(data);
 				try {
 					let response = await fetch(getStore().URL_API.concat("buservices/search?q=", data));
-
 					if (response.ok) {
 						let responseAsJson = await response.json();
-						setStore({ buservices: responseAsJson });
 						console.log(responseAsJson);
+						setStore({ buservices: responseAsJson });
 					} else {
 						throw new Error(response.statusText, "code", response.status);
 					}

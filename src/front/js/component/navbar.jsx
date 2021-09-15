@@ -225,8 +225,11 @@ const Navbar = () => {
 							onKeyPress={e => {
 								if (e.key === "Enter") {
 									e.preventDefault();
-									actions.getBuservicesSearch(e.target.value);
-									// location.replace("/search");
+									if (e.target.value === "") {
+										location.replace("/search");
+									} else {
+										actions.getBuservicesSearch(e.target.value);
+									}
 								}
 							}}
 							placeholder="Where are you?"
