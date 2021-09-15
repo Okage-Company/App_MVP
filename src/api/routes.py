@@ -14,6 +14,7 @@ from api.models import db, Account, Client, Business, Services, Reviews, Buservi
 from api.utils import generate_sitemap, APIException
 import jwt
 import json
+import itertools
 #Poner API delante
 api = Blueprint('api', __name__)
 
@@ -214,11 +215,14 @@ def get_buservice():
 # Searchbar api route
 @api.route('/buservices/search', methods=['GET'])
 def get_buservice_search():
-    search_info = request.get_json()
-    print(search_info)
-    buservice_result = Buservices.get_all()
+    if request.args:
+        search_info = request.args.get('q', None)
+        print(search_info)
+        buservice_result = Buservices.get_by_data(search_info)
+        print(buservice_result)
     if buservice_result:
-        return jsonify([buservice.serialize() for buservice in buservice_result]), 200
+        buservice_final = list(itertools.chain.from_iterable(buservice_result))
+        return jsonify(buservice_final), 200
     return {'almitghty Thor!': 'Raise us from perdition'}, 409
 
 #Get buservices ONLY ONE OF 'EM mothethef*****
