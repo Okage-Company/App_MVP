@@ -11,6 +11,11 @@
     grid-template-rows: repeat(1, minmax(0, 1fr));
     grid-template-areas: "sidebar sidebar sidebar main main main main main main map map map";
 }
+
+.color-icon-heart {
+    color: $primary-color;
+}
+
 .seach_menu_submit{
     margin-top: 2rem;
 }

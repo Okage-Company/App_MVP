@@ -204,7 +204,7 @@ const Privacy_Policy = () => {
 				<div className="cookies-body-text-terms-div">
 					<span>This website is owned and operated by OKAGE.</span>
 					<span>Or by writing or sending us an email to the following address info@okage.es</span>
-					<span>C/Del Chorro Fantasma 69, 28080, MADRID (Madrid)</span>
+					<span>C/Jesús del Valle 23, 28080, MADRID (Madrid)</span>
 				</div>
 				<span className="terms_title">Download</span>
 				<span className="cookies-body-text-terms">

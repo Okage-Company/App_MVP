@@ -20,6 +20,23 @@ const Search = () => {
 	let params = useParams();
 	const [openLocationMenu, setOpenLocationMenu] = useState(false);
 
+	////////////////////////////
+
+	const [fill, setFill] = useState(true);
+	const [heartIcon, setHeartIcon] = useState(<i className="far fa-heart heart-icon-class"></i>);
+
+	const changeHeart = () => {
+		if (fill == true) {
+			setHeartIcon(<i className="fas fa-heart color-icon-heart"></i>);
+			setFill(false);
+		} else {
+			setHeartIcon(<i className="far fa-heart"></i>);
+			setFill(true);
+		}
+	};
+
+	////////////////////////////
+
 	useEffect(() => {
 		actions.getBuservices(params.id);
 	}, []);
@@ -97,7 +114,8 @@ const Search = () => {
 								title={account.title_bus}
 								profile={account.centre_name}
 								address={account.adress}
-								icon={<i className="card_icon far fa-heart" />}
+								// icon={<span onClick={() => changeHeart()}>{heartIcon}</span>}
+								icon={heartIcon}
 							/>
 						);
 					})}

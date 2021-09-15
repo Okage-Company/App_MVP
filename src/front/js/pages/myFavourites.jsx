@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { Fragment, useContext } from "react";
 import { useParams } from "react-router";
 import { Context } from "../store/appContext";
-import "../../styles/myServices.scss";
+import "../../styles/myFavourites.scss";
+import "../../styles/home.scss";
 import Card from "../component/card.jsx";
 
 const myFavourites = () => {
@@ -15,13 +16,18 @@ const myFavourites = () => {
 
 	return (
 		<Fragment>
-			<div className="grid_container_myServices">
-				<div className="sidebar_search_page">
-					<div className="search_menu_container">
-						<h6>Your Favourites</h6>
+			<div className="grid_container_myFavorites">
+				<div className="sidebar_favorites_page">
+					<div className="favorites_menu_container">
+						<span className="my-favorites-title">Favourites</span>
+						<div className="home_categories_text">
+							<span>
+								Keep your favorite services for later <i className="far fa-star"></i>
+							</span>
+						</div>
 					</div>
 				</div>
-				<div className="main_search_page">
+				<div className="main_favorites_page">
 					{store.favouritesId.map((account, index) => {
 						// console.log(account[4].id);
 						console.log(account.length);
@@ -37,9 +43,10 @@ const myFavourites = () => {
 									<Card
 										key={i.toString()}
 										i={i.toString()}
+										image={account[i].photos}
 										category={account[i].specialty}
 										title={account[i].title_bus}
-										profile={account[i].professional_name}
+										profile={account[i].centre_name}
 										address={account[i].adress}
 										icon={<i className="card_icon far fa-heart" />}
 									/>
