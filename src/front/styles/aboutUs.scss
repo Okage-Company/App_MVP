@@ -12,14 +12,22 @@ $logo-photo: url('https://i.ibb.co/vvrtTKW/0logo-navbar-08.png') no-repeat cente
     display: grid;
     grid-gap: $grid-gap;
     grid-template-columns: repeat(12, minmax(0, 1fr));
-    grid-template-rows: repeat(1, minmax(0, 1fr));
-    grid-template-areas: "witch witch witch witch witch witch cook cook cook cook cook cook";
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas: "witch witch witch witch witch witch cook cook cook cook cook cook"
+                        "valor valor valor valor valor valor valor valor valor valor valor valor";
 
 }
 
 .about-us-witch {
     grid-area: witch;
     width: auto;
+}
+
+.valores {
+    grid-area: valor;
+    width: auto;
+    padding-left: 8rem;
+    padding-right: 8rem;
 }
 
 .about-us-main {
@@ -93,10 +101,17 @@ $logo-photo: url('https://i.ibb.co/vvrtTKW/0logo-navbar-08.png') no-repeat cente
         grid-gap: $grid-gap;
         grid-template-columns: 1fr;
         grid-template-areas: "witch"
-                            "cook";
+                            "cook"
+                            "valor";
     
     }
     .about-us-image {
         height: 15rem;
+    }
+    .valores {
+        grid-area: valor;
+        width: auto;
+        padding-left: 0rem;
+        padding-right: 0rem;
     }
 }

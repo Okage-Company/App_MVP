@@ -1,6 +1,6 @@
 @import '../styles/index.scss';
 
-$profile-photo: url('https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2850&q=80') no-repeat center;
+$profile-photo: url('https://i.ibb.co/vxZmtd1/Profile-photyo-03.png') no-repeat center;
 
 .grid_container_detail_page {
     font-family: $primary-font;
@@ -13,34 +13,15 @@ $profile-photo: url('https://images.unsplash.com/photo-1607746882042-944635dfe10
     padding-bottom: $container-grid-padding;
     grid-gap: $grid-gap;
     grid-template-columns: repeat(12, minmax(0, 1fr));
-    grid-template-rows: auto auto auto;
-    grid-template-areas: "main main main main main main main main main sidebar sidebar sidebar"
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas: "gal gal gal gal gal gal gal gal gal sidebar sidebar sidebar"
+                        "main main main main main main main main main sidebar sidebar sidebar"
                         "review review review review review review review review review sidebar sidebar sidebar"
                         "more more more more more more more more more sidebar sidebar sidebar";
 }
 
-@media (max-width: 1200px) {
-    .grid_container_detail_page {
-        padding-left: 4.063rem;
-        padding-right: 4.063rem;
-        grid-template-columns: 1fr;
-        grid-template-areas: "sidebar"
-                            "main"
-                            "review"
-                            "more";
-    }
-}
-
-@media (max-width: 600px) {
-    .grid_container_detail_page {
-        padding-left: 2.188rem;
-        padding-right: 2.188rem;
-        grid-template-columns: 1fr;
-        grid-template-areas: "sidebar"
-                            "main"
-                            "review"
-                            "more";
-    }
+.detail_page_gallery {
+    grid-area: gal;
 }
 
 .main_detail_page {
@@ -78,19 +59,6 @@ $profile-photo: url('https://images.unsplash.com/photo-1607746882042-944635dfe10
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-gap: $grid-gap;
-}
-
-.sidebar_detail_page {
-    grid-area: sidebar;
-}
-
-@media (max-width: 600px) {
-    .sidebar_detail_page {
-        grid-area: sidebar;
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        grid-gap: $grid-gap;
-    }
 }
 
 .main_detail_page_header {
@@ -133,6 +101,12 @@ $profile-photo: url('https://images.unsplash.com/photo-1607746882042-944635dfe10
     font-size: $large-size;
     color: $primary-color;
     font-weight: $bold-weight;
+}
+
+.title_profile_centre {
+    font-size: $medium-size;
+    color: $primary-color;
+    font-weight: $medium-weight;
 }
 
 .tags_profile_service {
@@ -184,4 +158,43 @@ $profile-photo: url('https://images.unsplash.com/photo-1607746882042-944635dfe10
     font-size: $large-size;
     color: $dark-grey-color;
     font-weight: $medium-weight;
+}
+
+@media (max-width: 1200px) {
+    .grid_container_detail_page {
+        padding-left: 4.063rem;
+        padding-right: 4.063rem;
+        // padding-top: 1rem;
+        grid-template-columns: 1fr;
+        grid-template-areas: "gal"
+                            "sidebar"
+                            "main"
+                            "review"
+                            "more";
+    }
+    .sidebar_detail_page {
+        grid-area: sidebar;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-gap: $grid-gap;
+    }
+}
+
+@media (max-width: 600px) {
+    .grid_container_detail_page {
+        padding-left: 2.188rem;
+        padding-right: 2.188rem;
+        padding-top: 3rem;
+        grid-template-columns: 1fr;
+        grid-template-areas: "gal"
+                            "sidebar"
+                            "main"
+                            "review"
+                            "more";
+    }
+    .review_detail_page_inside {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: $grid-gap;
+    }
 }
