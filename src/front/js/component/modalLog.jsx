@@ -8,7 +8,11 @@ import ModalSign from "./modalSign.jsx";
 //alguien convertir a otro path i can't do itttt pleaseee help
 
 const ModalLog = ({ closeModalLog }) => {
-	const { register, handleSubmit } = useForm();
+	const {
+		register,
+		formState: { errors },
+		handleSubmit
+	} = useForm();
 	const { store, actions } = useContext(Context);
 	const onSubmit = data => actions.getLogin(JSON.stringify(data));
 	const [logModalContent, setLogModalContent] = useState("");
@@ -29,10 +33,11 @@ const ModalLog = ({ closeModalLog }) => {
 						<label className="form_label">Email</label>
 						<input
 							{...register("email")}
-							className="form_placeholder"
-							type="text"
 							id="email"
+							type="email"
+							className="form_placeholder"
 							placeholder="e.g. your@mail.com"
+							required
 						/>
 					</div>
 					<div className="form_imputs">
@@ -40,9 +45,12 @@ const ModalLog = ({ closeModalLog }) => {
 						<input
 							{...register("password")}
 							className="form_placeholder"
-							type="text"
+							placeholder="••••"
+							type="password"
 							id="password"
-							placeholder="••••••••"
+							minLength="4"
+							maxLength="10"
+							required
 						/>
 						<span className="form_footer_text_log">¿Forgot your password?</span>
 					</div>

@@ -56,6 +56,7 @@ const ModalSign = ({ LogWorks }) => {
 							type="text"
 							id="phone"
 							placeholder="e.g. 999 999 999"
+							minLength="9"
 						/>
 					</div>
 					<div className="form_imputs">
@@ -106,9 +107,10 @@ const ModalSign = ({ LogWorks }) => {
 						<input
 							{...register("email")}
 							className="form_placeholder"
-							type="text"
+							type="email"
 							id="email"
 							placeholder="e.g. your@mail.com"
+							required
 						/>
 					</div>
 					<div className="form_imputs">
@@ -116,9 +118,12 @@ const ModalSign = ({ LogWorks }) => {
 						<input
 							{...register("_password")}
 							className="form_placeholder"
-							type="text"
+							type="password"
 							id="password"
-							placeholder="at least 8 characters"
+							placeholder="at least 4 characters"
+							minLength="4"
+							maxLength="10"
+							required
 						/>
 					</div>
 					<div className="form_imputs">
