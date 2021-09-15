@@ -97,7 +97,7 @@ class Buservices(db.Model):
 
     @classmethod
     def get_by_business(cls, business_id):
-        get_by_business_buservices_variable = cls.query.filter_by(business_id=business_id)
+        get_by_business_buservices_variable = cls.query.get(business_id)
         return get_by_business_buservices_variable
         
 
