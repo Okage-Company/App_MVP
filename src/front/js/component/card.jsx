@@ -9,7 +9,9 @@ const Card = props => {
 	return (
 		<div className="card_container">
 			<Link className="link-card-search" to={linkToBuserviceId}>
-				<div className="card_image" />
+				<div className="card_image">
+					<img className="card_search_new_image" src={props.image}></img>
+				</div>
 				<div className="card_container_text">
 					<span className="card_category">{props.category}</span>
 					<span className="card_title">{props.title}</span>

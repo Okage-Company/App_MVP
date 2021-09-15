@@ -6,7 +6,9 @@ import "../../styles/staffCard.scss";
 const StaffCard = props => {
 	return (
 		<div className="staff_card_container">
-			<div className="staff_card_image" />
+			<div className="staff_card_image">
+				<img className="staff_new_image" src={props.image}></img>
+			</div>
 			<div className="staff_card_container_text">
 				<span className="staff_card_name">
 					<i className="fas fa-user-md icon-right-margin"></i>
@@ -21,6 +23,7 @@ const StaffCard = props => {
 };
 
 StaffCard.propTypes = {
+	image: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
 	specialty: PropTypes.string.isRequired,
 	studies: PropTypes.string.isRequired,

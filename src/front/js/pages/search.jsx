@@ -93,6 +93,7 @@ const Search = () => {
 						let ind = index + 1;
 						return (
 							<Card
+								image="https://i.ibb.co/V3h15xt/3.png"
 								key={index.toString()}
 								i={ind.toString()}
 								category={account.specialty}
