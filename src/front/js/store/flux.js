@@ -10,6 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			//lista donde se almacena todos los fetch que hagamos :)
 			buservices: [],
+			buservicesSearch: [],
 			buservicesById: {},
 			account: [],
 			clientId: [],
@@ -43,7 +44,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (response.ok) {
 						let responseAsJson = await response.json();
 						setStore({ buservices: responseAsJson });
-						console.log(responseAsJson); // respuesta que recibo de la API, important, para ver siempre el array en la consola pa sacar los datos :) nos da un array con muchos objetos
+					} else {
+						throw new Error(response.statusText, "code", response.status);
+					}
+				} catch (error) {
+					console.log(error);
+				}
+			},
+			getBuservicesSearch: async () => {
+				try {
+					let response = await fetch(getStore().URL_API.concat("buservices/search"));
+
+					if (response.ok) {
+						let responseAsJson = await response.json();
+						setStore({ buservicesSearch: responseAsJson });
+						console.log(responseAsJson);
 					} else {
 						throw new Error(response.statusText, "code", response.status);
 					}

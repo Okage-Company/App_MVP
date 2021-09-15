@@ -211,6 +211,15 @@ def get_buservice():
     if buservice_result:
         return jsonify([buservice.serialize() for buservice in buservice_result]), 200
     return {'almitghty Thor!': 'Raise us from perdition'}, 409
+# Searchbar api route
+@api.route('/buservices/search', methods=['GET'])
+def get_buservice_search():
+    search_info = request.get_json()
+    print(search_info)
+    buservice_result = Buservices.get_all()
+    if buservice_result:
+        return jsonify([buservice.serialize() for buservice in buservice_result]), 200
+    return {'almitghty Thor!': 'Raise us from perdition'}, 409
 
 #Get buservices ONLY ONE OF 'EM mothethef*****
 @api.route('/buservices/<int:id>', methods=['GET'])
