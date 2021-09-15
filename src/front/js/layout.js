@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
+import { ErasePalomaDemo } from "./pages/erasePalomaDemo";
 import { Single } from "./pages/single";
 import Client_Profile from "./pages/client_profile.jsx";
 import injectContext from "./store/appContext";
@@ -72,7 +72,7 @@ const Layout = () => {
 								<Business_Profile />
 							</Route>
 							<Route exact path="/demo/">
-								<Demo />
+								<ErasePalomaDemo />
 							</Route>
 							----{" "}
 							<Route>
