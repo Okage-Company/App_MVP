@@ -5,21 +5,18 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
-import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import SearchIcon from "@material-ui/icons/Search";
-import MessageIcon from "@material-ui/icons/Message";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import LanguageIcon from "@material-ui/icons/Language";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import "../../styles/navbar.scss";
 import logo from "../../img/logopng.png";
-import Logo from "../component/logo.jsx";
 import Modal from "../component/modal.jsx";
 import { Link } from "react-router-dom";
-import { Avatar } from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
+import { useContext } from "react";
+import { Context } from "../store/appContext";
 
 const useStyles = makeStyles(theme => ({
 	grow: {
@@ -112,16 +109,19 @@ const useStyles = makeStyles(theme => ({
 const Navbar = () => {
 	//Declaro todas las constantes
 	const linkProfile = "/profile/".concat(localStorage.getItem("tokenID"));
+	const linkFavourites = "/myFavourites/".concat(localStorage.getItem("tokenID"));
 	const classes = useStyles();
 	const [profileMenu, setProfileMenu] = useState(null);
 	const [languagesMenu, setLanguagesMenu] = useState(null);
 	const [openModal, setOpenModal] = useState(false);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+	const [inputSearch, setInputSearch] = useState("");
+	const { store, actions } = useContext(Context);
 
 	const userLogedOrNot =
 		localStorage.getItem("tokenID") != null ? (
 			<>
-				<Link to="/myFavourites">
+				<Link to={linkFavourites}>
 					<IconButton className={classes.mobileIcons} aria-label="show 19 new messages" color="inherit">
 						<FavoriteIcon />
 					</IconButton>
@@ -144,6 +144,10 @@ const Navbar = () => {
 	// const handleProfileMenuOpen = event => {
 	// 	setProfileMenu(event.currentTarget);
 	// };
+	const handleSearchChange = event => {
+		setInputSearch(event.target.value);
+		console.log(inputSearch);
+	};
 
 	const handleLanguagesMenuOpen = event => {
 		setLanguagesMenu(event.currentTarget);
@@ -216,11 +220,12 @@ const Navbar = () => {
 							<SearchIcon />
 						</div>
 						<InputBase
+							onChange={handleSearchChange}
 							onKeyPress={e => {
 								if (e.key === "Enter") {
 									e.preventDefault();
-									console.log("hihihihihi");
-									location.replace("/search");
+									actions.getBuservicesSearch();
+									// location.replace("/search");
 								}
 							}}
 							placeholder="Where are you?"

@@ -10,12 +10,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			//lista donde se almacena todos los fetch que hagamos :)
 			buservices: [],
+			buservicesSearch: [],
 			buservicesById: {},
 			account: [],
 			clientId: [],
+			favouritesId: [],
 			businessId: [],
-			BASE_URL: "https://3000-magenta-heron-687dxyev.ws-eu16.gitpod.io/",
-			URL_API: "https://3001-magenta-heron-687dxyev.ws-eu16.gitpod.io/api/",
+			BASE_URL: "https://3000-kumquat-salmon-ki4n17c8.ws-eu16.gitpod.io/",
+			URL_API: "https://3001-kumquat-salmon-ki4n17c8.ws-eu16.gitpod.io/api/",
 			user: {},
 			currentUser: {}
 		},
@@ -42,7 +44,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (response.ok) {
 						let responseAsJson = await response.json();
 						setStore({ buservices: responseAsJson });
-						console.log(responseAsJson); // respuesta que recibo de la API, important, para ver siempre el array en la consola pa sacar los datos :) nos da un array con muchos objetos
+					} else {
+						throw new Error(response.statusText, "code", response.status);
+					}
+				} catch (error) {
+					console.log(error);
+				}
+			},
+			getBuservicesSearch: async () => {
+				try {
+					let response = await fetch(getStore().URL_API.concat("buservices/search"));
+
+					if (response.ok) {
+						let responseAsJson = await response.json();
+						setStore({ buservicesSearch: responseAsJson });
+						console.log(responseAsJson);
 					} else {
 						throw new Error(response.statusText, "code", response.status);
 					}
@@ -109,9 +125,54 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
+			getFavouritesId: async id => {
+				console.log(id);
+				const token = localStorage.getItem("access_token");
+				try {
+					let response = await fetch(getStore().URL_API.concat("favourites/", id), {
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${token}`
+						}
+					});
+					if (response.ok) {
+						let responseAsJson = await response.json();
+						setStore({ favouritesId: new Array(responseAsJson) });
+						console.log(getStore().favouritesId[0]);
+					} else {
+						throw new Error(response.statusText, "code", response.status);
+					}
+				} catch (error) {
+					console.log(error);
+				}
+			},
+			postFavouritesId: async buservice_id => {
+				const token = localStorage.getItem("access_token");
+				const tokenID = localStorage.getItem("tokenID");
+				try {
+					console.log("buservice", JSON.stringify(buservice_id));
+					let response = await fetch(getStore().URL_API.concat("favourites/", tokenID), {
+						method: "POST",
+						body: JSON.stringify(buservice_id),
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${token}`
+						}
+					});
+					if (response.ok) {
+						let responseAsJson = await response.json();
+					} else {
+						throw new Error(response.statusText, "code", response.status);
+					}
+				} catch (error) {
+					console.log(error);
+				}
+			},
 			getBusinessId: id => {
 				console.log(id);
 				const token = localStorage.getItem("access_token");
+				const tokenID = localStorage.getItem("tokenID");
 				fetch(getStore().URL_API.concat("account/", id), {
 					method: "GET",
 					headers: {

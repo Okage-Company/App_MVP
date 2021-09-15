@@ -203,7 +203,6 @@ const Client_Profile = () => {
 					</div>
 				);
 			})}
-			;
 		</div>
 	);
 };

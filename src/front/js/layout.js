@@ -88,7 +88,7 @@ const Layout = () => {
 							<Route exact path="/myServices/">
 								<MyServices />
 							</Route>
-							<Route exact path="/myFavourites/">
+							<Route exact path="/myFavourites/:id">
 								<MyFavourites />
 							</Route>
 							<Route exact path="/single/:theid">
