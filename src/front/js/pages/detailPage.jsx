@@ -43,7 +43,7 @@ const detailPage = () => {
 							<i className="far fa-clock small_icon_sidebar"></i>
 							<span className="sidebar_list_element_title">Hours</span>
 						</div>
-						<span className="sidebar_list_element">Fetch Horario Falta</span>
+						<span className="sidebar_list_element">Mon–Fri from 9:00–21:00</span>
 					</div>
 					<div className="sidebar_detail_page_section_last">
 						<div className="sidebar_title_section">
@@ -67,7 +67,11 @@ const detailPage = () => {
 				<div className="main_detail_page">
 					<div className="ay-no-se">
 						<div className="main_detail_page_header">
-							<div className="main_detail_page_header_image" />
+							<div className="main_detail_page_header_image">
+								<img
+									className="profile_centre_new_image"
+									src="https://cdn.dribbble.com/users/690037/screenshots/15321173/media/3110c5335303dd9270607ca752969dd1.jpg"></img>
+							</div>
 							<div className="main_detail_page_header_body">
 								<span className="title_profile_service">{store.buservicesById.title_bus}</span>
 								<span className="title_profile_centre">
@@ -86,6 +90,7 @@ const detailPage = () => {
 					</div>
 					<div className="staff_card_container_detail">
 						<StaffCard
+							image="https://images.pexels.com/photos/4098274/pexels-photo-4098274.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
 							name={store.buservicesById.professional_name}
 							specialty={store.buservicesById.professional_techniques}
 							studies={store.buservicesById.professional_studies}
