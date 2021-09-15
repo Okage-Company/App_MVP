@@ -23,9 +23,15 @@ const Footer = () => (
 			</div>
 		</div>
 		<div className="footer_social">
-			<i className="fab fa-instagram"></i>
-			<i className="fab sm-icon fa-facebook-square"></i>
-			<i className="fab sm-icon fa-twitter-square"></i>
+			<a className="a-footer" href="https://www.instagram.com/okage.es/">
+				<i className="fab fa-instagram"></i>
+			</a>
+			<a className="a-footer" href="https://www.facebook.com/Okage-102088032232073">
+				<i className="fab sm-icon fa-facebook-square"></i>
+			</a>
+			<a className="a-footer" href="https://twitter.com/Okage_es">
+				<i className="fab sm-icon fa-twitter-square"></i>
+			</a>
 		</div>
 		<div className="footer_terms">
 			<div className="footer_terms_divider" />
