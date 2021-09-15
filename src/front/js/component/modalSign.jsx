@@ -48,6 +48,7 @@ const ModalSign = ({ LogWorks }) => {
 							placeholder="e.g. Aniston"
 						/>
 					</div>
+
 					<div className="form_imputs">
 						<label className="form_label">Phone number</label>
 						<input

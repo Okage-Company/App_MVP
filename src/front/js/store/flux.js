@@ -16,8 +16,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			clientId: [],
 			favouritesId: [],
 			businessId: [],
-			BASE_URL: "https://3000-kumquat-salmon-ki4n17c8.ws-eu16.gitpod.io/",
-			URL_API: "https://3001-kumquat-salmon-ki4n17c8.ws-eu16.gitpod.io/api/",
+			BASE_URL: "https://okage.es/",
+			URL_API: "https://okage.es/api/",
 			user: {},
 			currentUser: {}
 		},
