@@ -1,64 +1,46 @@
-# WebApp boilerplate with React JS
+# OKAGE with React JS
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io#https://github.com/4GeeksAcademy/react-flask-hello.git)
 
+<h1 align="center">
+OKAGE
+</h1>
+
+**_Okage_** is the initiative of a group of conscientious people who understood the problems of people with ASD and their families, and decided to get down to work to facilitate access to all services and activities near their homes. _Okage_ is in charge of centralizing all the federations, associations, centers and specialized schools in a web / app where as many as others have all the information according to the needs and the stage of development in which they are and consequently help to improve their quality of life.
+
+##
+![Values](https://i.ibb.co/YN9BPyg/0-Valores2-01.png)
+
+
+### Design
+
+In Okage's initial stage our team used Figma, QuickDataBaseDiagrams and TRELLO to start to get used to the idea of what Okage would be like. Once our team had this phase completed the team applied scrum methodologies and started using the following tools:
+
 <p align="center">
-<a href="https://www.loom.com/share/f37c6838b3f1496c95111e515e83dd9b"><img src="https://github.com/4GeeksAcademy/flask-rest-hello/blob/main/docs/assets/how-to.png?raw=true?raw=true" /></a>
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" width="50" height="50" title="React">
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" width="50" height="50" title="Javascript">
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="50" height="50" title="Python">
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" width="50" height="50" title="HTML">
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" width="50" height="50" title="CSS">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7qvkwyXoEp63-8fLF6wm3bzxqypXoVGXCxaovfVezQNX5SVZVxluRocCTioU5PGtE3IA&usqp=CAU" width="50" height="50" title="Material UI">
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" width="50" height="50" title="Bootstrap">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/1051px-Adobe_Photoshop_CC_icon.svg.png" width="50" height="50" title="Photoshop">
+<img src="https://www.vectorlogo.zone/logos/pocoo_flask/pocoo_flask-icon.svg" width="50" height="50" title="Flask">
+<img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" width="50" height="50" title="Postman">
+<img src="https://user-images.githubusercontent.com/6686410/31217465-6adbbd18-a98d-11e7-9371-26d578182e9d.png" width="50" height="50" title="Insomnia">
+<img src="https://www.vectorlogo.zone/logos/heroku/heroku-icon.svg" width="50" height="50" title="Heroku">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4mz0NQOF7WzhaS7qk2mY8RlUKXfwvdzV5vmNOa8ZnYCs31tqmHAs0wujMZM5WfNwK9jo&usqp=CAU" width="50" height="50" title="Heroku">
 </p>
 
-### Styles
-You can update the `styles/index.scss` or create new `.scss` files inside `styles/` and import them into your current scss or js files depending on your needs.
+## Okage's website:
 
-### Components
-Add more files into your `./src/js/components` or styles folder as you need them and import them into your current files as needed.
+This boilerplate it's 100% integrated with Heroku: [okage.es](https://www.okage.es/)
 
-💡Note: There is an example using the Context API inside `views/demo.js`;
+## You also can reach Okage in our RRSS:
+- [Twitter](https://twitter.com/Okage_es)
+- [LinkedIn](https://www.linkedin.com/in/)
+- [Instagram](https://www.instagram.com/okage.es/?hl=es)
+- [Facebook](https://www.facebook.com/Okage-102088032232073)
 
-### Views (Components)
-Add more files into your `./src/js/views` and import them in `./src/js/layout.jsx`.
+### Okage members
 
-### Context
-This boilerplate comes with a centralized general Context API. The file `./src/js/store/flux.js` has a base structure for the store, we encourage you to change it and adapt it to your needs.
-
-React Context [docs](https://reactjs.org/docs/context.html)
-BreathCode Lesson [view](https://content.breatheco.de/lesson/react-hooks-explained)
-
-The `Provider` is already set. You can consume from any component using the useContext hook to get the `store` and `actions` from the Context. Check `/views/demo.js` to see a demo.
-
-```jsx
-import { Context } from "../store/appContext";
-const MyComponentSuper = () => {
-  //here you use useContext to get store and actions
-  const { store, actions } = useContext(Context);
-  return <div>{/* you can use your actions or store inside the html */}</div>
-}
-```
-
-### Back-End Manual Installation:
-
-It is recomended to install the backend first, make sure you have Python 3.8, Pipenv and a database engine (Posgress recomended)
-
-1. Install the python packages: `$ pipenv install`
-2. Create a .env file based on the .env.example: `$ cp .env.example .env`
-3. Install your database engine and create your database, depending on your database you have to create a DATABASE_URL variable with one of the possible values, make sure yo replace the valudes with your database information:
-
-| Engine	| DATABASE_URL 						|
-| ------------- | ----------------------------------------------------- |
-| SQLite	| sqlite:////test.db	 				|
-| MySQL		| mysql://username:password@localhost:port/example	|
-| Postgress	| postgres://username:password@localhost:5432/example 	|
-
-4. Migrate the migrations: `$ pipenv run migrate` (skip if you have not made changes to the models on the `./src/api/models.py`)
-5. Run the migrations: `$ pipenv run upgrade`
-6. Run the application: `$ pipenv run start
-
-
-### Front-End Manual Installation:
-
-- Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
-
-1. Install the packages: `$ npm install`
-2. Start coding! start the webpack dev server `$ npm run start`
-
-## Publish your website!
-
-This boilerplate it's 100% integrated with Herkou, just by pushing your changes to the heroku repository it will deploy: `$ git push heroku main`
+[Ricardo](https://github.com/ricardorsario), [Ruben](https://github.com/9Shuck), [Paloma](https://github.com/Florence-Paloma) and [Vino](https://github.com/VinoliaBarreto)
