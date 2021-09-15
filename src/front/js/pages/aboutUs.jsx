@@ -28,6 +28,9 @@ const AboutUs = () => {
 					help to improve their quality of life.
 				</span>
 			</div>
+			<div className="valores">
+				<img className="img-fluid" src="https://i.ibb.co/YN9BPyg/0-Valores2-01.png"></img>
+			</div>
 		</div>
 	);
 };
