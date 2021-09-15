@@ -17,6 +17,7 @@ import Modal from "../component/modal.jsx";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
+import InfoIcon from "@material-ui/icons/Info";
 
 const useStyles = makeStyles(theme => ({
 	grow: {
@@ -224,8 +225,8 @@ const Navbar = () => {
 							onKeyPress={e => {
 								if (e.key === "Enter") {
 									e.preventDefault();
-									actions.getBuservicesSearch();
-									location.replace("/search");
+									actions.getBuservicesSearch(e.target.value);
+									// location.replace("/search");
 								}
 							}}
 							placeholder="Where are you?"
@@ -239,13 +240,11 @@ const Navbar = () => {
 					<div className={classes.grow} />
 					<div className={classes.sectionDesktop}>
 						{/*Language icon*/}
-						<IconButton
-							className={classes.mobileIcons}
-							color="inherit"
-							onClick={handleLanguagesMenuOpen}
-							aria-controls={menuLanguagesId}>
-							<LanguageIcon />
-						</IconButton>
+						<Link to="/about">
+							<IconButton className={classes.mobileIcons} color="inherit">
+								<InfoIcon />
+							</IconButton>
+						</Link>
 
 						{/*FAVs icon */}
 						{/* Account Icon */}
