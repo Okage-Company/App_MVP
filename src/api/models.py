@@ -50,7 +50,7 @@ class Buservices(db.Model):
 
 
     def __repr__(self):
-        return f'Buservices {self.specialty}, {self.numero_colegiado}, {self.business_id}'
+        return f'{self.id}'
 
     def serialize(self):
 
@@ -94,7 +94,23 @@ class Buservices(db.Model):
     def get_by_id_buservices(cls, id):
         get_by_id_buservices_variable = cls.query.filter_by(id=id).one_or_none()
         return get_by_id_buservices_variable
-        
+    
+    @classmethod
+    def get_by_data(cls, data):
+        buservice_list = []
+        get_by_data_specialty = db.session.query(cls).filter(
+            cls.specialty.like(f'%{data}%')
+        ).all()
+        get_by_data_title = db.session.query(cls).filter(
+            cls.title_bus.like(f'%{data}%')
+        ).all()
+        specialty_serialize =[buservice.serialize() for buservice in get_by_data_specialty]
+        title_serialize = [buservice.serialize() for buservice in get_by_data_title]
+        buservice_list.append(specialty_serialize)
+        buservice_list.append(title_serialize)
+
+        return buservice_list
+
 
 #1.1-Declaro el nombre de la primera tabla
 class Account(db.Model):
@@ -247,7 +263,7 @@ class Client(db.Model):
                     backref="clients")
     #2
     def __repr__(self):
-        return f'Client {self.id} {self.account_id}'
+        return f'Client {self.id} {self.account_id} {self.buservices_}' 
         
     def serialize(self):
         client = Account.get_by_id(self.account_id)
@@ -273,7 +289,11 @@ class Client(db.Model):
     @classmethod
     def get_by_id(cls, id):
         client = cls.query.filter_by(id=id).one_or_none()
-        print (client)
+        return client
+    
+    @classmethod
+    def get_by_account_id(cls, id):
+        client = cls.query.filter_by(account_id=id).one_or_none()
         return client
 
 class Business(db.Model):

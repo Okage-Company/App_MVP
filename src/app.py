@@ -19,10 +19,14 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 # database condiguration
-if os.getenv("DATABASE_URL") is not None:
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+if ENV =="development":
+    if os.getenv("DATABASE_URL") is not None:
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////tmp/test.db"
+    uri = os.getenv("DATABASE_URL")  # or other relevant config var
+    if uri.startswith("postgres://"):
+        uri = uri.replace("postgres://", "postgresql://", 1)
+    app.config['SQLALCHEMY_DATABASE_URI'] = uri
 #TOKEN
 app.config["JWT_SECRET_KEY"] = os.environ.get('FLASK_APP_KEY')
 jwt = JWTManager(app)

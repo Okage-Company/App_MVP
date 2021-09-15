@@ -89,7 +89,6 @@ const Search = () => {
 				</div>
 				<div className="main_search_page">
 					{store.buservices.map((account, index) => {
-						console.log(account);
 						let ind = index + 1;
 						return (
 							<Card
