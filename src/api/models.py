@@ -94,7 +94,23 @@ class Buservices(db.Model):
     def get_by_id_buservices(cls, id):
         get_by_id_buservices_variable = cls.query.filter_by(id=id).one_or_none()
         return get_by_id_buservices_variable
-        
+    
+    @classmethod
+    def get_by_data(cls, data):
+        buservice_list = []
+        get_by_data_specialty = db.session.query(cls).filter(
+            cls.specialty.like(f'%{data}%')
+        ).all()
+        get_by_data_title = db.session.query(cls).filter(
+            cls.title_bus.like(f'%{data}%')
+        ).all()
+        specialty_serialize =[buservice.serialize() for buservice in get_by_data_specialty]
+        title_serialize = [buservice.serialize() for buservice in get_by_data_title]
+        buservice_list.append(specialty_serialize)
+        buservice_list.append(title_serialize)
+
+        return buservice_list
+
 
 #1.1-Declaro el nombre de la primera tabla
 class Account(db.Model):

@@ -51,13 +51,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
-			getBuservicesSearch: async () => {
+			getBuservicesSearch: async data => {
+				console.log(data);
 				try {
-					let response = await fetch(getStore().URL_API.concat("buservices/search"));
+					let response = await fetch(getStore().URL_API.concat("buservices/search?q=", data));
 
 					if (response.ok) {
 						let responseAsJson = await response.json();
-						setStore({ buservicesSearch: responseAsJson });
+						setStore({ buservices: responseAsJson });
 						console.log(responseAsJson);
 					} else {
 						throw new Error(response.statusText, "code", response.status);
