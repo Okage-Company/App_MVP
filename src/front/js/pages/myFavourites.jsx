@@ -48,7 +48,7 @@ const myFavourites = () => {
 										title={account[i].title_bus}
 										profile={account[i].centre_name}
 										address={account[i].adress}
-										icon={<i className="card_icon far fa-heart" />}
+										icon={<i className="fas fa-heart color-icon-heart"></i>}
 									/>
 								);
 							}

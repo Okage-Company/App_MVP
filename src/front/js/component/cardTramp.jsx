@@ -2,14 +2,26 @@ import React from "react"; // don't  forget useContext
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useParams } from "react-router";
 
 import "../../styles/card.scss";
 
-const Card = props => {
+const CardTramp = props => {
 	const { store, actions } = useContext(Context);
 	let params = useParams();
+	const [heartIcon, setHeartIcon] = useState(<i className="far fa-heart heart-icon-class"></i>);
+	const [fill, setFill] = useState(true);
+
+	const changeHeart = () => {
+		if (fill == true) {
+			setHeartIcon(<i className="fas fa-heart color-icon-heart"></i>);
+			setFill(false);
+		} else {
+			setHeartIcon(<i className="far fa-heart"></i>);
+			setFill(true);
+		}
+	};
 
 	const linkToBuserviceId = "/buservices/".concat(props.i);
 	return (
@@ -28,10 +40,10 @@ const Card = props => {
 							className="card_icon"
 							onClick={e => {
 								e.preventDefault();
-								props.functionHeart();
+								changeHeart();
 								actions.postFavouritesId(props.i);
 							}}>
-							{props.icon}
+							{heartIcon}
 						</div>
 					</div>
 				</div>
@@ -40,15 +52,14 @@ const Card = props => {
 	);
 };
 
-Card.propTypes = {
+CardTramp.propTypes = {
 	image: PropTypes.string.isRequired,
 	category: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
 	profile: PropTypes.string.isRequired,
 	address: PropTypes.string.isRequired,
-	icon: PropTypes.string.isRequired,
-	functionHeart: PropTypes.func,
+	icon: PropTypes.string,
 	i: PropTypes.string.isRequired
 };
 
-export default Card;
+export default CardTramp;

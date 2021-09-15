@@ -11,6 +11,16 @@ import PropTypes from "prop-types";
 const useStyles = makeStyles(theme => ({
 	formControl: {
 		width: "100%"
+	},
+	inputLabel: {
+		fontSize: "10px",
+		zIndex: "100",
+		paddingLeft: "0.3rem",
+		[theme.breakpoints.up("sm")]: {
+			zIndex: "100",
+			paddingLeft: "0.3rem",
+			fontSize: "16px"
+		}
 	}
 }));
 
@@ -25,7 +35,7 @@ const MenuProps = {
 	}
 };
 
-const location = ["Barcelona", "Madrid", "Sevilla", "Tenerife", "Valencia"];
+const location = ["Madrid"];
 
 function getStyles(name, personName, theme) {
 	return {
@@ -46,7 +56,9 @@ const SelectLocation = props => {
 	return (
 		<Fragment>
 			<FormControl className={classes.formControl}>
-				<InputLabel id="demo-mutiple-name-label">{props.placeholder}</InputLabel>
+				<InputLabel className={classes.inputLabel} id="demo-mutiple-name-label">
+					{props.placeholder}
+				</InputLabel>
 				<Select
 					labelId="demo-mutiple-name-label"
 					id="demo-mutiple-name"

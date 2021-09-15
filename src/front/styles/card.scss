@@ -73,3 +73,7 @@
     margin-top: auto;
     padding-left: 0.5rem;
 }
+.card_icon:hover {
+    color: $secondary-color;
+    transform: scale(1.5)
+}

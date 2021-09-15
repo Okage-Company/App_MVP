@@ -4,38 +4,28 @@ import SelectCategory from "../component/selectCategory.jsx";
 import SelectInsurance from "../component/selectInsurance.jsx";
 import SelectLocation from "../component/selectLocation.jsx";
 import Card from "../component/card.jsx";
+import CardTramp from "../component/cardTramp.jsx";
 import { useParams } from "react-router";
 import "../../styles/button.scss";
-import Button from "../component/button.jsx";
-import { Link } from "react-router-dom";
-
 import "../../styles/search.scss";
 
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import icon from "leaflet/dist/images/marker-icon.png";
+import iconShadow from "leaflet/dist/images/marker-shadow.png";
 // import LocationMenu from "../component/locationMenu.jsx";
+let DefaultIcon = L.icon({
+	iconUrl: icon,
+	shadowUrl: iconShadow
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
 
 const Search = () => {
 	const { store, actions } = useContext(Context);
 	let params = useParams();
 	const [openLocationMenu, setOpenLocationMenu] = useState(false);
-
-	////////////////////////////
-
-	const [fill, setFill] = useState(true);
-	const [heartIcon, setHeartIcon] = useState(<i className="far fa-heart heart-icon-class"></i>);
-
-	const changeHeart = () => {
-		if (fill == true) {
-			setHeartIcon(<i className="fas fa-heart color-icon-heart"></i>);
-			setFill(false);
-		} else {
-			setHeartIcon(<i className="far fa-heart"></i>);
-			setFill(true);
-		}
-	};
-
-	////////////////////////////
 
 	useEffect(() => {
 		actions.getBuservices(params.id);
@@ -46,21 +36,16 @@ const Search = () => {
 			<div className="grid_container_search_page">
 				<div className="sidebar_search_page">
 					<div>
-						<h5>
-							<span className="h6">Location</span>
-						</h5>
 						<div className="search_menu_container">
 							<SelectLocation placeholder="Location" />
 						</div>
 					</div>
 					<div>
-						<span className="h6">Category</span>
 						<div className="search_menu_container">
 							<SelectCategory placeholder="Categories" />
 						</div>
 					</div>
 					<div>
-						<span className="h6">Insurance</span>
 						<div className="search_menu_container">
 							<SelectInsurance placeholder="Insurance" />
 						</div>
@@ -69,11 +54,16 @@ const Search = () => {
 						<div className="search_menu_container">
 							<button
 								className="button"
-								type="button"
+								type="submit"
 								onClick={e => {
 									e.preventDefault();
-									location.replace("/");
-									location.replace("/search");
+									if (e.target.value === "") {
+										location.replace("/search");
+									} else {
+										actions.getBuservicesSearch(e.target.value);
+									}
+									// location.replace("/");
+									// location.replace("/search");
 								}}>
 								Search
 							</button>
@@ -90,15 +80,40 @@ const Search = () => {
 						{openLocationMenu && <LocationMenu />} */}
 				</div>
 				<div className="map_search_page">
-					<Map className="mapita" center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+					<Map className="mapita" center={[40.4258, -3.7038]} zoom={14} scrollWheelZoom={false}>
 						<TileLayer
 							attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 						/>
-						<Marker position={[51.505, -0.09]}>
-							<Popup>
-								A pretty CSS3 popup. <br /> Easily customizable.
-							</Popup>
+						<Marker position={[40.4168, -3.7038]}>
+							<Popup>ISEP Clinic</Popup>
+						</Marker>
+						<Marker position={[40.4168, -3.705]}>
+							<Popup>Therapeutic Painting for Children</Popup>
+						</Marker>
+						<Marker position={[40.42, -3.7008]}>
+							<Popup>Soccer Club</Popup>
+						</Marker>
+						<Marker position={[40.4248, -3.7018]}>
+							<Popup>Swimming Weekends</Popup>
+						</Marker>
+						<Marker position={[40.4208, -3.7058]}>
+							<Popup>Introduction to Meditation</Popup>
+						</Marker>
+						<Marker position={[40.4288, -3.7138]}>
+							<Popup>Intensive Preschool ABA Services</Popup>
+						</Marker>
+						<Marker position={[40.4248, -3.7138]}>
+							<Popup>Diagnostic for Children and Adults</Popup>
+						</Marker>
+						<Marker position={[40.4138, -3.6958]}>
+							<Popup>English Trivia Nights</Popup>
+						</Marker>
+						<Marker position={[40.4138, -3.7138]}>
+							<Popup>Speed Friending</Popup>
+						</Marker>
+						<Marker position={[40.4138, -3.7148]}>
+							<Popup>French Catch Up!</Popup>
 						</Marker>
 					</Map>
 				</div>
@@ -106,7 +121,7 @@ const Search = () => {
 					{store.buservices.map((account, index) => {
 						let ind = index + 1;
 						return (
-							<Card
+							<CardTramp
 								image={account.photos}
 								key={index.toString()}
 								i={ind.toString()}
@@ -115,7 +130,7 @@ const Search = () => {
 								profile={account.centre_name}
 								address={account.adress}
 								// icon={<span onClick={() => changeHeart()}>{heartIcon}</span>}
-								icon={heartIcon}
+								icon={<i className="far fa-heart"></i>}
 							/>
 						);
 					})}
