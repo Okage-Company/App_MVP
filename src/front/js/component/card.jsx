@@ -8,7 +8,7 @@ const Card = props => {
 	const linkToBuserviceId = "/buservices/".concat(props.i);
 	return (
 		<div className="card_container">
-			<Link to={linkToBuserviceId}>
+			<Link className="link-card-search" to={linkToBuserviceId}>
 				<div className="card_image" />
 				<div className="card_container_text">
 					<span className="card_category">{props.category}</span>

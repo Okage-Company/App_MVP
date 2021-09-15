@@ -7,6 +7,11 @@
     font-size: $medium-size;
     color: $body-color;
     border-radius: $border-radius;
+    margin-bottom: auto;
+}
+
+.link-card-search {
+    text-decoration: none;
 }
 
 .card_image {
@@ -28,6 +33,7 @@
 
 .card_category {
     font-family: $secondary-font;
+    color: $dark-grey-color;
     margin-bottom: $container-elements-margin;
     font-size: $small-size;
 }

@@ -11,10 +11,14 @@ const Footer = () => (
 			</div>
 			<div>
 				<div className="footer_text">
-					<Link to="/about">About us</Link>
+					<Link className="a-footer" to="/about">
+						About us
+					</Link>
 				</div>
 				<div>
-					<Link to="/contact">Contact</Link>
+					<Link className="a-footer" to="/contact">
+						Contact
+					</Link>
 				</div>
 			</div>
 		</div>
@@ -26,8 +30,18 @@ const Footer = () => (
 		<div className="footer_terms">
 			<div className="footer_terms_divider" />
 			<span className="footer_terms_text">
-				2021© <Link to="/terms">Terms & Conditions</Link> • <Link to="/privacy">Privacy Policy</Link> •{" "}
-				<Link to="/cookies">Cookies</Link>
+				2021©{" "}
+				<Link className="a-footer" to="/terms">
+					Terms & Conditions
+				</Link>{" "}
+				•{" "}
+				<Link className="a-footer" to="/privacy">
+					Privacy Policy
+				</Link>{" "}
+				•{" "}
+				<Link className="a-footer" to="/cookies">
+					Cookies
+				</Link>
 			</span>
 		</div>
 	</div>

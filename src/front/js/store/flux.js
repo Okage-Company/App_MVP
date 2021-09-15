@@ -14,8 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			account: [],
 			clientId: [],
 			businessId: [],
-			BASE_URL: "https://3000-copper-anglerfish-t5encfcw.ws-eu16.gitpod.io/",
-			URL_API: "https://3001-copper-anglerfish-t5encfcw.ws-eu16.gitpod.io/api/",
+			BASE_URL: "https://3000-magenta-heron-687dxyev.ws-eu16.gitpod.io/",
+			URL_API: "https://3001-magenta-heron-687dxyev.ws-eu16.gitpod.io/api/",
 			user: {},
 			currentUser: {}
 		},

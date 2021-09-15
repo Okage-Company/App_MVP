@@ -75,7 +75,7 @@ export const Home = () => {
 
 			<div className="grid_container_banner">
 				<div className="home_banner_text">
-					<Link to="/search">
+					<Link className="link-style" to="/search">
 						It is for them <i className="fas fa-arrow-left"></i> it is for you{" "}
 						<i className="far fa-star"></i>
 					</Link>

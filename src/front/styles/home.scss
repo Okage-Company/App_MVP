@@ -44,6 +44,16 @@
     }
 }
 
+.link-style {
+    text-decoration: none;
+    color: $body-color;
+}
+
+.link-style:hover {
+    text-decoration: none;
+    color: $dark-grey-color;
+}
+
 .grid_container > * {
     padding: 0;
 }
