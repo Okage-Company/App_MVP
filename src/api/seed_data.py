@@ -121,7 +121,7 @@ data = {
             "id": 1,
             "account_id": 1,
             "centre_name": "ISEP Clinic",
-            "cif": "https://images.pexels.com/photos/4098274/pexels-photo-4098274.jpeg? auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+            "cif": "https://cdn.dribbble.com/users/690037/screenshots/15321173/media/3110c5335303dd9270607ca752969dd1.jpg",
             "schedule": "Mon–Fri from 9:00–21:00"
         },
         {
@@ -171,7 +171,7 @@ data = {
             "title_bus": "ISEP Clinic Madrid",
             "professional_name": "Sandra Muñoz Revilla",
             "professional_studies": "Degree in Psychology.",
-            "professional_techniques": "https://cdn.dribbble.com/users/690037/screenshots/15321173/media/3110c5335303dd9270607ca752969dd1.jpg",
+            "professional_techniques": "https://images.pexels.com/photos/4098274/pexels-photo-4098274.jpeg? auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
             "offer": False,
             "adress": "Calle de Maldonado, 29, 28006 Madrid",
             "specialty": "Psychology",
@@ -278,7 +278,7 @@ data = {
             "email": "botella@clinic.com",
             "title_bus": "Diagnostic for Children and Adults",
             "professional_name":"Javier Botella",
-            "professional_studies":"Senior Consultant of the Psychiatry Service and Coordinator of the Hospitalization Unit of Acute Hospital Ramón y Cajal.",
+            "professional_studies":"Senior Consultant the Psychiatry Service.",
             "professional_techniques":"https://images.pexels.com/photos/4100672/pexels-photo-4100672.jpeg? auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
             "offer": False,
             "adress":"Calle de Estamos Bien, 34, 24018 Madrid",
