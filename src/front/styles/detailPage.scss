@@ -24,6 +24,10 @@ $profile-photo: url('https://i.ibb.co/vxZmtd1/Profile-photyo-03.png') no-repeat 
     grid-area: gal;
 }
 
+.sidebar_detail_page {
+    grid-area: sidebar;
+}
+
 .main_detail_page {
     grid-area: main;
     display: grid;
@@ -66,13 +70,23 @@ $profile-photo: url('https://i.ibb.co/vxZmtd1/Profile-photyo-03.png') no-repeat 
     margin-bottom: 2rem;
 }
 
-.main_detail_page_header_image {
-    background: $profile-photo;
+.profile_centre_new_image {
+    width: 7.5rem;
+    height: 7.5rem;
+    object-fit: cover;
+    background-position: center;
     border-radius: $border-radius;
-    background-size: cover;
     width: 7.5rem;
     height: 7.5rem;
 }
+
+// .main_detail_page_header_image {
+//     background: $profile-photo;
+//     border-radius: $border-radius;
+//     background-size: cover;
+//     width: 7.5rem;
+//     height: 7.5rem;
+// }
 
 .main_detail_page_header_body {
     display: flex;
