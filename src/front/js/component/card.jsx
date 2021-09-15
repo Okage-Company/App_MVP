@@ -25,6 +25,7 @@ const Card = props => {
 					<div className="card_container_footer">
 						<span className="card_address">{props.address}</span>
 						<div
+							className="card_icon"
 							onClick={e => {
 								e.preventDefault();
 								actions.postFavouritesId(props.i);

@@ -14,7 +14,7 @@ const StaffCard = props => {
 					<i className="fas fa-user-md icon-right-margin"></i>
 					{props.name}
 				</span>
-				<span className="staff_card_specialty">{props.specialty}</span>
+				{/* <span className="staff_card_specialty">{props.specialty}</span> */}
 				<span className="staff_card_studies">{props.studies}</span>
 				<span className="staff_card_collegiate_number">Collegiate number {props.collegiateNumber}</span>
 			</div>

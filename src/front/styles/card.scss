@@ -61,7 +61,6 @@
 
 .card_container_footer {
     display: flex;
-    align-items: center;
 }
 
 .card_address {
@@ -71,4 +70,6 @@
 .card_icon {
     color: $dark-grey-color;
     margin-left: auto;
+    margin-top: auto;
+    padding-left: 0.5rem;
 }

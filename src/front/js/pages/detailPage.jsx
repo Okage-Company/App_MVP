@@ -21,7 +21,7 @@ const detailPage = () => {
 		<Fragment>
 			<div className="grid_container_detail_page">
 				<div className="detail_page_gallery">
-					<Gallery />
+					<Gallery img1={store.buservicesById.photos} img2={store.buservicesById.tecniques} />
 				</div>
 				<div className="sidebar_detail_page">
 					{/* <div className="sidebar_detail_page_section">
@@ -54,10 +54,10 @@ const detailPage = () => {
 							<span className="sidebar_list_element_contact">Phone</span>
 							<span className="sidebar_list_element_contact_value">915 908 364</span>
 						</div>
-						<div className="sidebar_list_contact_element">
+						{/* <div className="sidebar_list_contact_element">
 							<span className="sidebar_list_element_contact">Mobile</span>
 							<span className="sidebar_list_element_contact_value">661320786</span>
-						</div>
+						</div> */}
 						<div className="sidebar_list_contact_element">
 							<span className="sidebar_list_element_contact">Mail</span>
 							<span className="sidebar_list_element_contact_value">{store.buservicesById.email}</span>
@@ -68,15 +68,11 @@ const detailPage = () => {
 					<div className="ay-no-se">
 						<div className="main_detail_page_header">
 							<div className="main_detail_page_header_image">
-								<img
-									className="profile_centre_new_image"
-									src="https://cdn.dribbble.com/users/690037/screenshots/15321173/media/3110c5335303dd9270607ca752969dd1.jpg"></img>
+								<img className="profile_centre_new_image" src={store.buservicesById.cif}></img>
 							</div>
 							<div className="main_detail_page_header_body">
 								<span className="title_profile_service">{store.buservicesById.title_bus}</span>
-								<span className="title_profile_centre">
-									{/* {store.buservicesById.business[0].centre_name} */}Fetch Centre Name Falta
-								</span>
+								<span className="title_profile_centre">{store.buservicesById.centre_name}</span>
 								<span className="tags_profile_service">{store.buservicesById.specialty}</span>
 								<div className="main_detail_page_header_footer">
 									<div>
@@ -90,9 +86,9 @@ const detailPage = () => {
 					</div>
 					<div className="staff_card_container_detail">
 						<StaffCard
-							image="https://images.pexels.com/photos/4098274/pexels-photo-4098274.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+							image={store.buservicesById.professional_techniques}
 							name={store.buservicesById.professional_name}
-							specialty={store.buservicesById.professional_techniques}
+							// specialty={store.buservicesById.professional_techniques}
 							studies={store.buservicesById.professional_studies}
 							collegiateNumber={store.buservicesById.numero_colegiado}
 						/>
@@ -125,10 +121,10 @@ const detailPage = () => {
 						/>
 					</div>
 				</div>
-				<div className="review_detail_more_services">
-					<div className="card_section_title_detail">{/* <span>More by ISEP Clinic</span> */}</div>
+				{/* <div className="review_detail_more_services">
+					<div className="card_section_title_detail"><span>More by ISEP Clinic</span></div>
 					<div className="review_detail_more_services_inside">
-						{/* {store.buservicesById.map((buservicesParameter, index) => {
+						{store.buservicesById.map((buservicesParameter, index) => {
 							return (
 								<Card
 									key={index}
@@ -139,9 +135,9 @@ const detailPage = () => {
 									icon={<i className="card_icon far fa-heart" />}
 								/>
 							);
-						})} */}
+						})}
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</Fragment>
 	);

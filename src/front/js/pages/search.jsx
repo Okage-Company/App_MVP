@@ -23,6 +23,7 @@ const Search = () => {
 	useEffect(() => {
 		actions.getBuservices(params.id);
 	}, []);
+
 	return (
 		<Fragment>
 			<div className="grid_container_search_page">
@@ -36,19 +37,16 @@ const Search = () => {
 						</div>
 					</div>
 					<div>
-						<h5>
-							<span className="h6">Category</span>
-						</h5>
+						<span className="h6">Category</span>
 						<div className="search_menu_container">
 							<SelectCategory placeholder="Categories" />
 						</div>
 					</div>
 					<div>
-						<h5>
-							<span className="h6">Insurance</span>
-						</h5>
-						<div className="search_menu_container"></div>
-						<SelectInsurance placeholder="Insurance" />
+						<span className="h6">Insurance</span>
+						<div className="search_menu_container">
+							<SelectInsurance placeholder="Insurance" />
+						</div>
 					</div>
 					<div className="seach_menu_submit">
 						<div className="search_menu_container">
@@ -92,12 +90,12 @@ const Search = () => {
 						let ind = index + 1;
 						return (
 							<Card
-								image="https://i.ibb.co/V3h15xt/3.png"
+								image={account.photos}
 								key={index.toString()}
 								i={ind.toString()}
 								category={account.specialty}
 								title={account.title_bus}
-								profile={account.professional_name}
+								profile={account.centre_name}
 								address={account.adress}
 								icon={<i className="card_icon far fa-heart" />}
 							/>

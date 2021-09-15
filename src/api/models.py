@@ -4,7 +4,7 @@ import sys
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.dialects.postgresql import VARCHAR
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, ForeignKey, Integer, String, Enum, Boolean, Table
+from sqlalchemy import Column, ForeignKey, Integer, String, Enum, Boolean, Table, Text
 #Import del cifrado de la password
 from werkzeug.security import check_password_hash
 
@@ -44,7 +44,7 @@ class Buservices(db.Model):
     adress = db.Column(db.VARCHAR, nullable=False)
     specialty = db.Column(db.VARCHAR, nullable=False)
     numero_colegiado = db.Column(db.VARCHAR, nullable=False, unique=False)
-    description = db.Column(db.VARCHAR, nullable=False, unique=False)
+    description = db.Column(db.Text, nullable=False, unique=False)
     tecniques = db.Column(db.VARCHAR, nullable=True, unique=False)
     photos = db.Column(db.VARCHAR, nullable=True, unique=False)
 

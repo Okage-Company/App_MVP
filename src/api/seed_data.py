@@ -1,4 +1,35 @@
 data = {
+
+    "Services": [
+        {
+            "id": 1,
+            "title": "Arts"
+        },
+        {
+            "id": 2,
+            "title": "Healthcare"
+        },
+        {
+            "id": 3,
+            "title": "Languages"
+        },
+        {
+            "id": 4,
+            "title": "Meditation"
+        },
+        {
+            "id": 5,
+            "title": "Meetings"
+        },
+        {
+            "id": 6,
+            "title": "Psychology"
+        },
+        {
+            "id": 7,
+            "title": "Sports"
+        },
+    ],
     "Account": [
         {
             "id": 1,
@@ -139,7 +170,7 @@ data = {
             "email": "isep@clinic.com",
             "title_bus": "ISEP Clinic Madrid",
             "professional_name": "Sandra Muñoz Revilla",
-            "professional_studies": "Degree in Psychology. Pontifical University of Salamanca",
+            "professional_studies": "Degree in Psychology.",
             "professional_techniques": "https://cdn.dribbble.com/users/690037/screenshots/15321173/media/3110c5335303dd9270607ca752969dd1.jpg",
             "offer": False,
             "adress": "Calle de Maldonado, 29, 28006 Madrid",
@@ -157,7 +188,7 @@ data = {
             "email": "isep@clinic.com",
             "title_bus": "Therapeutic Painting for Children",
             "professional_name":"Marta Múgica Carrasco",
-            "professional_studies": "Master in Clinical and Health Psychology (ISEP Clinic Málaga)",
+            "professional_studies": "Master in Clinical Psychology",
             "professional_techniques": "https://images.unsplash.com/photo-1607746882042-944635dfe10e? ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80",
             "offer": False,
             "adress": "Calle de Maldonado, 29, 28006 Madrid",
@@ -175,7 +206,7 @@ data = {
             "email": "verywell@health.com",
             "title_bus": "Soccer Club",
             "professional_name": "Jorge Aurelio Patiño",
-            "professional_studies": "Master in Intervention in Learning Disabilities. University of Vitoria-Gasteiz",
+            "professional_studies": "Master in Intervention in Learning.",
             "professional_techniques": "https://images.pexels.com/photos/4098353/pexels-photo-4098353.jpeg? auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
             "offer": False,
             "adress": "Calle de Jesús del Valle, 23, 28004 Madrid",
@@ -193,7 +224,7 @@ data = {
             "email": "sports@okage.es",
             "title_bus": "Swimming Weekends",
             "professional_name": "Erika Gleeson",
-            "professional_studies": "G.C Autism, B.A Behavioural Science",
+            "professional_studies": "B.A Behavioural Science.",
             "professional_techniques":"https://images.pexels.com/photos/4098345/pexels-photo-4098345.jpeg? auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
             "offer": False,
             "adress": "Calle de Santa Clarita, 69, 2819 Madrid",
@@ -211,7 +242,7 @@ data = {
             "email": "florence@paloma.life",
             "title_bus": "Introduction to Meditation",
             "professional_name": "Florence Paloma",
-            "professional_studies": "Postgraduate in Neuropsychology. University of Salamanca.",
+            "professional_studies": "University of Salamanca.",
             "professional_techniques": "https://images.pexels.com/photos/7579116/pexels-photo-7579116.jpeg? auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
             "offer": False,
             "adress":"Calle de la Mamma Mía, 21, 20819 Madrid",
@@ -235,7 +266,7 @@ data = {
             "adress":"Calle de Estamos Bien, 34, 24018 Madrid",
             "specialty": "Healthcare",
             "numero_colegiado": "M–20763",
-            "description":"With some children, the signs of autism might not become entirely obvious until they reach preschool (or even school age), when suddenly the developmental gap between them and their peers becomes more pronounced. In addition to the signs for babies/toddlers, here are some of the more common ways ASD might present itself in a preschool-aged child. When your child is diagnosed with autism spectrum disorder, there's a lot to learn. You're faced with new terms like "early intervention" and "positive behavior support." It's normal to feel overwhelmed. But don't worry — you're not alone. Many parents have walked this path before. Many resources and support services are available to you.",
+            "description":"With some children, the signs of autism might not become entirely obvious until they reach preschool (or even school age), when suddenly the developmental gap between them and their peers becomes more pronounced. In addition to the signs for babies/toddlers, here are some of the more common ways ASD might present itself in a preschool-aged child. When your child is diagnosed with autism spectrum disorder, there's a lot to learn. You're faced with new terms like 'early intervention' and 'positive behavior support.' It's normal to feel overwhelmed. But don't worry — you're not alone. Many parents have walked this path before. Many resources and support services are available to you.",
             "tecniques": "https://i.ibb.co/GpbPgjX/9.png",
             "photos": "https://i.ibb.co/WD6txt0/10.png"
         },
@@ -265,7 +296,7 @@ data = {
             "email": "rainbow@of.smiles",
             "title_bus": "English Trivia Nights",
             "professional_name":"Ernesto Feliz",
-            "professional_studies":"Master in Cognitive Behavioral Psychotherapy. University of the Street",
+            "professional_studies":"Master in Cognitive Behavioral Psychotherapy.",
             "professional_techniques": "https://images.pexels.com/photos/6325954/pexels-photo-6325954.jpeg? auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
             "offer": False,
             "adress":"“La Central”, Plaza de Callao, 4, 28004 Madrid",
@@ -283,7 +314,7 @@ data = {
             "email": "languages@okage.es",
             "title_bus": "Speed Friending",
             "professional_name":"Ernesto Feliz",
-            "professional_studies": "Master in Cognitive Behavioral Psychotherapy. University of the Street",
+            "professional_studies": "Master in Cognitive Behavioral Psychotherapy.",
             "professional_techniques":"https://images.pexels.com/photos/6325954/pexels-photo-6325954.jpeg? auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
             "offer": False,
             "adress":"“Sky Dawson Café”, Calle Pez, 10, 28004 Madrid",
@@ -294,14 +325,14 @@ data = {
             "photos":"https://i.ibb.co/XJfymr3/17.png",
         },
         {
-            "id": 10
+            "id": 10,
             "business_id": 6,
             "services_id": 3,
             "phone": "688990011",
             "email": "unbridge@academy.com",
             "title_bus": "French Catch Up!",
             "professional_name":"Dolores Umbridge",
-            "professional_studies": "Postgraduate Specialist in Individual Psychodynamic, Interaction Institute. Madrid",
+            "professional_studies": "Postgraduate Specialist in Individual Psychodynamic.",
             "professional_techniques":"https://images.pexels.com/photos/5212325/pexels-photo-5212325.jpeg? auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
             "offer": False,
             "adress":"Calle de la Elocuencia, 2, 20018 Madrid",
@@ -312,37 +343,5 @@ data = {
             "photos": "https://i.ibb.co/8Xb3zw8/12.png"
         },
     ],
-
-    "Services": [
-        {
-            "id": 1,
-            "title": "Arts"
-        },
-        {
-            "id": 2,
-            "title": "Healthcare"
-        },
-        {
-            "id": 3,
-            "title": "Languages"
-        },
-        {
-            "id": 4,
-            "title": "Meditation"
-        },
-        {
-            "id": 5,
-            "title": "Meetings"
-        },
-        {
-            "id": 6,
-            "title": "Psychology"
-        },
-        {
-            "id": 7,
-            "title": "Sports"
-        },
-    ],
-
 
 }
