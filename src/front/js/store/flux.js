@@ -16,7 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			clientId: [],
 			favouritesId: [],
 			businessId: [],
-			BASE_URL: "https://www.okage.es/",
+			BASE_URL: "https://okage.es/",
 			URL_API: "https://3001-copper-cougar-airoiadp.ws-eu16.gitpod.io/api/",
 			user: {},
 			currentUser: {}
