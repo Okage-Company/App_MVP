@@ -35,7 +35,9 @@ const ModalSign = ({ LogWorks }) => {
 							className="form_placeholder"
 							type="text"
 							id="name"
-							placeholder="e.g. Jennifer"
+							placeholder="Jennifer"
+							minLength="3"
+							required
 						/>
 					</div>
 					<div className="form_imputs">
@@ -43,12 +45,14 @@ const ModalSign = ({ LogWorks }) => {
 						<input
 							{...register("last_name")}
 							className="form_placeholder"
-							type="text"
-							id="last_name"
-							placeholder="e.g. Aniston"
+							type="lname"
+							name="lname"
+							id="hello"
+							placeholder="Aniston"
+							minLength="3"
+							required
 						/>
 					</div>
-
 					<div className="form_imputs">
 						<label className="form_label">Phone number</label>
 						<input
@@ -77,7 +81,10 @@ const ModalSign = ({ LogWorks }) => {
 							className="form_placeholder"
 							type="text"
 							id="post_code"
+							minLength="4"
+							maxLength="10"
 							placeholder="Zip"
+							required
 						/>
 					</div>
 					<div className="form_imputs">
@@ -135,7 +142,7 @@ const ModalSign = ({ LogWorks }) => {
 								<span className="form_check">Particular</span>
 							</div>
 							<div className="form_check_container_flex">
-								<input type="checkbox" id="business" />
+								<input type="checkbox" id="business" disabled />
 								<span className="form_check">Business</span>
 							</div>
 						</div>
