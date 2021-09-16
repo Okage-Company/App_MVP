@@ -34,13 +34,22 @@ In Okage's initial stage our team used Figma, QuickDataBaseDiagrams and TRELLO t
 ## Okage's website:
 
 This boilerplate it's 100% integrated with Heroku: [okage.es](https://www.okage.es/)
+<div align="center">
+<span><img src="https://raw.githubusercontent.com/Okage-Company/App_MVP/main/src/front/img/Home.jpg" width="250" height="500" title="Home"></span>
+<img src="https://raw.githubusercontent.com/Okage-Company/App_MVP/main/src/front/img/SignUp.jpg" width="250" height="500" title="SignUp">
+<img src="https://raw.githubusercontent.com/Okage-Company/App_MVP/main/src/front/img/MapView.jpg" width="250" height="500" title="MapView">
+<img src="https://raw.githubusercontent.com/Okage-Company/App_MVP/main/src/front/img/Search.jpg" width="250" height="500" title="Search">
+<img src="https://raw.githubusercontent.com/Okage-Company/App_MVP/main/src/front/img/Services.jpg" width="250" height="500" title="Services">
+<img src="https://raw.githubusercontent.com/Okage-Company/App_MVP/main/src/front/img/AboutUs.jpg" width="250" height="500" title="~AboutUs">
+</div>
 
 ## You also can reach Okage in our RRSS:
+
 - [Twitter](https://twitter.com/Okage_es)
 - [LinkedIn](https://www.linkedin.com/in/)
 - [Instagram](https://www.instagram.com/okage.es/?hl=es)
 - [Facebook](https://www.facebook.com/Okage-102088032232073)
 
-### Okage members
+### Okage members:
 
 [Ricardo](https://github.com/ricardorsario), [Ruben](https://github.com/9Shuck), [Paloma](https://github.com/Florence-Paloma) and [Vino](https://github.com/VinoliaBarreto)
