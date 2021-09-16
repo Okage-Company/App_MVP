@@ -16,7 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			clientId: [],
 			favouritesId: [],
 			businessId: [],
-			BASE_URL: "https://okage2.herokuapp.com/",
+			BASE_URL: "https://www.okage.es/",
 			URL_API: "https://okage2.herokuapp.com/api/",
 			user: {},
 			currentUser: {}
